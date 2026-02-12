@@ -1,0 +1,248 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "hi", "hello", "hey", "namaste", "good morning",
+        "good evening", "whats up", "how are you",
+        "hi there", "greetings"
+      ],
+      "responses": [
+        "Namaste! 🙏 I'm GovScheme AI. I can help you find government schemes. Ask me anything!",
+        "Hello! Welcome to GovScheme AI. How can I help you find the right government scheme?",
+        "Hey there! I'm here to help you discover government schemes you're eligible for."
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "bye", "goodbye", "see you", "thank you bye",
+        "thanks bye", "quit", "exit", "close"
+      ],
+      "responses": [
+        "Goodbye! 🙏 Hope I helped you find useful schemes. Visit official websites to apply!",
+        "Thank you for using GovScheme AI! Good luck with your applications!",
+        "Bye! Remember to check official portals for the latest scheme updates."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "thanks", "thank you", "helpful", "nice",
+        "great help", "appreciate it", "dhanyavaad",
+        "shukriya", "thanks a lot"
+      ],
+      "responses": [
+        "You're welcome! 😊 Let me know if you need anything else.",
+        "Happy to help! Don't forget to apply before deadlines.",
+        "Glad I could help! Share this tool with others who might benefit."
+      ]
+    },
+    {
+      "tag": "pm_kisan",
+      "patterns": [
+        "tell me about pm kisan", "what is pm kisan",
+        "pm kisan scheme", "kisan samman nidhi",
+        "farmer scheme money", "6000 rupees farmer",
+        "pm kisan eligibility", "how to apply pm kisan",
+        "kisan yojana", "farmer income support"
+      ],
+      "responses": [
+        "📋 PM-KISAN Samman Nidhi:\n💰 Rs. 6,000/year (3 installments of Rs. 2,000)\n👤 For: All farmer families with cultivable land\n📝 Apply: pmkisan.gov.in\n📄 Documents: Aadhaar, Land Records, Bank Account\n✅ Income limit: Rs. 2 lakh/year"
+      ]
+    },
+    {
+      "tag": "pm_awas",
+      "patterns": [
+        "pm awas yojana", "pradhan mantri awas",
+        "housing scheme", "free house scheme",
+        "home loan subsidy", "awas yojana apply",
+        "pmay scheme", "government housing",
+        "house for poor", "affordable housing"
+      ],
+      "responses": [
+        "🏠 PM Awas Yojana (PMAY):\n💰 Subsidy up to Rs. 2.67 Lakh on home loan\n👤 For: Families without pucca house\n💵 Income limit: Up to Rs. 18 Lakh/year\n📝 Apply: pmaymis.gov.in or nearest bank\n📄 Documents: Aadhaar, Income Certificate, Bank Statement"
+      ]
+    },
+    {
+      "tag": "ayushman_bharat",
+      "patterns": [
+        "ayushman bharat", "health insurance scheme",
+        "pm jan arogya", "free health insurance",
+        "5 lakh health cover", "ayushman card",
+        "pmjay", "government health scheme",
+        "free hospital treatment", "medical scheme"
+      ],
+      "responses": [
+        "🏥 Ayushman Bharat (PMJAY):\n💰 Free health cover of Rs. 5 Lakh/family/year\n👤 For: BPL families, SC/ST/OBC with low income\n🏨 Covers: 1,500+ medical procedures at empaneled hospitals\n📝 Apply: pmjay.gov.in or call 14555\n📄 Documents: Aadhaar, Ration Card, BPL Certificate"
+      ]
+    },
+    {
+      "tag": "ujjwala",
+      "patterns": [
+        "ujjwala yojana", "free gas connection",
+        "lpg scheme", "cooking gas scheme",
+        "ujjwala apply", "free cylinder",
+        "gas for bpl", "pm ujjwala"
+      ],
+      "responses": [
+        "🔥 PM Ujjwala Yojana:\n💰 Free LPG connection + Rs. 1,600 support\n👤 For: Women from BPL households\n📝 Apply: Visit nearest LPG distributor\n📄 Documents: BPL Card, Aadhaar, Bank Account, Photo\n⚠️ Connection in woman's name only"
+      ]
+    },
+    {
+      "tag": "mudra_loan",
+      "patterns": [
+        "mudra loan", "pm mudra yojana", "business loan",
+        "mudra scheme", "small business loan",
+        "startup loan", "loan without collateral",
+        "shishu kishor tarun loan", "self employment loan"
+      ],
+      "responses": [
+        "💼 PM Mudra Yojana:\n💰 Loans without collateral:\n  • Shishu: Up to Rs. 50,000\n  • Kishor: Rs. 50,000 - 5 Lakh\n  • Tarun: Rs. 5 Lakh - 10 Lakh\n👤 For: Small business owners, self-employed\n📝 Apply: Any bank, NBFC, or MFI branch\n📄 Documents: Aadhaar, PAN, Business Plan"
+      ]
+    },
+    {
+      "tag": "scholarship",
+      "patterns": [
+        "scholarship", "student scholarship",
+        "education scheme", "national scholarship",
+        "sc st scholarship", "obc scholarship",
+        "post matric scholarship", "free education",
+        "study scheme", "scholarship for poor"
+      ],
+      "responses": [
+        "🎓 National Scholarship Portal:\n💰 Full tuition fee + Rs. 1,200-3,000/month allowance\n👤 For: SC/ST/OBC students (post-matric level)\n💵 Income limit: Rs. 2.5 Lakh/year\n📝 Apply: scholarships.gov.in\n📄 Documents: Marksheet, Caste Certificate, Income Certificate, Aadhaar\n📅 Apply before deadline each academic year"
+      ]
+    },
+    {
+      "tag": "pension",
+      "patterns": [
+        "pension scheme", "atal pension", "old age pension",
+        "retirement scheme", "monthly pension",
+        "pension for poor", "apy scheme",
+        "shram yogi pension", "unorganized worker pension"
+      ],
+      "responses": [
+        "👴 Pension Schemes:\n\n1️⃣ Atal Pension Yojana (APY):\n💰 Rs. 1,000-5,000/month after age 60\n👤 Age: 18-40 years\n\n2️⃣ PM Shram Yogi Maandhan:\n💰 Rs. 3,000/month after age 60\n👤 For: Unorganized workers, income < Rs. 15,000/month\n\n📝 Apply at any bank branch with Aadhaar"
+      ]
+    },
+    {
+      "tag": "women_schemes",
+      "patterns": [
+        "schemes for women", "women welfare scheme",
+        "mahila yojana", "girl child scheme",
+        "sukanya samriddhi", "women empowerment",
+        "scheme for daughter", "beti bachao"
+      ],
+      "responses": [
+        "👩 Schemes for Women:\n\n1️⃣ Sukanya Samriddhi Yojana:\n💰 8.2% interest for girl child (0-10 years)\n\n2️⃣ PM Ujjwala: Free LPG for BPL women\n\n3️⃣ Mahila Shakti Kendra: Skill training\n\n4️⃣ Stand Up India: Loans Rs.10L-1Cr for women entrepreneurs\n\n5️⃣ State schemes like Kanya Sumangala (UP), Bhagyashree (MH)"
+      ]
+    },
+    {
+      "tag": "farmer_schemes",
+      "patterns": [
+        "schemes for farmers", "farmer yojana",
+        "kisan scheme", "agriculture scheme",
+        "crop insurance", "farmer loan",
+        "farming help", "kisano ke liye yojana"
+      ],
+      "responses": [
+        "🌾 Schemes for Farmers:\n\n1️⃣ PM-KISAN: Rs. 6,000/year direct transfer\n\n2️⃣ PM Fasal Bima Yojana: Crop insurance at 2% premium\n\n3️⃣ Kisan Credit Card: Easy farm loans\n\n4️⃣ Soil Health Card: Free soil testing\n\n5️⃣ PM Krishi Sinchai Yojana: Irrigation support\n\n📝 Visit nearest Krishi Vigyan Kendra for help"
+      ]
+    },
+    {
+      "tag": "disability_schemes",
+      "patterns": [
+        "disability scheme", "handicapped scheme",
+        "divyang yojana", "disabled person scheme",
+        "disability pension", "scheme for disabled",
+        "pwd scheme", "physically challenged"
+      ],
+      "responses": [
+        "♿ Schemes for Persons with Disabilities:\n\n1️⃣ IGNDPS: Monthly pension Rs. 300-500 for BPL disabled\n\n2️⃣ ADIP Scheme: Free aids and appliances\n\n3️⃣ Scholarship for disabled students\n\n4️⃣ NHFDC Loans: Easy loans for self-employment\n\n📝 Get Disability Certificate (40%+) from govt hospital first\n📄 Apply through District Social Welfare Office"
+      ]
+    },
+    {
+      "tag": "how_to_apply",
+      "patterns": [
+        "how to apply", "where to apply",
+        "application process", "how to register",
+        "apply kaise kare", "registration process",
+        "how can i apply", "application method"
+      ],
+      "responses": [
+        "📝 How to Apply for Government Schemes:\n\n1️⃣ Online: Visit scheme's official website\n2️⃣ CSC Center: Go to nearest Common Service Center\n3️⃣ Bank: Visit any nationalized bank branch\n4️⃣ UMANG App: Download from Play Store/App Store\n5️⃣ Government Office: District Collector / BDO office\n\n💡 Tip: Keep Aadhaar Card, Income Certificate, and Bank Passbook ready!"
+      ]
+    },
+    {
+      "tag": "documents_needed",
+      "patterns": [
+        "what documents needed", "required documents",
+        "papers needed", "documents for scheme",
+        "kya documents chahiye", "which documents",
+        "document list", "paperwork needed"
+      ],
+      "responses": [
+        "📄 Common Documents Required:\n\n✅ Aadhaar Card (mandatory for most)\n✅ Income Certificate\n✅ Caste Certificate (SC/ST/OBC)\n✅ Bank Account Passbook\n✅ Passport Size Photos\n✅ Ration Card / BPL Card\n✅ Address Proof\n✅ Age Proof / Birth Certificate\n\n💡 Get certificates from Tehsil / District office or through DigiLocker app"
+      ]
+    },
+    {
+      "tag": "eligibility",
+      "patterns": [
+        "am i eligible", "eligibility check",
+        "can i apply", "who is eligible",
+        "eligibility criteria", "qualification needed",
+        "kya main eligible hun", "who can apply"
+      ],
+      "responses": [
+        "To check your eligibility:\n\n1️⃣ Fill the form on our homepage with your details\n2️⃣ Our AI will automatically match you with eligible schemes\n3️⃣ Each scheme shows a match percentage\n\nOr tell me:\n• Your age\n• Your state\n• Your occupation\n• Your annual income\n\nAnd I'll suggest schemes for you! 😊"
+      ]
+    },
+    {
+      "tag": "sc_st_schemes",
+      "patterns": [
+        "schemes for sc", "schemes for st",
+        "dalit schemes", "tribal schemes",
+        "sc st yojana", "scheduled caste scheme",
+        "scheduled tribe scheme", "reserved category scheme"
+      ],
+      "responses": [
+        "📋 Schemes for SC/ST:\n\n1️⃣ Post-Matric Scholarship: Free education\n2️⃣ Stand Up India: Business loans Rs.10L-1Cr\n3️⃣ Venture Capital Fund for SC: Startup support\n4️⃣ National Fellowship: Research scholarships\n5️⃣ Free Coaching: For competitive exams\n6️⃣ NSFDC/NSTFDC: Easy loans for self-employment\n\n📝 Apply at scholarships.gov.in or standupmitra.in"
+      ]
+    },
+    {
+      "tag": "state_schemes",
+      "patterns": [
+        "state schemes", "state government scheme",
+        "rajya yojana", "my state schemes",
+        "schemes in my state", "state welfare scheme"
+      ],
+      "responses": [
+        "🏛️ Popular State Schemes:\n\n• UP: Kanya Sumangala Yojana (Rs.15K for girls)\n• Rajasthan: Chiranjeevi Health Insurance (Rs.25L cover)\n• Maharashtra: Majhi Kanya Bhagyashree\n• Tamil Nadu: Amma Two Wheeler Scheme\n• Karnataka: Bhagya Lakshmi (Rs.1L for girl child)\n• MP: Ladli Laxmi Yojana\n• Bihar: Mukhyamantri Kanya Utthan Yojana\n\n📝 Fill the form with your state to see matching state schemes!"
+      ]
+    },
+    {
+      "tag": "bpl_schemes",
+      "patterns": [
+        "bpl schemes", "below poverty line",
+        "scheme for poor", "poor family scheme",
+        "garib yojana", "bpl card schemes",
+        "poverty scheme", "low income scheme"
+      ],
+      "responses": [
+        "📋 Schemes for BPL Families:\n\n1️⃣ Ayushman Bharat: Rs. 5L free health insurance\n2️⃣ PM Ujjwala: Free LPG connection\n3️⃣ PM Awas Yojana: Free/subsidized housing\n4️⃣ Antyodaya Anna Yojana: 35kg food grains at Rs.2-3/kg\n5️⃣ National Family Benefit: Rs.20,000 on breadwinner's death\n6️⃣ Free education scholarships for children\n\n💡 Get BPL certificate from Block Development Office"
+      ]
+    },
+    {
+      "tag": "unknown",
+      "patterns": [
+        "i dont know", "confused", "help me",
+        "what should i do", "guide me", "tell me more",
+        "information", "details"
+      ],
+      "responses": [
+        "I can help you with:\n\n🔍 Finding eligible schemes - fill the form above\n📋 Information about specific schemes - just ask!\n📝 How to apply for schemes\n📄 Documents required\n👩 Women/Farmer/Student specific schemes\n\nWhat would you like to know? 😊"
+      ]
+    }
+  ]
+}
