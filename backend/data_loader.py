@@ -60,3 +60,4 @@ class DataLoader:
         for scheme in self.schemes:
             categories.add(scheme.get('category', 'other'))
         return sorted(list(categories))
+    
