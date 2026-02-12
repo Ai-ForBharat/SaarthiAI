@@ -5,7 +5,7 @@ Utility Functions - Translation + Helpers
 from deep_translator import GoogleTranslator
 
 
-# ========== TRANSLATION ==========
+
 
 SUPPORTED_LANGUAGES = {
     'en': 'english',
@@ -36,8 +36,7 @@ def translate_text(text, target_lang):
         return translated if translated else text
     except Exception as e:
         print(f"Translation error: {e}")
-        return text  # Return original on failure
-
+        return text  
 
 def translate_schemes(schemes, target_lang):
     """Translate list of schemes to target language"""
@@ -51,7 +50,7 @@ def translate_schemes(schemes, target_lang):
         t_scheme['description'] = translate_text(scheme.get('description', ''), target_lang)
         t_scheme['benefits'] = translate_text(scheme.get('benefits', ''), target_lang)
         t_scheme['how_to_apply'] = translate_text(scheme.get('how_to_apply', ''), target_lang)
-        # Keep original name for reference
+       
         t_scheme['name_en'] = scheme.get('name', '')
         translated.append(t_scheme)
 
