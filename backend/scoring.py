@@ -19,42 +19,35 @@ class ScoringEngine:
         score = 0
         total_applicable = 0
 
-        # 1. Age Score
         result = self._score_age(user, eligibility)
         score += result[0]
         total_applicable += result[1]
 
-        # 2. Gender Score
         result = self._score_gender(user, eligibility)
         score += result[0]
         total_applicable += result[1]
 
-        # 3. State Score
+      
         result = self._score_state(user, eligibility)
         score += result[0]
         total_applicable += result[1]
 
-        # 4. Category Score
         result = self._score_category(user, eligibility)
         score += result[0]
         total_applicable += result[1]
 
-        # 5. Income Score
         result = self._score_income(user, eligibility)
         score += result[0]
         total_applicable += result[1]
 
-        # 6. Occupation Score
         result = self._score_occupation(user, eligibility)
         score += result[0]
         total_applicable += result[1]
 
-        # 7. Special Conditions Score
         result = self._score_special(user, eligibility)
         score += result[0]
         total_applicable += result[1]
 
-        # Calculate percentage
         if total_applicable == 0:
             return 50
 
@@ -155,7 +148,6 @@ class ScoringEngine:
         score = 0
         total = 0
 
-        # BPL check
         if elig.get('is_bpl') is not None:
             total += weight
             user_bpl = user.get('is_bpl', False)
@@ -164,7 +156,6 @@ class ScoringEngine:
             if user_bpl == elig['is_bpl']:
                 score += weight
 
-        # Farmer check
         if elig.get('is_farmer') is not None:
             total += weight
             user_farmer = user.get('is_farmer', False)
@@ -173,7 +164,6 @@ class ScoringEngine:
             if user_farmer == elig['is_farmer']:
                 score += weight
 
-        # Student check
         if elig.get('is_student') is not None:
             total += weight
             user_student = user.get('is_student', False)
@@ -182,7 +172,6 @@ class ScoringEngine:
             if user_student == elig['is_student']:
                 score += weight
 
-        # Disability check
         if elig.get('disability') is not None:
             total += weight
             user_disability = user.get('disability', False)
