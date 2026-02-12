@@ -75,7 +75,6 @@ def get_supported_languages():
     ]
 
 
-# ========== VALIDATION ==========
 
 INDIAN_STATES = [
     "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar",
