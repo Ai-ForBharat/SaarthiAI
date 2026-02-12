@@ -15,19 +15,15 @@ from utils import (
     INDIAN_STATES
 )
 
-# ========== INITIALIZE APP ==========
 app = Flask(__name__)
-CORS(app)  # Allow frontend to call API
+CORS(app)
 
-# Load components
 print("🚀 Starting GovScheme AI...")
 data_loader = DataLoader()
 matcher = MatchingEngine(data_loader.get_all_schemes())
 chatbot = GovSchemeBot()
 print("✅ All systems ready!\n")
 
-
-# ========== API ROUTES ==========
 
 @app.route('/', methods=['GET'])
 def home():
@@ -60,18 +56,18 @@ def recommend_schemes():
         if not user_data:
             return jsonify({"error": "No data received"}), 400
 
-        # Validate input
+       
         errors = validate_user_input(user_data)
         if errors:
             return jsonify({"error": "Validation failed", "details": errors}), 400
 
-        # Get language preference
+     
         language = user_data.get('language', 'en')
 
-        # Find matching schemes
+     
         matched_schemes = matcher.find_matches(user_data)
 
-        # Translate if needed
+
         if language != 'en':
             matched_schemes = translate_schemes(matched_schemes, language)
 
@@ -172,6 +168,6 @@ def get_categories():
     return jsonify({"categories": data_loader.get_categories()})
 
 
-# ========== RUN SERVER ==========
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
