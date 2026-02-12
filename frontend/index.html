@@ -10,7 +10,6 @@
 </head>
 <body>
 
-    <!-- ========== NAVBAR ========== -->
     <nav class="navbar">
         <div class="nav-brand">
             <span class="logo">🏛️</span>
@@ -34,7 +33,6 @@
         </div>
     </nav>
 
-    <!-- ========== HERO SECTION ========== -->
     <section class="hero" id="heroSection">
         <div class="hero-content">
             <h2>🇮🇳 Find Government Schemes You Deserve</h2>
@@ -59,13 +57,11 @@
         </div>
     </section>
 
-    <!-- ========== FORM SECTION ========== -->
     <section class="form-section" id="formSection">
         <div class="form-container">
             <h2><i class="fas fa-user-edit"></i> Enter Your Details</h2>
             <p class="form-subtitle">Fill in your information to find matching schemes</p>
 
-            <!-- Progress Bar -->
             <div class="progress-bar">
                 <div class="step active" data-step="1">
                     <span class="step-num">1</span>
@@ -85,7 +81,6 @@
 
             <form id="userForm" onsubmit="submitForm(event)">
 
-                <!-- STEP 1: Personal Details -->
                 <div class="form-step" id="step1">
                     <h3>👤 Personal Information</h3>
 
@@ -134,7 +129,6 @@
                     </button>
                 </div>
 
-                <!-- STEP 2: Economic Details -->
                 <div class="form-step hidden" id="step2">
                     <h3>💰 Economic Information</h3>
 
@@ -178,7 +172,6 @@
                     </div>
                 </div>
 
-                <!-- STEP 3: Additional Details -->
                 <div class="form-step hidden" id="step3">
                     <h3>📋 Additional Information</h3>
 
@@ -241,8 +234,6 @@
             </form>
         </div>
     </section>
-
-    <!-- ========== LOADING ========== -->
     <section class="loading-section hidden" id="loadingSection">
         <div class="loader">
             <div class="spinner"></div>
@@ -251,7 +242,6 @@
         </div>
     </section>
 
-    <!-- ========== RESULTS SECTION ========== -->
     <section class="results-section hidden" id="resultsSection">
         <div class="results-header">
             <h2>📋 Your Eligible Schemes</h2>
@@ -268,23 +258,20 @@
         </div>
 
         <div class="schemes-grid" id="schemesGrid">
-            <!-- Scheme cards injected by JS -->
+      
         </div>
     </section>
 
-    <!-- ========== SCHEME DETAIL MODAL ========== -->
     <div class="modal-overlay hidden" id="schemeModal">
         <div class="modal">
             <button class="modal-close" onclick="closeModal()">
                 <i class="fas fa-times"></i>
             </button>
             <div id="modalContent">
-                <!-- Filled by JS -->
             </div>
         </div>
     </div>
 
-    <!-- ========== CHATBOT ========== -->
     <div class="chatbot-toggle" id="chatToggle" onclick="toggleChat()">
         <i class="fas fa-robot"></i>
         <span class="chat-badge">AI</span>
@@ -307,7 +294,6 @@
         </div>
     </div>
 
-    <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <p>🏛️ GovScheme AI — Made with ❤️ for every Indian citizen</p>
         <p class="footer-sub">This is an informational tool. Please verify details on official government websites.</p>
