@@ -248,9 +248,6 @@ const FAQ = () => {
             </motion.button>
 
             <div style={styles.helpText}>
-              <span style={styles.helpTextIcon}>💬</span>
-              Can't find your answer?{' '}
-              <span style={styles.helpTextLink}>Ask our AI</span>
             </div>
           </motion.div>
         </motion.div>
