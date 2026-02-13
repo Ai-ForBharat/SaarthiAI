@@ -42,7 +42,7 @@ const FAQ = () => {
               <button
                 style={{
                   ...styles.faqQuestion,
-                  color: openIndex === i ? '#3b82f6' : '#1e293b',
+                  color: openIndex === i ? '#22c55e' : '#1e293b',
                 }}
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
               >
@@ -51,7 +51,7 @@ const FAQ = () => {
                   transition: 'transform 0.3s',
                   transform: openIndex === i ? 'rotate(180deg)' : 'rotate(0)',
                   flexShrink: 0,
-                  color: openIndex === i ? '#3b82f6' : '#94a3b8',
+                  color: openIndex === i ? '#22c55e' : '#94a3b8',
                   fontSize: '14px',
                 }} />
               </button>
@@ -90,7 +90,7 @@ const FAQ = () => {
 const styles = {
   section: {
     padding: 'clamp(50px, 8vw, 80px) clamp(12px, 3vw, 24px)',
-    background: 'white',
+    background: 'var(--bg-card)',
   },
   container: {
     maxWidth: '800px',
@@ -115,11 +115,11 @@ const styles = {
   heading: {
     fontSize: 'clamp(22px, 5vw, 36px)',
     fontWeight: 800,
-    color: '#1e293b',
+    color: 'var(--text)',
     marginBottom: '8px',
   },
   subtitleText: {
-    color: '#64748b',
+    color: 'var(--text-light)',
     fontSize: 'clamp(13px, 2.5vw, 15px)',
   },
   faqList: {
@@ -128,9 +128,9 @@ const styles = {
     gap: 'clamp(8px, 2vw, 12px)',
   },
   faqItem: {
-    background: '#f8faff',
+    background: 'var(--bg-secondary)',
     borderRadius: 'clamp(10px, 2vw, 14px)',
-    border: '1px solid #e2e8f0',
+    border: '1px solid var(--border)',
     overflow: 'hidden',
   },
   faqQuestion: {
@@ -152,7 +152,7 @@ const styles = {
   faqAnswer: {
     padding: '0 clamp(14px, 3vw, 20px) clamp(14px, 3vw, 18px)',
     fontSize: 'clamp(12px, 2.5vw, 14px)',
-    color: '#64748b',
+    color: 'var(--text-light)',
     lineHeight: 1.7,
   },
   viewMoreBtn: {

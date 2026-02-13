@@ -15,7 +15,7 @@ const AboutPage = () => {
         <h1 style={styles.title}>🏛️ About GovScheme AI</h1>
 
         <div style={styles.card}>
-          <h2 style={styles.sectionTitle}><FaBullseye style={{ color: '#3b82f6' }} /> Our Mission</h2>
+          <h2 style={styles.sectionTitle}><FaBullseye style={{ color: '#22c55e' }} /> Our Mission</h2>
           <p style={styles.text}>
             GovScheme AI is a platform that aims to offer <strong>one-stop search and discovery</strong> of
             Government schemes. We believe every Indian citizen deserves to know about the benefits
@@ -29,7 +29,7 @@ const AboutPage = () => {
         </div>
 
         <div style={styles.card}>
-          <h2 style={styles.sectionTitle}><FaLightbulb style={{ color: '#f97316' }} /> How It Works</h2>
+          <h2 style={styles.sectionTitle}><FaLightbulb style={{ color: '#16a34a' }} /> How It Works</h2>
           <ol style={styles.list}>
             <li>User fills a simple multi-step form with personal details</li>
             <li>Our AI matching engine analyzes the profile against 200+ schemes</li>
@@ -54,8 +54,8 @@ const AboutPage = () => {
               <div key={t.label} style={styles.techItem}>
                 <span style={{ fontSize: '24px' }}>{t.icon}</span>
                 <div>
-                  <div style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 500 }}>{t.label}</div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#1e293b' }}>{t.value}</div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-lighter)', fontWeight: 500 }}>{t.label}</div>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text)' }}>{t.value}</div>
                 </div>
               </div>
             ))}
@@ -66,15 +66,15 @@ const AboutPage = () => {
           <h2 style={styles.sectionTitle}><FaHeart style={{ color: '#ef4444' }} /> Key Features</h2>
           <div style={styles.featuresGrid}>
             {[
-              { icon: <FaRobot />, title: 'AI Powered', desc: 'Smart matching engine with ML-based chatbot', color: '#3b82f6' },
+              { icon: <FaRobot />, title: 'AI Powered', desc: 'Smart matching engine with ML-based chatbot', color: '#22c55e' },
               { icon: <FaLanguage />, title: '12 Languages', desc: 'Hindi, Tamil, Telugu, Bengali, and more', color: '#8b5cf6' },
               { icon: <FaShieldAlt />, title: '100% Free', desc: 'No registration, no fees, no hidden charges', color: '#22c55e' },
-              { icon: <FaUsers />, title: 'For Everyone', desc: 'Farmers, students, women, elderly, disabled', color: '#f97316' },
+              { icon: <FaUsers />, title: 'For Everyone', desc: 'Farmers, students, women, elderly, disabled', color: '#16a34a' },
             ].map(f => (
               <div key={f.title} style={styles.featureCard}>
                 <div style={{ ...styles.featureIcon, background: `${f.color}15`, color: f.color }}>{f.icon}</div>
                 <h4 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '4px' }}>{f.title}</h4>
-                <p style={{ fontSize: '13px', color: '#64748b' }}>{f.desc}</p>
+                <p style={{ fontSize: '13px', color: 'var(--text-light)' }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -92,33 +92,33 @@ const styles = {
     display: 'inline-flex', alignItems: 'center', gap: '8px',
     padding: '10px 20px', background: '#f1f5f9', border: 'none',
     borderRadius: '10px', fontSize: '14px', fontWeight: 600,
-    cursor: 'pointer', color: '#475569', fontFamily: 'Inter, sans-serif',
+    cursor: 'pointer', color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif',
     width: 'fit-content',
   },
-  title: { fontSize: '36px', fontWeight: 900, color: '#1e293b' },
+  title: { fontSize: '36px', fontWeight: 900, color: 'var(--text)' },
   card: {
-    background: 'white', borderRadius: '20px', padding: '32px',
-    border: '1px solid #e2e8f0', boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
+    background: 'var(--bg-card)', borderRadius: '20px', padding: '32px',
+    border: '1px solid var(--border)', boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
   },
   sectionTitle: {
-    fontSize: '20px', fontWeight: 700, color: '#1e293b',
+    fontSize: '20px', fontWeight: 700, color: 'var(--text)',
     marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px',
   },
-  text: { fontSize: '15px', color: '#475569', lineHeight: 1.8, marginBottom: '12px' },
-  list: { paddingLeft: '20px', fontSize: '15px', color: '#475569', lineHeight: 2 },
+  text: { fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '12px' },
+  list: { paddingLeft: '20px', fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 2 },
   techGrid: {
     display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '12px',
   },
   techItem: {
     display: 'flex', alignItems: 'center', gap: '12px',
-    padding: '14px', background: '#f8faff', borderRadius: '12px', border: '1px solid #e2e8f0',
+    padding: '14px', background: 'var(--bg-secondary)', borderRadius: '12px', border: '1px solid var(--border)',
   },
   featuresGrid: {
     display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px',
   },
   featureCard: {
-    padding: '20px', background: '#f8faff', borderRadius: '14px',
-    border: '1px solid #e2e8f0',
+    padding: '20px', background: 'var(--bg-secondary)', borderRadius: '14px',
+    border: '1px solid var(--border)',
   },
   featureIcon: {
     width: '40px', height: '40px', borderRadius: '10px',

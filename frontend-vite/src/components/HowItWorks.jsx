@@ -7,12 +7,12 @@ const HowItWorks = () => {
     {
       icon: <FaEdit />, title: 'Enter Details',
       desc: 'Start by entering your basic details like age, state, income, and occupation.',
-      color: '#3b82f6', bg: '#dbeafe', num: '01',
+      color: '#22c55e', bg: '#dcfce7', num: '01',
     },
     {
       icon: <FaSearch />, title: 'AI Searches',
       desc: 'Our AI search engine will find the most relevant schemes matching your profile.',
-      color: '#f97316', bg: '#ffedd5', num: '02',
+      color: '#16a34a', bg: '#ffedd5', num: '02',
     },
     {
       icon: <FaCheckCircle />, title: 'Select & Apply',
@@ -79,7 +79,7 @@ const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 const styles = {
   section: {
     padding: 'clamp(50px, 8vw, 80px) clamp(16px, 4vw, 24px)',
-    background: 'white',
+    background: 'var(--bg-card)',
   },
   header: {
     textAlign: 'center',
@@ -87,8 +87,8 @@ const styles = {
   },
   label: {
     display: 'inline-block',
-    background: '#eff6ff',
-    color: '#3b82f6',
+    background: '#f0fdf4',
+    color: '#22c55e',
     padding: '6px 20px',
     borderRadius: '50px',
     fontSize: '14px',
@@ -98,11 +98,11 @@ const styles = {
   heading: {
     fontSize: 'clamp(24px, 5vw, 40px)',
     fontWeight: 800,
-    color: '#1e293b',
+    color: 'var(--text)',
     lineHeight: 1.2,
   },
   headingHighlight: {
-    color: '#3b82f6',
+    color: '#22c55e',
   },
   stepsContainer: {
     display: 'flex',
@@ -114,12 +114,12 @@ const styles = {
     flexWrap: 'wrap',
   },
   stepCard: {
-    background: 'white',
+    background: 'var(--bg-card)',
     borderRadius: '20px',
     padding: 'clamp(24px, 4vw, 36px) clamp(20px, 3vw, 28px)',
     textAlign: 'center',
     width: 'clamp(240px, 40vw, 280px)',
-    border: '1px solid #e2e8f0',
+    border: '1px solid var(--border)',
     boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
     transition: 'all 0.3s ease',
     position: 'relative',
@@ -149,12 +149,12 @@ const styles = {
   stepTitle: {
     fontSize: 'clamp(15px, 3vw, 18px)',
     fontWeight: 700,
-    color: '#1e293b',
+    color: 'var(--text)',
     marginBottom: '8px',
   },
   stepDesc: {
     fontSize: 'clamp(12px, 2.5vw, 14px)',
-    color: '#64748b',
+    color: 'var(--text-light)',
     lineHeight: 1.6,
   },
   arrowDesktop: {

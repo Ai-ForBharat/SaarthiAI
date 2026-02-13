@@ -45,7 +45,7 @@ const FAQPage = () => {
               <button
                 style={{
                   ...styles.faqQ,
-                  color: openIndex === i ? '#3b82f6' : '#1e293b',
+                  color: openIndex === i ? '#22c55e' : '#1e293b',
                 }}
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
               >
@@ -54,7 +54,7 @@ const FAQPage = () => {
                 <FaChevronDown style={{
                   transition: 'transform 0.3s',
                   transform: openIndex === i ? 'rotate(180deg)' : 'rotate(0)',
-                  color: openIndex === i ? '#3b82f6' : '#94a3b8',
+                  color: openIndex === i ? '#22c55e' : '#94a3b8',
                   flexShrink: 0,
                 }} />
               </button>
@@ -84,14 +84,14 @@ const styles = {
     display: 'inline-flex', alignItems: 'center', gap: '8px',
     padding: '10px 20px', background: '#f1f5f9', border: 'none',
     borderRadius: '10px', fontSize: '14px', fontWeight: 600,
-    cursor: 'pointer', color: '#475569', fontFamily: 'Inter, sans-serif', marginBottom: '24px',
+    cursor: 'pointer', color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif', marginBottom: '24px',
   },
-  title: { fontSize: '36px', fontWeight: 900, color: '#1e293b', marginBottom: '8px' },
-  subtitle: { fontSize: '16px', color: '#64748b', marginBottom: '32px' },
+  title: { fontSize: '36px', fontWeight: 900, color: 'var(--text)', marginBottom: '8px' },
+  subtitle: { fontSize: '16px', color: 'var(--text-light)', marginBottom: '32px' },
   faqList: { display: 'flex', flexDirection: 'column', gap: '10px' },
   faqItem: {
-    background: 'white', borderRadius: '14px',
-    border: '1px solid #e2e8f0', overflow: 'hidden',
+    background: 'var(--bg-card)', borderRadius: '14px',
+    border: '1px solid var(--border)', overflow: 'hidden',
     boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
   },
   faqQ: {
@@ -103,14 +103,14 @@ const styles = {
     fontFamily: 'Inter, sans-serif', lineHeight: 1.4,
   },
   qNum: {
-    fontSize: '12px', fontWeight: 800, color: '#3b82f6',
-    background: '#dbeafe', width: '28px', height: '28px',
+    fontSize: '12px', fontWeight: 800, color: '#22c55e',
+    background: '#dcfce7', width: '28px', height: '28px',
     borderRadius: '8px', display: 'flex', alignItems: 'center',
     justifyContent: 'center', flexShrink: 0,
   },
   faqA: {
     padding: '0 20px 18px 62px', fontSize: '14px',
-    color: '#64748b', lineHeight: 1.7,
+    color: 'var(--text-light)', lineHeight: 1.7,
   },
 };
 

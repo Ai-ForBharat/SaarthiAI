@@ -95,7 +95,7 @@ const UserForm = () => {
         transition={{ duration: 0.6 }}
       >
         <h2 style={styles.title}>
-          <FaUser style={{ color: '#3b82f6' }} /> Enter Your Details
+          <FaUser style={{ color: '#22c55e' }} /> Enter Your Details
         </h2>
         <p style={styles.subtitle}>
           Fill your information to find matching government schemes
@@ -112,7 +112,7 @@ const UserForm = () => {
               <div style={styles.progressStep}>
                 <div style={{
                   ...styles.progressDot,
-                  background: step > i ? '#22c55e' : step === i + 1 ? '#3b82f6' : '#e2e8f0',
+                  background: step > i ? '#22c55e' : step === i + 1 ? '#22c55e' : '#e2e8f0',
                   color: step >= i + 1 ? 'white' : '#94a3b8',
                 }}>
                   {step > i + 1 ? '✓' : i + 1}
@@ -120,7 +120,7 @@ const UserForm = () => {
                 <span style={{
                   fontSize: 'clamp(10px, 2.5vw, 12px)',
                   fontWeight: step === i + 1 ? 700 : 500,
-                  color: step === i + 1 ? '#3b82f6' : '#94a3b8',
+                  color: step === i + 1 ? '#22c55e' : '#94a3b8',
                 }}>{label}</span>
               </div>
             </React.Fragment>
@@ -149,7 +149,7 @@ const UserForm = () => {
 
                 <div style={styles.row}>
                   <div style={styles.group}>
-                    <label style={styles.label}><FaBirthdayCake style={{ ...styles.labelIcon, color: '#f97316' }} /> Age</label>
+                    <label style={styles.label}><FaBirthdayCake style={{ ...styles.labelIcon, color: '#16a34a' }} /> Age</label>
                     <input style={styles.input} type="number" name="age" value={formData.age}
                       onChange={handleChange} placeholder="Your age" min="0" max="120" required />
                   </div>
@@ -210,7 +210,7 @@ const UserForm = () => {
                 </div>
 
                 <div style={styles.group}>
-                  <label style={styles.label}><FaBriefcase style={{ ...styles.labelIcon, color: '#f97316' }} /> Occupation</label>
+                  <label style={styles.label}><FaBriefcase style={{ ...styles.labelIcon, color: '#16a34a' }} /> Occupation</label>
                   <select style={styles.input} name="occupation" value={formData.occupation} onChange={handleChange} required>
                     <option value="">Select Occupation</option>
                     <option value="farmer">🌾 Farmer</option>
@@ -326,19 +326,19 @@ const styles = {
     borderRadius: 'clamp(16px, 3vw, 20px)',
     padding: 'clamp(24px, 5vw, 40px)',
     boxShadow: '0 10px 50px rgba(0, 0, 0, 0.1)',
-    border: '1px solid #e2e8f0',
+    border: '1px solid var(--border)',
   },
   title: {
     fontSize: 'clamp(20px, 4vw, 24px)',
     fontWeight: 800,
-    color: '#1e293b',
+    color: 'var(--text)',
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
     marginBottom: '4px',
   },
   subtitle: {
-    color: '#94a3b8',
+    color: 'var(--text-lighter)',
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     marginBottom: 'clamp(20px, 4vw, 28px)',
   },
@@ -379,7 +379,7 @@ const styles = {
     fontSize: 'clamp(16px, 3vw, 18px)',
     fontWeight: 700,
     marginBottom: 'clamp(14px, 3vw, 20px)',
-    color: '#1e293b',
+    color: 'var(--text)',
   },
   group: {
     marginBottom: 'clamp(14px, 3vw, 18px)',
@@ -391,26 +391,26 @@ const styles = {
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     fontWeight: 600,
     marginBottom: '6px',
-    color: '#1e293b',
+    color: 'var(--text)',
   },
   labelIcon: {
-    color: '#3b82f6',
+    color: '#22c55e',
     fontSize: '14px',
   },
   input: {
     width: '100%',
     padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 16px)',
-    border: '2px solid #e2e8f0',
+    border: '2px solid var(--border)',
     borderRadius: 'clamp(10px, 2vw, 12px)',
     fontSize: 'clamp(13px, 2.5vw, 15px)',
     fontFamily: 'Inter, sans-serif',
-    background: '#fafbff',
+    background: 'var(--bg-input)',
     transition: 'all 0.3s ease',
     outline: 'none',
     boxSizing: 'border-box',
   },
   hint: {
-    color: '#94a3b8',
+    color: 'var(--text-lighter)',
     fontSize: 'clamp(10px, 2vw, 12px)',
     marginTop: '4px',
     display: 'block',
@@ -425,19 +425,19 @@ const styles = {
     alignItems: 'center',
     gap: 'clamp(8px, 2vw, 12px)',
     padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 18px)',
-    border: '2px solid #e2e8f0',
+    border: '2px solid var(--border)',
     borderRadius: 'clamp(10px, 2vw, 12px)',
     marginBottom: 'clamp(8px, 1.5vw, 10px)',
     cursor: 'pointer',
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     fontWeight: 500,
     transition: 'all 0.3s ease',
-    background: '#fafbff',
+    background: 'var(--bg-input)',
   },
   checkboxInput: {
     width: '18px',
     height: '18px',
-    accentColor: '#3b82f6',
+    accentColor: '#22c55e',
     flexShrink: 0,
   },
   btnRow: {
@@ -466,7 +466,7 @@ const styles = {
   backBtn: {
     padding: 'clamp(12px, 2.5vw, 14px) clamp(16px, 3vw, 24px)',
     background: '#f1f5f9',
-    color: '#64748b',
+    color: 'var(--text-light)',
     border: 'none',
     borderRadius: 'clamp(10px, 2vw, 12px)',
     fontSize: 'clamp(13px, 2.5vw, 15px)',

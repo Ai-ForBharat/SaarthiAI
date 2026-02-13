@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
-import { FaArrowRight, FaShieldAlt, FaLanguage, FaRobot, FaUsers } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
 
 const About = () => {
   const { setCurrentView } = useApp();
@@ -9,18 +9,23 @@ const About = () => {
   return (
     <section style={styles.section}>
       <div style={styles.container}>
+        
+        {/* LEFT SIDE */}
         <motion.div
-          style={styles.content}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          style={styles.left}
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <span style={styles.labelBadge}>About Us</span>
-          <h2 style={styles.heading}>About GovScheme AI</h2>
+          <h2 style={styles.title}>About</h2>
 
           <p style={styles.text}>
-            <strong>GovScheme AI</strong> is a platform that aims to offer one-stop search and discovery
-            of Government schemes. It provides an innovative, technology-based solution to discover
+            <strong>GovScheme AI</strong> is a national platform that aims to offer
+            one-stop search and discovery of Government schemes.
+          </p>
+
+          <p style={styles.text}>
+            It provides an innovative, technology-based solution to discover
             scheme information based upon the eligibility of the citizen.
           </p>
 
@@ -30,38 +35,28 @@ const About = () => {
             Thus no need to visit multiple Government websites.
           </p>
 
-          <div style={styles.features}>
-            {[
-              { icon: <FaRobot />, label: 'AI Powered Matching', color: '#3b82f6' },
-              { icon: <FaLanguage />, label: '12 Languages Supported', color: '#8b5cf6' },
-              { icon: <FaShieldAlt />, label: '100% Free & Secure', color: '#22c55e' },
-              { icon: <FaUsers />, label: 'For Every Indian Citizen', color: '#f97316' },
-            ].map((f, i) => (
-              <motion.div
-                key={f.label}
-                style={styles.featureItem}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <div style={{ ...styles.featureIcon, background: `${f.color}15`, color: f.color }}>
-                  {f.icon}
-                </div>
-                <span style={styles.featureText}>{f.label}</span>
-              </motion.div>
-            ))}
-          </div>
-
           <motion.button
-            style={styles.btn}
-            onClick={() => setCurrentView('about')}
+            style={styles.button}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => setCurrentView('about')}
           >
             View More <FaArrowRight />
           </motion.button>
         </motion.div>
+
+        {/* RIGHT SIDE – EMPTY FRAME */}
+        <motion.div
+          style={styles.right}
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
+          <div style={styles.placeholder}>
+            {/* Empty decorative box */}
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
@@ -69,87 +64,63 @@ const About = () => {
 
 const styles = {
   section: {
-    padding: 'clamp(50px, 8vw, 80px) clamp(12px, 3vw, 24px)',
-    background: '#f0f4ff',
+    padding: '80px 20px',
+    background: '#1f2937',
   },
+
   container: {
-    maxWidth: '800px',
+    maxWidth: '1200px',
     margin: '0 auto',
-  },
-  content: {
-    background: 'white',
-    borderRadius: 'clamp(16px, 3vw, 24px)',
-    padding: 'clamp(28px, 5vw, 50px) clamp(20px, 4vw, 40px)',
-    boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
-    border: '1px solid #e2e8f0',
-    textAlign: 'center',
-  },
-  labelBadge: {
-    display: 'inline-block',
-    background: '#ede9fe',
-    color: '#7c3aed',
-    padding: '6px 20px',
-    borderRadius: '50px',
-    fontSize: 'clamp(12px, 2.5vw, 14px)',
-    fontWeight: 600,
-    marginBottom: '14px',
-  },
-  heading: {
-    fontSize: 'clamp(24px, 5vw, 32px)',
-    fontWeight: 800,
-    color: '#1e293b',
-    marginBottom: 'clamp(16px, 3vw, 24px)',
-  },
-  text: {
-    fontSize: 'clamp(13px, 2.5vw, 16px)',
-    color: '#475569',
-    lineHeight: 1.8,
-    marginBottom: '14px',
-    textAlign: 'left',
-  },
-  features: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(140px, 40vw, 200px), 1fr))',
-    gap: 'clamp(8px, 2vw, 12px)',
-    margin: 'clamp(20px, 4vw, 30px) 0',
-  },
-  featureItem: {
-    display: 'flex',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '60px',
     alignItems: 'center',
-    gap: 'clamp(8px, 2vw, 12px)',
-    padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 16px)',
-    background: '#f8faff',
-    borderRadius: '12px',
-    border: '1px solid #e2e8f0',
   },
-  featureIcon: {
-    width: 'clamp(30px, 5vw, 36px)',
-    height: 'clamp(30px, 5vw, 36px)',
-    borderRadius: '10px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 'clamp(14px, 2.5vw, 16px)',
-    flexShrink: 0,
-  },
-  featureText: {
-    fontSize: 'clamp(11px, 2.5vw, 13px)',
-    fontWeight: 600,
-    color: '#1e293b',
-  },
-  btn: {
-    padding: 'clamp(12px, 2.5vw, 14px) clamp(24px, 4vw, 32px)',
-    background: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
+
+  left: {
     color: 'white',
-    border: 'none',
-    borderRadius: '50px',
-    fontSize: 'clamp(13px, 2.5vw, 15px)',
-    fontWeight: 600,
+  },
+
+  title: {
+    fontSize: '40px',
+    fontWeight: '700',
+    color: '#22c55e',
+    marginBottom: '20px',
+  },
+
+  text: {
+    fontSize: '16px',
+    lineHeight: '1.8',
+    color: '#d1d5db',
+    marginBottom: '20px',
+  },
+
+  button: {
+    marginTop: '20px',
+    padding: '12px 28px',
+    background: 'transparent',
+    border: '1px solid white',
+    color: 'white',
+    borderRadius: '8px',
     cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '8px',
-    fontFamily: 'Inter, sans-serif',
+    gap: '10px',
+    fontSize: '15px',
+  },
+
+  right: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+
+  placeholder: {
+    width: '100%',
+    height: '350px',
+    borderRadius: '20px',
+    background: '#111827',
+    border: '2px solid #374151',
+    boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
   },
 };
 

@@ -36,15 +36,15 @@ const SchemeModal = ({ scheme, onClose }) => {
           {/* Header */}
           <span style={{
             ...styles.badge,
-            background: scheme.type === 'central' ? '#dbeafe' : '#fef3c7',
-            color: scheme.type === 'central' ? '#1e40af' : '#92400e',
+            background: scheme.type === 'central' ? '#dcfce7' : '#fef3c7',
+            color: scheme.type === 'central' ? '#16a34a' : '#92400e',
           }}>
             {scheme.type === 'central' ? '🇮🇳 Central Government' : '🏛️ State Government'}
           </span>
 
           <h2 style={styles.title}>{scheme.name}</h2>
           {scheme.name_en && (
-            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px' }}>
+            <p style={{ color: 'var(--text-lighter)', fontSize: '13px', marginBottom: '20px' }}>
               ({scheme.name_en})
             </p>
           )}
@@ -65,7 +65,7 @@ const SchemeModal = ({ scheme, onClose }) => {
           <Section icon={<FaFileAlt color="#eab308" />} title="Documents Required">
             <ul style={{ paddingLeft: '20px' }}>
               {(scheme.documents || ['Check official website']).map((doc, i) => (
-                <li key={i} style={{ marginBottom: '4px', fontSize: '14px', color: '#475569' }}>{doc}</li>
+                <li key={i} style={{ marginBottom: '4px', fontSize: '14px', color: 'var(--text-secondary)' }}>{doc}</li>
               ))}
             </ul>
           </Section>
@@ -108,10 +108,10 @@ const SchemeModal = ({ scheme, onClose }) => {
 
 const Section = ({ icon, title, children }) => (
   <div style={{ marginBottom: '20px' }}>
-    <h4 style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', fontWeight: 700, marginBottom: '8px', color: '#1e293b' }}>
+    <h4 style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>
       {icon} {title}
     </h4>
-    <div style={{ fontSize: '14px', color: '#475569', lineHeight: 1.7 }}>
+    <div style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
       {children}
     </div>
   </div>
@@ -130,7 +130,7 @@ const styles = {
     backdropFilter: 'blur(6px)',
   },
   modal: {
-    background: 'white',
+    background: 'var(--bg-card)',
     borderRadius: '20px',
     maxWidth: '600px',
     width: '100%',
@@ -153,7 +153,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: '14px',
-    color: '#64748b',
+    color: 'var(--text-light)',
     transition: 'all 0.3s ease',
   },
   badge: {
@@ -167,7 +167,7 @@ const styles = {
   title: {
     fontSize: '22px',
     fontWeight: 800,
-    color: '#1e293b',
+    color: 'var(--text)',
     marginBottom: '6px',
     paddingRight: '40px',
     lineHeight: 1.3,

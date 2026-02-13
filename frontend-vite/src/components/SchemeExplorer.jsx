@@ -19,8 +19,8 @@ const SchemeExplorer = () => {
   const [searchFilter, setSearchFilter] = useState('');
 
   const tabs = [
-    { key: 'categories', label: 'Categories', icon: <FaThList />, color: '#3b82f6' },
-    { key: 'states', label: 'States/UTs', icon: <FaMapMarkedAlt />, color: '#f97316' },
+    { key: 'categories', label: 'Categories', icon: <FaThList />, color: '#22c55e' },
+    { key: 'states', label: 'States/UTs', icon: <FaMapMarkedAlt />, color: '#16a34a' },
     { key: 'central', label: 'Central Ministries', icon: <FaLandmark />, color: '#8b5cf6' },
   ];
 
@@ -115,7 +115,7 @@ const SchemeExplorer = () => {
 
           {/* ========== SEARCH WITHIN TAB ========== */}
           <div style={styles.searchBar}>
-            <FaSearch style={{ color: '#94a3b8', fontSize: '14px', flexShrink: 0 }} />
+            <FaSearch style={{ color: 'var(--text-lighter)', fontSize: '14px', flexShrink: 0 }} />
             <input
               style={styles.searchInput}
               placeholder={`Search ${activeTab === 'categories' ? 'categories' : activeTab === 'states' ? 'states' : 'ministries'}...`}
@@ -191,12 +191,12 @@ const SchemeExplorer = () => {
                     whileHover={{
                       y: -5,
                       boxShadow: '0 10px 30px rgba(249,115,22,0.12)',
-                      borderColor: '#f97316',
+                      borderColor: '#16a34a',
                     }}
                   >
                     <div style={styles.stateTop}>
                       <div style={styles.stateIconBox}>
-                        <FaMapMarkerAlt style={{ color: '#f97316', fontSize: '18px' }} />
+                        <FaMapMarkerAlt style={{ color: '#16a34a', fontSize: '18px' }} />
                       </div>
                       <div style={{ flex: 1 }}>
                         <h3 style={styles.stateName}>{state.name}</h3>
@@ -215,7 +215,7 @@ const SchemeExplorer = () => {
                           {state.state} State Schemes
                         </span>
                       )}
-                      <span style={{ ...styles.statBadge, background: '#dbeafe', color: '#1e40af' }}>
+                      <span style={{ ...styles.statBadge, background: '#dcfce7', color: '#16a34a' }}>
                         {state.central} Central
                       </span>
                     </div>
@@ -256,10 +256,10 @@ const SchemeExplorer = () => {
             {filteredData.length === 0 && (
               <div style={styles.noResults}>
                 <span style={{ fontSize: '48px', marginBottom: '16px', display: 'block' }}>😔</span>
-                <p style={{ fontSize: '18px', fontWeight: 600, color: '#475569', marginBottom: '8px' }}>
+                <p style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>
                   No results found for "{searchFilter}"
                 </p>
-                <p style={{ fontSize: '14px', color: '#94a3b8' }}>
+                <p style={{ fontSize: '14px', color: 'var(--text-lighter)' }}>
                   Try different keywords
                 </p>
               </div>
@@ -335,8 +335,8 @@ const styles = {
   },
   label: {
     display: 'inline-block',
-    background: '#eff6ff',
-    color: '#3b82f6',
+    background: '#f0fdf4',
+    color: '#22c55e',
     padding: '6px 20px',
     borderRadius: '50px',
     fontSize: '14px',
@@ -346,7 +346,7 @@ const styles = {
   heading: {
     fontSize: 'clamp(28px, 4vw, 42px)',
     fontWeight: 900,
-    color: '#1e293b',
+    color: 'var(--text)',
     lineHeight: 1.2,
   },
 
@@ -361,11 +361,11 @@ const styles = {
   tabsContainer: {
     display: 'flex',
     gap: '10px',
-    background: 'white',
+    background: 'var(--bg-card)',
     padding: '8px',
     borderRadius: '16px',
     boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-    border: '1px solid #e2e8f0',
+    border: '1px solid var(--border)',
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
@@ -382,7 +382,7 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     fontFamily: 'Inter, sans-serif',
-    color: '#64748b',
+    color: 'var(--text-light)',
     whiteSpace: 'nowrap',
   },
   tabCount: {
@@ -397,10 +397,10 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
-    background: 'white',
+    background: 'var(--bg-card)',
     padding: '10px 18px',
     borderRadius: '12px',
-    border: '2px solid #e2e8f0',
+    border: '2px solid var(--border)',
     width: '100%',
     maxWidth: '400px',
     boxShadow: '0 2px 10px rgba(0,0,0,0.03)',
@@ -412,13 +412,13 @@ const styles = {
     fontSize: '14px',
     width: '100%',
     fontFamily: 'Inter, sans-serif',
-    color: '#1e293b',
+    color: 'var(--text)',
     background: 'transparent',
   },
   clearSearch: {
     background: '#f1f5f9',
     border: 'none',
-    color: '#94a3b8',
+    color: 'var(--text-lighter)',
     cursor: 'pointer',
     fontSize: '12px',
     width: '24px',
@@ -439,11 +439,11 @@ const styles = {
     gap: '16px',
   },
   categoryCard: {
-    background: 'white',
+    background: 'var(--bg-card)',
     borderRadius: '16px',
     padding: '24px 18px',
     textAlign: 'center',
-    border: '2px solid #e2e8f0',
+    border: '2px solid var(--border)',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
   },
@@ -459,7 +459,7 @@ const styles = {
   catName: {
     fontSize: '13px',
     fontWeight: 700,
-    color: '#1e293b',
+    color: 'var(--text)',
     marginBottom: '10px',
     lineHeight: 1.3,
     minHeight: '36px',
@@ -482,10 +482,10 @@ const styles = {
     gap: '14px',
   },
   stateCard: {
-    background: 'white',
+    background: 'var(--bg-card)',
     borderRadius: '14px',
     padding: '18px',
-    border: '2px solid #e2e8f0',
+    border: '2px solid var(--border)',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
   },
@@ -508,12 +508,12 @@ const styles = {
   stateName: {
     fontSize: '14px',
     fontWeight: 700,
-    color: '#1e293b',
+    color: 'var(--text)',
     lineHeight: 1.2,
   },
   stateType: {
     fontSize: '11px',
-    color: '#94a3b8',
+    color: 'var(--text-lighter)',
     fontWeight: 500,
     marginTop: '2px',
     display: 'block',
@@ -537,13 +537,13 @@ const styles = {
     gap: '14px',
   },
   ministryCard: {
-    background: 'white',
+    background: 'var(--bg-card)',
     borderRadius: '14px',
     padding: '18px',
     display: 'flex',
     alignItems: 'center',
     gap: '14px',
-    border: '2px solid #e2e8f0',
+    border: '2px solid var(--border)',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
   },
@@ -560,7 +560,7 @@ const styles = {
   ministryName: {
     fontSize: '13px',
     fontWeight: 600,
-    color: '#1e293b',
+    color: 'var(--text)',
     lineHeight: 1.3,
   },
   ministryCount: {

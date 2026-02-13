@@ -49,7 +49,7 @@ const styles = {
   },
   content: {
     textAlign: 'center',
-    background: 'white',
+    background: 'var(--bg-card)',
     padding: '50px',
     borderRadius: '24px',
     boxShadow: '0 10px 50px rgba(0,0,0,0.1)',
@@ -60,7 +60,7 @@ const styles = {
     width: '60px',
     height: '60px',
     border: '5px solid #e2e8f0',
-    borderTopColor: '#3b82f6',
+    borderTopColor: '#22c55e',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
     margin: '0 auto 24px',
@@ -68,12 +68,12 @@ const styles = {
   title: {
     fontSize: '22px',
     fontWeight: 700,
-    color: '#1e40af',
+    color: '#16a34a',
     marginBottom: '8px',
   },
   subtitle: {
     fontSize: '14px',
-    color: '#94a3b8',
+    color: 'var(--text-lighter)',
     marginBottom: '30px',
   },
   steps: {
@@ -87,7 +87,7 @@ const styles = {
     alignItems: 'center',
     gap: '10px',
     fontSize: '14px',
-    color: '#475569',
+    color: 'var(--text-secondary)',
     fontWeight: 500,
   },
   checkIcon: {

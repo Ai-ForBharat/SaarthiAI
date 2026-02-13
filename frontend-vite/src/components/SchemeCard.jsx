@@ -34,8 +34,8 @@ const SchemeCard = ({ scheme, index, onViewDetails }) => {
       <div style={styles.top}>
         <span style={{
           ...styles.typeBadge,
-          background: scheme.type === 'central' ? '#dbeafe' : '#fef3c7',
-          color: scheme.type === 'central' ? '#1e40af' : '#92400e',
+          background: scheme.type === 'central' ? '#dcfce7' : '#fef3c7',
+          color: scheme.type === 'central' ? '#16a34a' : '#92400e',
         }}>
           {scheme.type === 'central' ? '🇮🇳 Central' : '🏛️ State'}
         </span>
@@ -84,11 +84,11 @@ const SchemeCard = ({ scheme, index, onViewDetails }) => {
 
 const styles = {
   card: {
-    background: 'white',
+    background: 'var(--bg-card)',
     borderRadius: '18px',
     padding: '24px',
     boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-    border: '1px solid #e2e8f0',
+    border: '1px solid var(--border)',
     transition: 'all 0.3s ease',
     display: 'flex',
     flexDirection: 'column',
@@ -121,13 +121,13 @@ const styles = {
   title: {
     fontSize: '17px',
     fontWeight: 700,
-    color: '#1e293b',
+    color: 'var(--text)',
     lineHeight: 1.3,
     marginBottom: '8px',
   },
   description: {
     fontSize: '13px',
-    color: '#64748b',
+    color: 'var(--text-light)',
     lineHeight: 1.6,
     marginBottom: '14px',
     display: '-webkit-box',
@@ -155,7 +155,7 @@ const styles = {
     background: '#f1f5f9',
     borderRadius: '8px',
     fontSize: '12px',
-    color: '#64748b',
+    color: 'var(--text-light)',
     fontWeight: 500,
   },
   detailBtn: {

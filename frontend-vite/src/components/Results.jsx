@@ -25,7 +25,7 @@ const Results = () => {
         <div>
           <h2 style={styles.title}>📋 Your Eligible Schemes</h2>
           <p style={styles.count}>
-            Found <strong style={{ color: '#3b82f6' }}>{totalMatches}</strong> schemes matching your profile
+            Found <strong style={{ color: '#22c55e' }}>{totalMatches}</strong> schemes matching your profile
           </p>
         </div>
         <motion.button
@@ -40,7 +40,7 @@ const Results = () => {
 
       {/* Filter Bar */}
       <div style={styles.filterBar}>
-        <FaFilter style={{ color: '#94a3b8', fontSize: '14px' }} />
+        <FaFilter style={{ color: 'var(--text-lighter)', fontSize: '14px' }} />
         {[
           { key: 'all', label: 'All Schemes' },
           { key: 'central', label: '🇮🇳 Central' },
@@ -112,10 +112,10 @@ const styles = {
   title: {
     fontSize: 'clamp(22px, 5vw, 28px)',
     fontWeight: 800,
-    color: '#1e293b',
+    color: 'var(--text)',
   },
   count: {
-    color: '#64748b',
+    color: 'var(--text-light)',
     fontSize: 'clamp(13px, 2.5vw, 15px)',
     marginTop: '4px',
   },
@@ -124,9 +124,9 @@ const styles = {
     alignItems: 'center',
     gap: '8px',
     padding: 'clamp(8px, 2vw, 10px) clamp(16px, 3vw, 24px)',
-    background: 'white',
+    background: 'var(--bg-card)',
     border: '2px solid #3b82f6',
-    color: '#3b82f6',
+    color: '#22c55e',
     borderRadius: '12px',
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     fontWeight: 600,
@@ -142,9 +142,9 @@ const styles = {
   },
   filterBtn: {
     padding: 'clamp(6px, 1.5vw, 8px) clamp(14px, 3vw, 20px)',
-    border: '2px solid #e2e8f0',
+    border: '2px solid var(--border)',
     borderRadius: '50px',
-    background: 'white',
+    background: 'var(--bg-card)',
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     fontWeight: 500,
     cursor: 'pointer',
@@ -153,12 +153,12 @@ const styles = {
     alignItems: 'center',
     gap: '6px',
     transition: 'all 0.3s ease',
-    color: '#64748b',
+    color: 'var(--text-light)',
   },
   filterBtnActive: {
     background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
     color: 'white',
-    borderColor: '#3b82f6',
+    borderColor: '#22c55e',
   },
   filterCount: {
     background: 'rgba(255,255,255,0.2)',
@@ -176,7 +176,7 @@ const styles = {
     gridColumn: '1 / -1',
     textAlign: 'center',
     padding: 'clamp(40px, 8vw, 60px) 20px',
-    color: '#94a3b8',
+    color: 'var(--text-lighter)',
   },
 };
 
