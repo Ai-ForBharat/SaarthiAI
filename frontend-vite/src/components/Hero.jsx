@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaSearch, FaShieldAlt, FaLanguage, FaRobot } from 'react-icons/fa';
+import { useApp } from '../context/AppContext';
 
 const slides = [
-  { image: '' }, // add image path later
+  { image: '' },
   { image: '' },
   { image: '' },
 ];
 
 const Hero = () => {
   const [current, setCurrent] = useState(0);
+  const { setCurrentView } = useApp();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,8 +20,9 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToForm = () => {
-    document.getElementById('form-section')?.scrollIntoView({ behavior: 'smooth' });
+  const goToForm = () => {
+    setCurrentView('form');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -36,7 +39,6 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
             style={styles.imageSlide}
           >
-            {/* Replace this with <img /> later */}
             <div style={styles.imagePlaceholder}>
               Image Area
             </div>
@@ -44,10 +46,10 @@ const Hero = () => {
         </AnimatePresence>
       </div>
 
-      {/* 📝 TEXT SECTION (STATIC BG COLOR) */}
+      {/* 📝 TEXT SECTION */}
       <div style={styles.hero}>
         <div style={styles.content}>
-          
+
           <motion.div
             style={styles.badge}
             initial={{ scale: 0 }}
@@ -98,7 +100,7 @@ const Hero = () => {
 
           <motion.button
             style={styles.ctaBtn}
-            onClick={scrollToForm}
+            onClick={goToForm}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -129,8 +131,6 @@ const styles = {
     width: '100%',
     overflow: 'hidden',
   },
-
-  /* IMAGE SECTION */
   imageSection: {
     width: '100%',
     height: '450px',
@@ -138,7 +138,7 @@ const styles = {
   imageSlide: {
     width: '100%',
     height: '100%',
-    background: '#0f172a', // static placeholder bg
+    background: '#0f172a',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -156,10 +156,8 @@ const styles = {
     fontSize: '20px',
     fontWeight: 600,
   },
-
-  /* TEXT SECTION */
   hero: {
-    background: '#0f172a',  // ✅ STATIC COLOR (change once if needed)
+    background: '#0f172a',
     padding: 'clamp(60px, 8vw, 100px) 24px',
     textAlign: 'center',
     color: '#ffffff',

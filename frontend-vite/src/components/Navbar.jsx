@@ -51,14 +51,12 @@ const Navbar = () => {
     }, 150);
   };
 
-  const navLinks = [
-    { label: 'Home', icon: <FaHome />, action: () => { resetApp(); setMobileMenu(false); } },
-    { label: 'Categories', icon: <FaThList />, action: () => scrollToExplorer('categories') },
-    { label: 'Central', icon: <FaLandmark />, action: () => scrollToExplorer('central') },
-    { label: 'States', icon: <FaMapMarkedAlt />, action: () => scrollToExplorer('states') },
-    { label: 'FAQ', icon: <FaQuestionCircle />, action: () => { setCurrentView('faq'); setMobileMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' }); } },
-    { label: 'About', icon: <FaInfoCircle />, action: () => { setCurrentView('about'); setMobileMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
-  ];
+const navLinks = [
+  { label: 'Home', icon: <FaHome />, action: () => { resetApp(); setMobileMenu(false); } },
+  { label: 'Categories', icon: <FaThList />, action: () => scrollToExplorer('categories') },
+  { label: 'About', icon: <FaInfoCircle />, action: () => { setCurrentView('about'); setMobileMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+];
+
 
   return (
     <nav style={styles.navbar}>

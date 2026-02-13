@@ -3,7 +3,7 @@ import { useApp } from './context/AppContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import HowItWorks from './components/HowItWorks';
-import SchemeExplorer from './components/SchemeExplorer';    // ← NEW
+import SchemeExplorer from './components/SchemeExplorer';
 import UserForm from './components/UserForm';
 import Loading from './components/Loading';
 import Results from './components/Results';
@@ -31,13 +31,13 @@ function App() {
           <>
             <Hero />
             <HowItWorks />
-            <UserForm />
             <SchemeExplorer />
             <FAQ />
             <About />
           </>
         )}
 
+        {currentView === 'form' && <UserForm />}
         {currentView === 'loading' && <Loading />}
         {currentView === 'results' && <Results />}
         {currentView === 'about' && <AboutPage />}

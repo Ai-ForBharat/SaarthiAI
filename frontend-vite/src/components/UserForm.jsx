@@ -7,7 +7,8 @@ import {
   FaUser, FaBirthdayCake, FaVenusMars, FaMapMarkerAlt,
   FaUsers, FaRupeeSign, FaBriefcase, FaGraduationCap,
   FaHeart, FaArrowRight, FaArrowLeft, FaSearch,
-  FaTractor, FaUserGraduate, FaWheelchair, FaMosque
+  FaTractor, FaUserGraduate, FaWheelchair, FaMosque,
+  FaHome
 } from 'react-icons/fa';
 
 const UserForm = () => {
@@ -59,6 +60,11 @@ const UserForm = () => {
 
   const prevStep = () => setStep(step - 1);
 
+  const goBackHome = () => {
+    setCurrentView('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCurrentView('loading');
@@ -86,45 +92,90 @@ const UserForm = () => {
   };
 
   return (
-    <section id="form-section" style={styles.section}>
+    <section style={styles.fullPage}>
+      {/* Background decoration */}
+      <div style={styles.bgDecor1} />
+      <div style={styles.bgDecor2} />
+
       <motion.div
         style={styles.container}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 style={styles.title}>
-          <FaUser style={{ color: '#22c55e' }} /> Enter Your Details
-        </h2>
-        <p style={styles.subtitle}>
-          Fill your information to find matching government schemes
-        </p>
+        {/* Back to Home */}
+        <motion.button
+          onClick={goBackHome}
+          style={styles.backHomeBtn}
+          whileHover={{ scale: 1.05, background: '#1e293b' }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <FaHome /> Back to Home
+        </motion.button>
+
+        {/* Header */}
+        <div style={styles.header}>
+          <motion.div
+            style={styles.headerIcon}
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
+          >
+            <FaSearch style={{ fontSize: '28px', color: '#22c55e' }} />
+          </motion.div>
+
+          <h2 style={styles.title}>Find Your Schemes</h2>
+          <p style={styles.subtitle}>
+            Fill in your details and our AI will match you with eligible
+            government schemes instantly
+          </p>
+        </div>
 
         {/* Progress */}
         <div style={styles.progress}>
           {['Personal', 'Economic', 'Additional'].map((label, i) => (
             <React.Fragment key={label}>
-              {i > 0 && <div style={{
-                ...styles.progressLine,
-                background: step > i ? '#22c55e' : '#e2e8f0'
-              }} />}
-              <div style={styles.progressStep}>
+              {i > 0 && (
                 <div style={{
-                  ...styles.progressDot,
-                  background: step > i ? '#22c55e' : step === i + 1 ? '#22c55e' : '#e2e8f0',
-                  color: step >= i + 1 ? 'white' : '#94a3b8',
-                }}>
+                  ...styles.progressLine,
+                  background: step > i
+                    ? 'linear-gradient(90deg, #22c55e, #16a34a)'
+                    : '#1e293b'
+                }} />
+              )}
+              <div style={styles.progressStep}>
+                <motion.div
+                  style={{
+                    ...styles.progressDot,
+                    background: step > i + 1
+                      ? '#22c55e'
+                      : step === i + 1
+                        ? 'linear-gradient(135deg, #22c55e, #16a34a)'
+                        : '#1e293b',
+                    color: step >= i + 1 ? 'white' : '#64748b',
+                    boxShadow: step === i + 1
+                      ? '0 0 20px rgba(34,197,94,0.4)'
+                      : 'none',
+                  }}
+                  animate={step === i + 1 ? { scale: [1, 1.1, 1] } : {}}
+                  transition={{ duration: 0.5 }}
+                >
                   {step > i + 1 ? '✓' : i + 1}
-                </div>
+                </motion.div>
                 <span style={{
                   fontSize: 'clamp(10px, 2.5vw, 12px)',
                   fontWeight: step === i + 1 ? 700 : 500,
-                  color: step === i + 1 ? '#22c55e' : '#94a3b8',
+                  color: step === i + 1 ? '#22c55e' : '#64748b',
+                  marginTop: '6px',
                 }}>{label}</span>
               </div>
             </React.Fragment>
           ))}
+        </div>
+
+        {/* Step indicator */}
+        <div style={styles.stepIndicator}>
+          Step {step} of 3
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -134,28 +185,55 @@ const UserForm = () => {
             {step === 1 && (
               <motion.div
                 key="step1"
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.35 }}
               >
                 <h3 style={styles.stepTitle}>👤 Personal Information</h3>
 
                 <div style={styles.group}>
-                  <label style={styles.label}><FaUser style={styles.labelIcon} /> Full Name</label>
-                  <input style={styles.input} name="name" value={formData.name}
-                    onChange={handleChange} placeholder="Enter your full name" required />
+                  <label style={styles.label}>
+                    <FaUser style={styles.labelIcon} /> Full Name
+                  </label>
+                  <input
+                    style={styles.input}
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                    required
+                  />
                 </div>
 
                 <div style={styles.row}>
                   <div style={styles.group}>
-                    <label style={styles.label}><FaBirthdayCake style={{ ...styles.labelIcon, color: '#16a34a' }} /> Age</label>
-                    <input style={styles.input} type="number" name="age" value={formData.age}
-                      onChange={handleChange} placeholder="Your age" min="0" max="120" required />
+                    <label style={styles.label}>
+                      <FaBirthdayCake style={{ ...styles.labelIcon, color: '#16a34a' }} /> Age
+                    </label>
+                    <input
+                      style={styles.input}
+                      type="number"
+                      name="age"
+                      value={formData.age}
+                      onChange={handleChange}
+                      placeholder="Your age"
+                      min="0"
+                      max="120"
+                      required
+                    />
                   </div>
                   <div style={styles.group}>
-                    <label style={styles.label}><FaVenusMars style={{ ...styles.labelIcon, color: '#ec4899' }} /> Gender</label>
-                    <select style={styles.input} name="gender" value={formData.gender} onChange={handleChange} required>
+                    <label style={styles.label}>
+                      <FaVenusMars style={{ ...styles.labelIcon, color: '#ec4899' }} /> Gender
+                    </label>
+                    <select
+                      style={styles.input}
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleChange}
+                      required
+                    >
                       <option value="">Select Gender</option>
                       <option value="male">👨 Male</option>
                       <option value="female">👩 Female</option>
@@ -166,15 +244,31 @@ const UserForm = () => {
 
                 <div style={styles.row}>
                   <div style={styles.group}>
-                    <label style={styles.label}><FaMapMarkerAlt style={{ ...styles.labelIcon, color: '#ef4444' }} /> State</label>
-                    <select style={styles.input} name="state" value={formData.state} onChange={handleChange} required>
+                    <label style={styles.label}>
+                      <FaMapMarkerAlt style={{ ...styles.labelIcon, color: '#ef4444' }} /> State
+                    </label>
+                    <select
+                      style={styles.input}
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      required
+                    >
                       <option value="">Select State</option>
                       {STATES.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
                   </div>
                   <div style={styles.group}>
-                    <label style={styles.label}><FaUsers style={{ ...styles.labelIcon, color: '#8b5cf6' }} /> Category</label>
-                    <select style={styles.input} name="category" value={formData.category} onChange={handleChange} required>
+                    <label style={styles.label}>
+                      <FaUsers style={{ ...styles.labelIcon, color: '#8b5cf6' }} /> Category
+                    </label>
+                    <select
+                      style={styles.input}
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      required
+                    >
                       <option value="">Select Category</option>
                       <option value="general">General</option>
                       <option value="obc">OBC</option>
@@ -184,9 +278,14 @@ const UserForm = () => {
                   </div>
                 </div>
 
-                <motion.button type="button" onClick={nextStep} style={styles.nextBtn}
-                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  Next <FaArrowRight />
+                <motion.button
+                  type="button"
+                  onClick={nextStep}
+                  style={styles.nextBtn}
+                  whileHover={{ scale: 1.02, boxShadow: '0 8px 25px rgba(59,130,246,0.4)' }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Continue to Economic Details <FaArrowRight />
                 </motion.button>
               </motion.div>
             )}
@@ -195,23 +294,41 @@ const UserForm = () => {
             {step === 2 && (
               <motion.div
                 key="step2"
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.35 }}
               >
                 <h3 style={styles.stepTitle}>💰 Economic Information</h3>
 
                 <div style={styles.group}>
-                  <label style={styles.label}><FaRupeeSign style={{ ...styles.labelIcon, color: '#22c55e' }} /> Annual Family Income (₹)</label>
-                  <input style={styles.input} type="number" name="annual_income" value={formData.annual_income}
-                    onChange={handleChange} placeholder="e.g. 200000" min="0" required />
+                  <label style={styles.label}>
+                    <FaRupeeSign style={{ ...styles.labelIcon, color: '#22c55e' }} /> Annual Family Income (₹)
+                  </label>
+                  <input
+                    style={styles.input}
+                    type="number"
+                    name="annual_income"
+                    value={formData.annual_income}
+                    onChange={handleChange}
+                    placeholder="e.g. 200000"
+                    min="0"
+                    required
+                  />
                   <small style={styles.hint}>Enter total yearly family income</small>
                 </div>
 
                 <div style={styles.group}>
-                  <label style={styles.label}><FaBriefcase style={{ ...styles.labelIcon, color: '#16a34a' }} /> Occupation</label>
-                  <select style={styles.input} name="occupation" value={formData.occupation} onChange={handleChange} required>
+                  <label style={styles.label}>
+                    <FaBriefcase style={{ ...styles.labelIcon, color: '#16a34a' }} /> Occupation
+                  </label>
+                  <select
+                    style={styles.input}
+                    name="occupation"
+                    value={formData.occupation}
+                    onChange={handleChange}
+                    required
+                  >
                     <option value="">Select Occupation</option>
                     <option value="farmer">🌾 Farmer</option>
                     <option value="student">🎓 Student</option>
@@ -225,19 +342,34 @@ const UserForm = () => {
                 </div>
 
                 <label style={styles.checkbox}>
-                  <input type="checkbox" name="is_bpl" checked={formData.is_bpl}
-                    onChange={handleChange} style={styles.checkboxInput} />
+                  <input
+                    type="checkbox"
+                    name="is_bpl"
+                    checked={formData.is_bpl}
+                    onChange={handleChange}
+                    style={styles.checkboxInput}
+                  />
                   📋 BPL (Below Poverty Line) Card Holder
                 </label>
 
                 <div style={styles.btnRow}>
-                  <motion.button type="button" onClick={prevStep} style={styles.backBtn}
-                    whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <motion.button
+                    type="button"
+                    onClick={prevStep}
+                    style={styles.backBtn}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
                     <FaArrowLeft /> Back
                   </motion.button>
-                  <motion.button type="button" onClick={nextStep} style={{ ...styles.nextBtn, flex: 1 }}
-                    whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    Next <FaArrowRight />
+                  <motion.button
+                    type="button"
+                    onClick={nextStep}
+                    style={{ ...styles.nextBtn, flex: 1, marginTop: 0 }}
+                    whileHover={{ scale: 1.02, boxShadow: '0 8px 25px rgba(59,130,246,0.4)' }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Continue <FaArrowRight />
                   </motion.button>
                 </div>
               </motion.div>
@@ -247,17 +379,24 @@ const UserForm = () => {
             {step === 3 && (
               <motion.div
                 key="step3"
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.35 }}
               >
                 <h3 style={styles.stepTitle}>📋 Additional Information</h3>
 
                 <div style={styles.row}>
                   <div style={styles.group}>
-                    <label style={styles.label}><FaGraduationCap style={{ ...styles.labelIcon, color: '#8b5cf6' }} /> Education</label>
-                    <select style={styles.input} name="education" value={formData.education} onChange={handleChange}>
+                    <label style={styles.label}>
+                      <FaGraduationCap style={{ ...styles.labelIcon, color: '#8b5cf6' }} /> Education
+                    </label>
+                    <select
+                      style={styles.input}
+                      name="education"
+                      value={formData.education}
+                      onChange={handleChange}
+                    >
                       <option value="">Select Level</option>
                       <option value="none">No Formal Education</option>
                       <option value="primary">Primary (1-5)</option>
@@ -268,8 +407,15 @@ const UserForm = () => {
                     </select>
                   </div>
                   <div style={styles.group}>
-                    <label style={styles.label}><FaHeart style={{ ...styles.labelIcon, color: '#ef4444' }} /> Marital Status</label>
-                    <select style={styles.input} name="marital_status" value={formData.marital_status} onChange={handleChange}>
+                    <label style={styles.label}>
+                      <FaHeart style={{ ...styles.labelIcon, color: '#ef4444' }} /> Marital Status
+                    </label>
+                    <select
+                      style={styles.input}
+                      name="marital_status"
+                      value={formData.marital_status}
+                      onChange={handleChange}
+                    >
                       <option value="">Select Status</option>
                       <option value="single">Single</option>
                       <option value="married">Married</option>
@@ -286,20 +432,33 @@ const UserForm = () => {
                   { name: 'is_minority', icon: <FaMosque />, text: 'Minority Community' },
                 ].map(item => (
                   <label key={item.name} style={styles.checkbox}>
-                    <input type="checkbox" name={item.name} checked={formData[item.name]}
-                      onChange={handleChange} style={styles.checkboxInput} />
+                    <input
+                      type="checkbox"
+                      name={item.name}
+                      checked={formData[item.name]}
+                      onChange={handleChange}
+                      style={styles.checkboxInput}
+                    />
                     {item.icon} {item.text}
                   </label>
                 ))}
 
                 <div style={styles.btnRow}>
-                  <motion.button type="button" onClick={prevStep} style={styles.backBtn}
-                    whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <motion.button
+                    type="button"
+                    onClick={prevStep}
+                    style={styles.backBtn}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
                     <FaArrowLeft /> Back
                   </motion.button>
-                  <motion.button type="submit" style={styles.submitBtn}
-                    whileHover={{ scale: 1.02, boxShadow: '0 6px 20px rgba(34,197,94,0.4)' }}
-                    whileTap={{ scale: 0.98 }}>
+                  <motion.button
+                    type="submit"
+                    style={styles.submitBtn}
+                    whileHover={{ scale: 1.02, boxShadow: '0 8px 30px rgba(34,197,94,0.5)' }}
+                    whileTap={{ scale: 0.98 }}
+                  >
                     <FaSearch /> Find My Schemes
                   </motion.button>
                 </div>
@@ -314,84 +473,161 @@ const UserForm = () => {
 };
 
 const styles = {
-  section: {
-    maxWidth: '680px',
-    margin: '-50px auto 40px',
-    padding: '0 clamp(12px, 3vw, 20px)',
+  /* 🔥 FULL PAGE DARK BACKGROUND */
+  fullPage: {
+    minHeight: '100vh',
+    background: 'linear-gradient(180deg, #020617 0%, #0f172a 40%, #020617 100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 'clamp(30px, 5vw, 60px) clamp(12px, 3vw, 20px)',
     position: 'relative',
-    zIndex: 10,
+    overflow: 'hidden',
+  },
+
+  /* Background decorations */
+  bgDecor1: {
+    position: 'absolute',
+    top: '-150px',
+    right: '-150px',
+    width: '400px',
+    height: '400px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%)',
+    pointerEvents: 'none',
+  },
+  bgDecor2: {
+    position: 'absolute',
+    bottom: '-100px',
+    left: '-100px',
+    width: '300px',
+    height: '300px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)',
+    pointerEvents: 'none',
   },
 
   /* 🔥 DARK CARD */
   container: {
-    background: '#0f172a', // dark navy
-    borderRadius: 'clamp(16px, 3vw, 20px)',
-    padding: 'clamp(24px, 5vw, 40px)',
-    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.6)',
+    width: '100%',
+    maxWidth: '720px',
+    background: '#0f172a',
+    borderRadius: 'clamp(16px, 3vw, 24px)',
+    padding: 'clamp(24px, 5vw, 48px)',
+    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px #1e293b',
     border: '1px solid #1e293b',
+    position: 'relative',
+    zIndex: 1,
+  },
+
+  /* Back to Home button */
+  backHomeBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '8px 16px',
+    background: '#0f172a',
+    border: '1px solid #1e293b',
+    borderRadius: '50px',
+    color: '#94a3b8',
+    fontSize: '13px',
+    fontWeight: 600,
+    cursor: 'pointer',
+    fontFamily: 'Inter, sans-serif',
+    marginBottom: '24px',
+    transition: 'all 0.3s ease',
+  },
+
+  /* Header */
+  header: {
+    textAlign: 'center',
+    marginBottom: 'clamp(24px, 4vw, 36px)',
+  },
+  headerIcon: {
+    width: '64px',
+    height: '64px',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, rgba(34,197,94,0.15), rgba(34,197,94,0.05))',
+    border: '2px solid rgba(34,197,94,0.2)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 auto 16px',
   },
 
   title: {
-    fontSize: 'clamp(20px, 4vw, 24px)',
+    fontSize: 'clamp(22px, 5vw, 30px)',
     fontWeight: 800,
     color: '#ffffff',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    marginBottom: '4px',
+    marginBottom: '8px',
   },
 
   subtitle: {
     color: '#94a3b8',
-    fontSize: 'clamp(12px, 2.5vw, 14px)',
-    marginBottom: 'clamp(20px, 4vw, 28px)',
+    fontSize: 'clamp(13px, 2.5vw, 15px)',
+    maxWidth: '480px',
+    margin: '0 auto',
+    lineHeight: 1.6,
   },
 
+  /* Progress */
   progress: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 'clamp(20px, 4vw, 30px)',
+    marginBottom: 'clamp(8px, 2vw, 12px)',
   },
 
   progressStep: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '5px',
+    gap: '2px',
   },
 
   progressDot: {
-    width: 'clamp(30px, 5vw, 36px)',
-    height: 'clamp(30px, 5vw, 36px)',
+    width: 'clamp(32px, 5vw, 40px)',
+    height: 'clamp(32px, 5vw, 40px)',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: 700,
     fontSize: 'clamp(12px, 2.5vw, 14px)',
-    transition: 'all 0.3s ease',
+    transition: 'all 0.4s ease',
   },
 
   progressLine: {
-    width: 'clamp(30px, 8vw, 60px)',
+    width: 'clamp(40px, 10vw, 80px)',
     height: '3px',
     borderRadius: '10px',
     marginBottom: '22px',
     marginLeft: '4px',
     marginRight: '4px',
-    transition: 'all 0.3s ease',
+    transition: 'all 0.4s ease',
+  },
+
+  stepIndicator: {
+    textAlign: 'center',
+    fontSize: '12px',
+    color: '#64748b',
+    fontWeight: 600,
+    marginBottom: 'clamp(20px, 4vw, 30px)',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
   },
 
   stepTitle: {
-    fontSize: 'clamp(16px, 3vw, 18px)',
+    fontSize: 'clamp(16px, 3vw, 20px)',
     fontWeight: 700,
-    marginBottom: 'clamp(14px, 3vw, 20px)',
+    marginBottom: 'clamp(16px, 3vw, 24px)',
     color: '#ffffff',
+    paddingBottom: '12px',
+    borderBottom: '1px solid #1e293b',
   },
 
   group: {
-    marginBottom: 'clamp(14px, 3vw, 18px)',
+    marginBottom: 'clamp(16px, 3vw, 20px)',
   },
 
   label: {
@@ -400,7 +636,7 @@ const styles = {
     gap: '8px',
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     fontWeight: 600,
-    marginBottom: '6px',
+    marginBottom: '8px',
     color: '#e2e8f0',
   },
 
@@ -412,7 +648,7 @@ const styles = {
   /* 🔥 DARK INPUTS */
   input: {
     width: '100%',
-    padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 16px)',
+    padding: 'clamp(12px, 2.5vw, 16px) clamp(14px, 2.5vw, 18px)',
     border: '2px solid #1e293b',
     borderRadius: 'clamp(10px, 2vw, 12px)',
     fontSize: 'clamp(13px, 2.5vw, 15px)',
@@ -425,27 +661,27 @@ const styles = {
   },
 
   hint: {
-    color: '#94a3b8',
+    color: '#64748b',
     fontSize: 'clamp(10px, 2vw, 12px)',
-    marginTop: '4px',
+    marginTop: '6px',
     display: 'block',
   },
 
   row: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: 'clamp(10px, 2vw, 15px)',
+    gap: 'clamp(12px, 2vw, 16px)',
   },
 
   /* 🔥 DARK CHECKBOX CARDS */
   checkbox: {
     display: 'flex',
     alignItems: 'center',
-    gap: 'clamp(8px, 2vw, 12px)',
-    padding: 'clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 18px)',
+    gap: 'clamp(10px, 2vw, 14px)',
+    padding: 'clamp(12px, 2.5vw, 16px) clamp(14px, 2.5vw, 20px)',
     border: '2px solid #1e293b',
     borderRadius: 'clamp(10px, 2vw, 12px)',
-    marginBottom: 'clamp(8px, 1.5vw, 10px)',
+    marginBottom: 'clamp(10px, 1.5vw, 12px)',
     cursor: 'pointer',
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     fontWeight: 500,
@@ -455,42 +691,42 @@ const styles = {
   },
 
   checkboxInput: {
-    width: '18px',
-    height: '18px',
+    width: '20px',
+    height: '20px',
     accentColor: '#22c55e',
     flexShrink: 0,
   },
 
   btnRow: {
     display: 'flex',
-    gap: 'clamp(8px, 2vw, 12px)',
-    marginTop: 'clamp(10px, 2vw, 15px)',
+    gap: 'clamp(10px, 2vw, 14px)',
+    marginTop: 'clamp(16px, 3vw, 24px)',
     flexWrap: 'wrap',
   },
 
   nextBtn: {
     width: '100%',
-    padding: 'clamp(12px, 2.5vw, 14px) 24px',
+    padding: 'clamp(14px, 3vw, 18px) 24px',
     background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
     color: 'white',
     border: 'none',
     borderRadius: 'clamp(10px, 2vw, 12px)',
-    fontSize: 'clamp(13px, 2.5vw, 15px)',
+    fontSize: 'clamp(14px, 2.5vw, 16px)',
     fontWeight: 700,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '8px',
+    gap: '10px',
     cursor: 'pointer',
     fontFamily: 'Inter, sans-serif',
-    marginTop: '10px',
+    marginTop: '12px',
   },
 
   backBtn: {
-    padding: 'clamp(12px, 2.5vw, 14px) clamp(16px, 3vw, 24px)',
+    padding: 'clamp(14px, 3vw, 18px) clamp(18px, 3vw, 28px)',
     background: '#1e293b',
     color: '#e2e8f0',
-    border: 'none',
+    border: '1px solid #334155',
     borderRadius: 'clamp(10px, 2vw, 12px)',
     fontSize: 'clamp(13px, 2.5vw, 15px)',
     fontWeight: 600,
@@ -503,12 +739,12 @@ const styles = {
 
   submitBtn: {
     flex: 1,
-    padding: 'clamp(14px, 3vw, 16px) 24px',
+    padding: 'clamp(14px, 3vw, 18px) 24px',
     background: 'linear-gradient(135deg, #22c55e, #16a34a)',
     color: 'white',
     border: 'none',
     borderRadius: 'clamp(10px, 2vw, 12px)',
-    fontSize: 'clamp(14px, 3vw, 16px)',
+    fontSize: 'clamp(14px, 3vw, 17px)',
     fontWeight: 700,
     display: 'flex',
     alignItems: 'center',
