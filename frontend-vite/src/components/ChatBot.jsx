@@ -46,242 +46,393 @@ const ChatBot = ({ onClose }) => {
 
   return (
     <motion.div
-      style={styles.overlay}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      style={styles.chatWindow}
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 30, scale: 0.95 }}
+      transition={{ type: 'spring', damping: 22, stiffness: 300 }}
     >
-      <motion.div
-        style={styles.modal}
-        initial={{ scale: 0.9, y: 40 }}
-        animate={{ scale: 1, y: 0 }}
-        transition={{ type: 'spring', damping: 20 }}
-      >
 
-        {/* HEADER */}
-        <div style={styles.header}>
-          <div style={styles.logo}>
+      {/* HEADER */}
+      <div style={styles.header}>
+        <div style={styles.logo}>
+          <div style={styles.logoIcon}>
             <FaRobot />
-            <span>myScheme</span>
           </div>
-          <button onClick={onClose} style={styles.closeBtn}>
-            <FaTimes />
-          </button>
+          <div>
+            <span style={styles.logoText}>myScheme</span>
+            <span style={styles.statusDot}>● Online</span>
+          </div>
         </div>
+        <button onClick={onClose} style={styles.closeBtn}>
+          <FaTimes />
+        </button>
+      </div>
 
-        {/* WELCOME BOX */}
-        {messages.length === 0 && (
-          <div style={styles.welcomeBox}>
-            <h2>myScheme</h2>
-            <p>
-              myScheme is a National Platform that aims to offer one-stop search
-              and discovery of Government schemes.
-            </p>
-            <p>
-              Hi! I am your assistant, here to help you find eligible government
-              schemes and provide information on eligibility, documents and more.
-            </p>
-          </div>
-        )}
+      {/* WELCOME BOX */}
+      {messages.length === 0 && (
+        <div style={styles.welcomeBox}>
+          <h2 style={styles.welcomeTitle}>myScheme</h2>
+          <p style={styles.welcomeText}>
+            myScheme is a National Platform that aims to offer one-stop search
+            and discovery of Government schemes.
+          </p>
+          <p style={styles.welcomeText}>
+            Hi! I am your assistant, here to help you find eligible government
+            schemes and provide information on eligibility, documents and more.
+          </p>
+        </div>
+      )}
 
-        {/* MESSAGES */}
-        <div style={styles.messages}>
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              style={{
-                ...styles.message,
-                ...(msg.sender === 'user' ? styles.userMsg : styles.botMsg),
-              }}
-            >
+      {/* MESSAGES */}
+      <div style={styles.messages}>
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            style={{
+              ...styles.message,
+              ...(msg.sender === 'user' ? styles.userMsg : styles.botMsg),
+            }}
+          >
+            {msg.sender === 'bot' && (
+              <div style={styles.botAvatar}>
+                <FaRobot style={{ fontSize: '10px' }} />
+              </div>
+            )}
+            <div style={{
+              ...(msg.sender === 'user' ? styles.userBubble : styles.botBubble),
+            }}>
               {msg.text}
             </div>
-          ))}
-          {loading && <div style={styles.botMsg}>Thinking...</div>}
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* SUGGESTIONS */}
-        {messages.length === 0 && (
-          <div style={styles.suggestions}>
-            {suggestions.map((s, i) => (
-              <button
-                key={i}
-                style={styles.suggestionBtn}
-                onClick={() => handleSend(s)}
-              >
-                {s}
-              </button>
-            ))}
+          </div>
+        ))}
+        {loading && (
+          <div style={{ ...styles.message, ...styles.botMsg }}>
+            <div style={styles.botAvatar}>
+              <FaRobot style={{ fontSize: '10px' }} />
+            </div>
+            <div style={styles.botBubble}>
+              <div style={styles.typingDots}>
+                <span style={styles.dot}>●</span>
+                <span style={{ ...styles.dot, animationDelay: '0.2s' }}>●</span>
+                <span style={{ ...styles.dot, animationDelay: '0.4s' }}>●</span>
+              </div>
+            </div>
           </div>
         )}
+        <div ref={messagesEndRef} />
+      </div>
 
-        {/* INPUT BAR */}
-        <div style={styles.inputBar}>
-          <input
-            style={styles.input}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Type something..."
-            disabled={loading}
-          />
-
-          <button style={styles.iconBtn}>
-            <FaMicrophone />
-          </button>
-
-          <button
-            style={styles.sendBtn}
-            onClick={() => handleSend()}
-            disabled={loading}
-          >
-            <FaPaperPlane />
-          </button>
+      {/* SUGGESTIONS */}
+      {messages.length === 0 && (
+        <div style={styles.suggestions}>
+          {suggestions.map((s, i) => (
+            <button
+              key={i}
+              style={styles.suggestionBtn}
+              onClick={() => handleSend(s)}
+            >
+              {s}
+            </button>
+          ))}
         </div>
+      )}
 
-        {/* FOOTER NOTE */}
-        <div style={styles.footer}>
-          *myScheme assistant can make mistakes. Consider checking important information.
-        </div>
+      {/* INPUT BAR */}
+      <div style={styles.inputBar}>
+        <input
+          style={styles.input}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+          placeholder="Type something..."
+          disabled={loading}
+        />
 
-      </motion.div>
+        <button style={styles.iconBtn} title="Voice input">
+          <FaMicrophone />
+        </button>
+
+        <button
+          style={{
+            ...styles.sendBtn,
+            opacity: input.trim() ? 1 : 0.5,
+          }}
+          onClick={() => handleSend()}
+          disabled={loading || !input.trim()}
+        >
+          <FaPaperPlane />
+        </button>
+      </div>
+
+      {/* FOOTER NOTE */}
+      <div style={styles.footer}>
+        *myScheme assistant can make mistakes. Consider checking important information.
+      </div>
+
     </motion.div>
   );
 };
 
 const styles = {
-  overlay: {
+  /* 🔥 BOTTOM-RIGHT CORNER POSITIONING */
+  chatWindow: {
     position: 'fixed',
-    inset: 0,
-    background: 'rgba(0,0,0,0.4)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 2000,
-  },
-
-  modal: {
-    width: '650px',
-    maxHeight: '90vh',
-    background: '#ffffff',
-    borderRadius: '16px',
+    bottom: '90px',
+    right: '20px',
+    width: '400px',
+    maxWidth: 'calc(100vw - 32px)',
+    height: '580px',
+    maxHeight: 'calc(100vh - 120px)',
+    background: '#0f172a',
+    borderRadius: '20px',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
-    boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
+    boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px #1e293b',
+    border: '1px solid #1e293b',
     fontFamily: 'Inter, sans-serif',
+    zIndex: 2000,
   },
 
+  /* HEADER */
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '16px 20px',
-    borderBottom: '1px solid #e5e7eb',
+    padding: '14px 16px',
+    borderBottom: '1px solid #1e293b',
+    background: '#020617',
+    flexShrink: 0,
   },
 
   logo: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
+    gap: '10px',
+  },
+
+  logoIcon: {
+    width: '36px',
+    height: '36px',
+    borderRadius: '10px',
+    background: 'linear-gradient(135deg, rgba(34,197,94,0.2), rgba(34,197,94,0.05))',
+    border: '1px solid rgba(34,197,94,0.3)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#22c55e',
+    fontSize: '16px',
+  },
+
+  logoText: {
     fontWeight: 700,
-    fontSize: '18px',
+    fontSize: '16px',
+    color: '#ffffff',
+    display: 'block',
+  },
+
+  statusDot: {
+    fontSize: '10px',
+    color: '#22c55e',
+    fontWeight: 500,
   },
 
   closeBtn: {
-    background: 'none',
+    background: '#1e293b',
     border: 'none',
-    fontSize: '16px',
+    fontSize: '14px',
     cursor: 'pointer',
+    color: '#94a3b8',
+    width: '32px',
+    height: '32px',
+    borderRadius: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s ease',
   },
 
+  /* WELCOME BOX */
   welcomeBox: {
-    padding: '20px',
-    background: '#f3f4f6',
+    padding: '16px',
+    background: '#020617',
     borderRadius: '12px',
-    margin: '16px',
+    margin: '12px',
+    border: '1px solid #1e293b',
+    flexShrink: 0,
   },
 
+  welcomeTitle: {
+    fontSize: '16px',
+    fontWeight: 800,
+    color: '#22c55e',
+    marginBottom: '8px',
+    margin: '0 0 8px 0',
+  },
+
+  welcomeText: {
+    fontSize: '12px',
+    color: '#94a3b8',
+    lineHeight: 1.5,
+    margin: '0 0 6px 0',
+  },
+
+  /* MESSAGES */
   messages: {
     flex: 1,
     overflowY: 'auto',
-    padding: '0 16px',
+    padding: '12px',
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
   },
 
   message: {
-    padding: '10px 14px',
-    borderRadius: '12px',
-    maxWidth: '75%',
-    fontSize: '14px',
+    display: 'flex',
+    gap: '8px',
+    maxWidth: '85%',
   },
 
   botMsg: {
-    background: '#f3f4f6',
     alignSelf: 'flex-start',
   },
 
   userMsg: {
-    background: '#2563eb',
-    color: 'white',
     alignSelf: 'flex-end',
+    flexDirection: 'row-reverse',
   },
 
+  botAvatar: {
+    width: '24px',
+    height: '24px',
+    borderRadius: '8px',
+    background: 'rgba(34,197,94,0.15)',
+    border: '1px solid rgba(34,197,94,0.3)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#22c55e',
+    flexShrink: 0,
+    marginTop: '2px',
+  },
+
+  botBubble: {
+    padding: '10px 14px',
+    borderRadius: '4px 12px 12px 12px',
+    background: '#1e293b',
+    color: '#e2e8f0',
+    fontSize: '13px',
+    lineHeight: 1.5,
+  },
+
+  userBubble: {
+    padding: '10px 14px',
+    borderRadius: '12px 4px 12px 12px',
+    background: 'linear-gradient(135deg, #22c55e, #16a34a)',
+    color: '#ffffff',
+    fontSize: '13px',
+    lineHeight: 1.5,
+  },
+
+  /* TYPING DOTS */
+  typingDots: {
+    display: 'flex',
+    gap: '4px',
+    alignItems: 'center',
+    padding: '2px 0',
+  },
+
+  dot: {
+    fontSize: '14px',
+    color: '#64748b',
+    animation: 'pulse 1s infinite',
+  },
+
+  /* SUGGESTIONS */
   suggestions: {
-    padding: '12px 16px',
+    padding: '8px 12px',
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px',
+    gap: '6px',
+    flexShrink: 0,
+    maxHeight: '180px',
+    overflowY: 'auto',
   },
 
   suggestionBtn: {
-    background: '#f3f4f6',
-    border: 'none',
-    padding: '10px',
+    background: '#020617',
+    border: '1px solid #1e293b',
+    padding: '10px 14px',
     borderRadius: '10px',
     cursor: 'pointer',
     textAlign: 'left',
+    fontSize: '12px',
+    color: '#94a3b8',
+    fontFamily: 'Inter, sans-serif',
+    transition: 'all 0.2s ease',
+    fontWeight: 500,
   },
 
+  /* INPUT BAR */
   inputBar: {
     display: 'flex',
     alignItems: 'center',
-    padding: '12px',
+    padding: '10px 12px',
     gap: '8px',
-    borderTop: '1px solid #e5e7eb',
+    borderTop: '1px solid #1e293b',
+    background: '#020617',
+    flexShrink: 0,
   },
 
   input: {
     flex: 1,
     padding: '10px 14px',
-    borderRadius: '20px',
-    border: '1px solid #d1d5db',
+    borderRadius: '12px',
+    border: '1px solid #1e293b',
     outline: 'none',
+    fontSize: '13px',
+    fontFamily: 'Inter, sans-serif',
+    background: '#0f172a',
+    color: '#ffffff',
   },
 
   iconBtn: {
-    background: '#f3f4f6',
+    background: '#1e293b',
     border: 'none',
-    padding: '8px',
-    borderRadius: '50%',
+    padding: '10px',
+    borderRadius: '10px',
     cursor: 'pointer',
+    color: '#94a3b8',
+    fontSize: '14px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s ease',
   },
 
   sendBtn: {
-    background: '#2563eb',
+    background: 'linear-gradient(135deg, #22c55e, #16a34a)',
     color: 'white',
     border: 'none',
     padding: '10px',
-    borderRadius: '50%',
+    borderRadius: '10px',
     cursor: 'pointer',
+    fontSize: '14px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s ease',
   },
 
+  /* FOOTER */
   footer: {
-    fontSize: '11px',
-    color: '#6b7280',
-    padding: '8px 16px 14px',
+    fontSize: '10px',
+    color: '#475569',
+    padding: '6px 12px 10px',
+    textAlign: 'center',
+    background: '#020617',
+    flexShrink: 0,
   },
 };
 
