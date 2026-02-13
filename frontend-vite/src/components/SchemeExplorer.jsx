@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../context/AppContext';
-import { FaThList, FaMapMarkedAlt, FaLandmark, FaChevronDown, FaChevronUp, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
+import {
+  FaThList, FaMapMarkedAlt, FaLandmark,
+  FaChevronDown, FaChevronUp, FaMapMarkerAlt, FaSearch
+} from 'react-icons/fa';
 
 const SchemeExplorer = () => {
-  const { CATEGORIES, MINISTRIES, STATE_DATA } = useApp();
-  const [activeTab, setActiveTab] = useState('categories');
+  const {
+    CATEGORIES, MINISTRIES, STATE_DATA,
+    activeExplorerTab, setActiveExplorerTab
+  } = useApp();
+
+  const activeTab = activeExplorerTab;
+  const setActiveTab = setActiveExplorerTab;
+
   const [showAll, setShowAll] = useState(false);
   const [searchFilter, setSearchFilter] = useState('');
 
@@ -15,7 +24,6 @@ const SchemeExplorer = () => {
     { key: 'central', label: 'Central Ministries', icon: <FaLandmark />, color: '#8b5cf6' },
   ];
 
-  // Filter logic
   const getFilteredData = () => {
     const query = searchFilter.toLowerCase();
     if (activeTab === 'categories') {
@@ -40,14 +48,21 @@ const SchemeExplorer = () => {
     return 0;
   };
 
+  const getDefaultVisible = () => {
+    if (activeTab === 'categories') return 10;
+    if (activeTab === 'states') return 12;
+    if (activeTab === 'central') return 9;
+    return 10;
+  };
+
   const filteredData = getFilteredData();
   const activeTabData = tabs.find(t => t.key === activeTab);
 
   return (
-    <section id="categories" style={styles.section}>
+    <section id="scheme-explorer" style={styles.section}>
       <div style={styles.container}>
 
-        {/* Header */}
+        {/* ========== HEADER ========== */}
         <motion.div
           style={styles.header}
           initial={{ opacity: 0, y: 20 }}
@@ -61,7 +76,7 @@ const SchemeExplorer = () => {
           </h2>
         </motion.div>
 
-        {/* Tabs */}
+        {/* ========== TABS ========== */}
         <div style={styles.tabsWrapper}>
           <div style={styles.tabsContainer}>
             {tabs.map((tab) => (
@@ -98,19 +113,30 @@ const SchemeExplorer = () => {
             ))}
           </div>
 
-          {/* Search within tab */}
+          {/* ========== SEARCH WITHIN TAB ========== */}
           <div style={styles.searchBar}>
             <FaSearch style={{ color: '#94a3b8', fontSize: '14px', flexShrink: 0 }} />
             <input
               style={styles.searchInput}
               placeholder={`Search ${activeTab === 'categories' ? 'categories' : activeTab === 'states' ? 'states' : 'ministries'}...`}
               value={searchFilter}
-              onChange={(e) => setSearchFilter(e.target.value)}
+              onChange={(e) => {
+                setSearchFilter(e.target.value);
+                setShowAll(true);
+              }}
             />
+            {searchFilter && (
+              <button
+                onClick={() => { setSearchFilter(''); setShowAll(false); }}
+                style={styles.clearSearch}
+              >
+                ✕
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Content */}
+        {/* ========== CONTENT ========== */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -119,7 +145,8 @@ const SchemeExplorer = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Categories Tab */}
+
+            {/* ===== CATEGORIES TAB ===== */}
             {activeTab === 'categories' && (
               <div style={styles.gridCategories}>
                 {filteredData.map((cat, i) => (
@@ -151,7 +178,7 @@ const SchemeExplorer = () => {
               </div>
             )}
 
-            {/* States Tab */}
+            {/* ===== STATES TAB ===== */}
             {activeTab === 'states' && (
               <div style={styles.gridStates}>
                 {filteredData.map((state, i) => (
@@ -197,7 +224,7 @@ const SchemeExplorer = () => {
               </div>
             )}
 
-            {/* Central Ministries Tab */}
+            {/* ===== CENTRAL MINISTRIES TAB ===== */}
             {activeTab === 'central' && (
               <div style={styles.gridCentral}>
                 {filteredData.map((ministry, i) => (
@@ -225,17 +252,24 @@ const SchemeExplorer = () => {
               </div>
             )}
 
-            {/* No Results */}
+            {/* ===== NO RESULTS ===== */}
             {filteredData.length === 0 && (
               <div style={styles.noResults}>
-                <p>😔 No results found for "{searchFilter}"</p>
+                <span style={{ fontSize: '48px', marginBottom: '16px', display: 'block' }}>😔</span>
+                <p style={{ fontSize: '18px', fontWeight: 600, color: '#475569', marginBottom: '8px' }}>
+                  No results found for "{searchFilter}"
+                </p>
+                <p style={{ fontSize: '14px', color: '#94a3b8' }}>
+                  Try different keywords
+                </p>
               </div>
             )}
+
           </motion.div>
         </AnimatePresence>
 
-        {/* View All / Show Less Button */}
-        {getTotalCount() > (activeTab === 'categories' ? 10 : activeTab === 'states' ? 12 : 9) && (
+        {/* ========== VIEW ALL / SHOW LESS BUTTON ========== */}
+        {!searchFilter && getTotalCount() > getDefaultVisible() && (
           <div style={{ textAlign: 'center', marginTop: '32px' }}>
             <motion.button
               style={{
@@ -255,28 +289,28 @@ const SchemeExplorer = () => {
           </div>
         )}
 
-        {/* Summary Stats */}
-        <div style={styles.summaryBar}>
-          <div style={styles.summaryItem}>
-            <span style={styles.summaryNum}>7,500+</span>
-            <span style={styles.summaryLabel}>Total Schemes</span>
-          </div>
-          <div style={styles.summaryDivider} />
-          <div style={styles.summaryItem}>
-            <span style={styles.summaryNum}>36</span>
-            <span style={styles.summaryLabel}>States & UTs</span>
-          </div>
-          <div style={styles.summaryDivider} />
-          <div style={styles.summaryItem}>
-            <span style={styles.summaryNum}>22+</span>
-            <span style={styles.summaryLabel}>Ministries</span>
-          </div>
-          <div style={styles.summaryDivider} />
-          <div style={styles.summaryItem}>
-            <span style={styles.summaryNum}>15</span>
-            <span style={styles.summaryLabel}>Categories</span>
-          </div>
-        </div>
+        {/* ========== SUMMARY STATS BAR ========== */}
+        <motion.div
+          style={styles.summaryBar}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          {[
+            { num: '7,500+', label: 'Total Schemes' },
+            { num: '36', label: 'States & UTs' },
+            { num: '22+', label: 'Ministries' },
+            { num: '15', label: 'Categories' },
+          ].map((item, i) => (
+            <React.Fragment key={item.label}>
+              {i > 0 && <div style={styles.summaryDivider} />}
+              <div style={styles.summaryItem}>
+                <span style={styles.summaryNum}>{item.num}</span>
+                <span style={styles.summaryLabel}>{item.label}</span>
+              </div>
+            </React.Fragment>
+          ))}
+        </motion.div>
 
       </div>
     </section>
@@ -284,6 +318,7 @@ const SchemeExplorer = () => {
 };
 
 const styles = {
+  // ===== SECTION =====
   section: {
     padding: '80px 24px',
     background: 'linear-gradient(180deg, #f8faff 0%, white 50%, #f8faff 100%)',
@@ -292,6 +327,8 @@ const styles = {
     maxWidth: '1200px',
     margin: '0 auto',
   },
+
+  // ===== HEADER =====
   header: {
     textAlign: 'center',
     marginBottom: '40px',
@@ -313,7 +350,7 @@ const styles = {
     lineHeight: 1.2,
   },
 
-  // Tabs
+  // ===== TABS =====
   tabsWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -354,6 +391,8 @@ const styles = {
     fontSize: '11px',
     fontWeight: 700,
   },
+
+  // ===== SEARCH =====
   searchBar: {
     display: 'flex',
     alignItems: 'center',
@@ -365,6 +404,7 @@ const styles = {
     width: '100%',
     maxWidth: '400px',
     boxShadow: '0 2px 10px rgba(0,0,0,0.03)',
+    transition: 'border-color 0.3s',
   },
   searchInput: {
     border: 'none',
@@ -375,8 +415,24 @@ const styles = {
     color: '#1e293b',
     background: 'transparent',
   },
+  clearSearch: {
+    background: '#f1f5f9',
+    border: 'none',
+    color: '#94a3b8',
+    cursor: 'pointer',
+    fontSize: '12px',
+    width: '24px',
+    height: '24px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+    fontFamily: 'Inter, sans-serif',
+    transition: 'all 0.2s',
+  },
 
-  // Categories Grid
+  // ===== CATEGORIES GRID =====
   gridCategories: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
@@ -407,6 +463,9 @@ const styles = {
     marginBottom: '10px',
     lineHeight: 1.3,
     minHeight: '36px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   badge: {
     display: 'inline-block',
@@ -416,7 +475,7 @@ const styles = {
     fontWeight: 700,
   },
 
-  // States Grid
+  // ===== STATES GRID =====
   gridStates: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
@@ -456,6 +515,8 @@ const styles = {
     fontSize: '11px',
     color: '#94a3b8',
     fontWeight: 500,
+    marginTop: '2px',
+    display: 'block',
   },
   stateStats: {
     display: 'flex',
@@ -469,7 +530,7 @@ const styles = {
     fontWeight: 700,
   },
 
-  // Central Grid
+  // ===== CENTRAL GRID =====
   gridCentral: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
@@ -513,15 +574,13 @@ const styles = {
     flexShrink: 0,
   },
 
-  // No Results
+  // ===== NO RESULTS =====
   noResults: {
     textAlign: 'center',
     padding: '60px 20px',
-    color: '#94a3b8',
-    fontSize: '16px',
   },
 
-  // View All Button
+  // ===== VIEW ALL BUTTON =====
   viewAllBtn: {
     padding: '14px 32px',
     color: 'white',
@@ -537,7 +596,7 @@ const styles = {
     boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
   },
 
-  // Summary Bar
+  // ===== SUMMARY BAR =====
   summaryBar: {
     display: 'flex',
     justifyContent: 'center',

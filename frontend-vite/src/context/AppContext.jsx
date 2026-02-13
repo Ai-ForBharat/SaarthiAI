@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
   const [totalMatches, setTotalMatches] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [activeExplorerTab, setActiveExplorerTab] = useState('categories');
 
   const LANGUAGES = [
     { code: 'en', name: 'English', native: 'English', flag: '🇬🇧' },
@@ -128,6 +129,7 @@ export const AppProvider = ({ children }) => {
     setTotalMatches(0);
     setSearchQuery('');
     setSearchResults([]);
+    setActiveExplorerTab('categories');
   };
 
   const value = {
@@ -138,6 +140,7 @@ export const AppProvider = ({ children }) => {
     totalMatches, setTotalMatches,
     searchQuery, setSearchQuery,
     searchResults, setSearchResults,
+    activeExplorerTab, setActiveExplorerTab,
     resetApp,
     LANGUAGES, STATES, CATEGORIES, MINISTRIES, STATE_DATA,
   };

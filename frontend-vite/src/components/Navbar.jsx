@@ -101,7 +101,7 @@ const Navbar = () => {
     <nav style={styles.navbar}>
       <div style={styles.container}>
 
-        {/* ========== BRAND ========== */}
+        {/* Brand */}
         <div style={styles.brand} onClick={() => { resetApp(); setMobileMenu(false); }}>
           <span style={{ fontSize: '28px' }}>🏛️</span>
           <h1 style={styles.title}>
@@ -109,7 +109,7 @@ const Navbar = () => {
           </h1>
         </div>
 
-        {/* ========== SEARCH BAR ========== */}
+        {/* Search Bar */}
         <form onSubmit={handleSearch} style={styles.searchForm}>
           <FaSearch style={styles.searchIcon} />
           <input
@@ -119,17 +119,13 @@ const Navbar = () => {
             placeholder="Search schemes..."
           />
           {searchInput && (
-            <button
-              type="button"
-              onClick={() => setSearchInput('')}
-              style={styles.clearBtn}
-            >
+            <button type="button" onClick={() => setSearchInput('')} style={styles.clearBtn}>
               <FaTimes />
             </button>
           )}
         </form>
 
-        {/* ========== DESKTOP NAV LINKS ========== */}
+        {/* Desktop Nav Links */}
         <div style={styles.navLinks}>
           {navLinks.map(link => (
             <button
@@ -150,7 +146,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* ========== LANGUAGE SELECTOR ========== */}
+        {/* Language Selector */}
         <div style={styles.langWrapper}>
           <FaGlobe style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px' }} />
           <select
@@ -159,27 +155,20 @@ const Navbar = () => {
             style={styles.langSelect}
           >
             {LANGUAGES.map(l => (
-              <option key={l.code} value={l.code}>
-                {l.flag} {l.native}
-              </option>
+              <option key={l.code} value={l.code}>{l.flag} {l.native}</option>
             ))}
           </select>
         </div>
 
-        {/* ========== MOBILE MENU TOGGLE ========== */}
-        <button
-          style={styles.menuBtn}
-          onClick={() => setMobileMenu(!mobileMenu)}
-        >
+        {/* Mobile Toggle */}
+        <button style={styles.menuBtn} onClick={() => setMobileMenu(!mobileMenu)}>
           {mobileMenu ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
-      {/* ========== MOBILE MENU ========== */}
+      {/* Mobile Menu */}
       {mobileMenu && (
         <div style={styles.mobileMenu}>
-
-          {/* Mobile Search */}
           <form
             onSubmit={handleSearch}
             style={{ ...styles.searchForm, width: '100%', maxWidth: '100%', marginBottom: '12px' }}
@@ -192,43 +181,28 @@ const Navbar = () => {
               placeholder="Search schemes..."
             />
             {searchInput && (
-              <button
-                type="button"
-                onClick={() => setSearchInput('')}
-                style={styles.clearBtn}
-              >
+              <button type="button" onClick={() => setSearchInput('')} style={styles.clearBtn}>
                 <FaTimes />
               </button>
             )}
           </form>
 
-          {/* Mobile Nav Links */}
           {navLinks.map(link => (
-            <button
-              key={link.label}
-              onClick={link.action}
-              style={styles.mobileLink}
-            >
+            <button key={link.label} onClick={link.action} style={styles.mobileLink}>
               <span style={styles.mobileLinkIcon}>{link.icon}</span>
               {link.label}
             </button>
           ))}
 
-          {/* Mobile Language Selector */}
           <div style={styles.mobileLangWrapper}>
             <FaGlobe style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px' }} />
             <select
               value={language}
-              onChange={(e) => {
-                setLanguage(e.target.value);
-                setMobileMenu(false);
-              }}
+              onChange={(e) => { setLanguage(e.target.value); setMobileMenu(false); }}
               style={styles.mobileLangSelect}
             >
               {LANGUAGES.map(l => (
-                <option key={l.code} value={l.code}>
-                  {l.flag} {l.native}
-                </option>
+                <option key={l.code} value={l.code}>{l.flag} {l.native}</option>
               ))}
             </select>
           </div>
@@ -239,194 +213,101 @@ const Navbar = () => {
 };
 
 const styles = {
-  // ===== NAVBAR =====
   navbar: {
     background: 'linear-gradient(135deg, #1e3a8a, #1e40af, #3730a3)',
-    position: 'sticky',
-    top: 0,
-    zIndex: 1000,
+    position: 'sticky', top: 0, zIndex: 1000,
     boxShadow: '0 4px 30px rgba(0,0,0,0.2)',
   },
   container: {
-    maxWidth: '1300px',
-    margin: '0 auto',
-    padding: '10px 20px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '16px',
+    maxWidth: '1300px', margin: '0 auto', padding: '10px 20px',
+    display: 'flex', alignItems: 'center', gap: '16px',
   },
-
-  // ===== BRAND =====
   brand: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    cursor: 'pointer',
-    flexShrink: 0,
+    display: 'flex', alignItems: 'center', gap: '8px',
+    cursor: 'pointer', flexShrink: 0,
   },
   title: {
-    fontSize: '20px',
-    fontWeight: 800,
-    color: 'white',
-    letterSpacing: '-0.5px',
+    fontSize: '20px', fontWeight: 800, color: 'white', letterSpacing: '-0.5px',
   },
   aiBadge: {
     background: 'linear-gradient(135deg, #f97316, #ea580c)',
-    padding: '1px 8px',
-    borderRadius: '6px',
-    fontSize: '12px',
-    fontWeight: 900,
-    marginLeft: '4px',
+    padding: '1px 8px', borderRadius: '6px', fontSize: '12px',
+    fontWeight: 900, marginLeft: '4px',
   },
-
-  // ===== SEARCH =====
   searchForm: {
-    display: 'flex',
-    alignItems: 'center',
+    display: 'flex', alignItems: 'center',
     background: 'rgba(255,255,255,0.12)',
-    borderRadius: '10px',
-    padding: '0 12px',
+    borderRadius: '10px', padding: '0 12px',
     border: '1px solid rgba(255,255,255,0.15)',
-    flex: 1,
-    maxWidth: '320px',
-    transition: 'all 0.3s ease',
+    flex: 1, maxWidth: '320px', transition: 'all 0.3s ease',
   },
   searchIcon: {
-    color: 'rgba(255,255,255,0.5)',
-    fontSize: '14px',
-    flexShrink: 0,
+    color: 'rgba(255,255,255,0.5)', fontSize: '14px', flexShrink: 0,
   },
   searchInput: {
-    background: 'transparent',
-    border: 'none',
-    color: 'white',
-    padding: '10px 10px',
-    fontSize: '13px',
-    width: '100%',
-    outline: 'none',
-    fontFamily: 'Inter, sans-serif',
+    background: 'transparent', border: 'none', color: 'white',
+    padding: '10px 10px', fontSize: '13px', width: '100%',
+    outline: 'none', fontFamily: 'Inter, sans-serif',
   },
   clearBtn: {
-    background: 'none',
-    border: 'none',
-    color: 'rgba(255,255,255,0.5)',
-    cursor: 'pointer',
-    fontSize: '12px',
-    padding: '4px',
-    display: 'flex',
-    alignItems: 'center',
-    transition: 'color 0.2s',
+    background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)',
+    cursor: 'pointer', fontSize: '12px', padding: '4px',
+    display: 'flex', alignItems: 'center',
   },
-
-  // ===== DESKTOP NAV LINKS =====
   navLinks: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '2px',
+    display: 'flex', alignItems: 'center', gap: '2px',
   },
   navLink: {
-    background: 'none',
-    border: 'none',
-    color: 'rgba(255,255,255,0.8)',
-    fontSize: '12px',
-    fontWeight: 600,
-    cursor: 'pointer',
-    padding: '8px 12px',
-    borderRadius: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '5px',
-    transition: 'all 0.2s ease',
-    fontFamily: 'Inter, sans-serif',
+    background: 'none', border: 'none', color: 'rgba(255,255,255,0.8)',
+    fontSize: '12px', fontWeight: 600, cursor: 'pointer',
+    padding: '8px 12px', borderRadius: '8px',
+    display: 'flex', alignItems: 'center', gap: '5px',
+    transition: 'all 0.2s ease', fontFamily: 'Inter, sans-serif',
     whiteSpace: 'nowrap',
   },
-
-  // ===== LANGUAGE SELECTOR =====
   langWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px',
-    background: 'rgba(255,255,255,0.1)',
-    padding: '7px 12px',
-    borderRadius: '8px',
-    border: '1px solid rgba(255,255,255,0.15)',
+    display: 'flex', alignItems: 'center', gap: '6px',
+    background: 'rgba(255,255,255,0.1)', padding: '7px 12px',
+    borderRadius: '8px', border: '1px solid rgba(255,255,255,0.15)',
     flexShrink: 0,
   },
   langSelect: {
-    background: 'transparent',
-    border: 'none',
-    color: 'white',
-    fontSize: '12px',
-    fontWeight: 500,
-    cursor: 'pointer',
-    outline: 'none',
-    fontFamily: 'Inter, sans-serif',
+    background: 'transparent', border: 'none', color: 'white',
+    fontSize: '12px', fontWeight: 500, cursor: 'pointer',
+    outline: 'none', fontFamily: 'Inter, sans-serif',
   },
-
-  // ===== MOBILE TOGGLE =====
   menuBtn: {
-    display: 'none',
-    background: 'none',
-    border: 'none',
-    color: 'white',
-    fontSize: '22px',
-    cursor: 'pointer',
-    padding: '4px',
+    display: 'none', background: 'none', border: 'none',
+    color: 'white', fontSize: '22px', cursor: 'pointer', padding: '4px',
   },
-
-  // ===== MOBILE MENU =====
   mobileMenu: {
     padding: '12px 20px 16px',
     borderTop: '1px solid rgba(255,255,255,0.1)',
     background: 'rgba(0,0,0,0.1)',
   },
   mobileLink: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    width: '100%',
-    padding: '12px 14px',
-    background: 'none',
-    border: 'none',
-    color: 'rgba(255,255,255,0.9)',
-    fontSize: '14px',
-    fontWeight: 500,
-    cursor: 'pointer',
-    borderRadius: '10px',
-    fontFamily: 'Inter, sans-serif',
-    textAlign: 'left',
-    transition: 'background 0.2s',
+    display: 'flex', alignItems: 'center', gap: '12px',
+    width: '100%', padding: '12px 14px', background: 'none',
+    border: 'none', color: 'rgba(255,255,255,0.9)', fontSize: '14px',
+    fontWeight: 500, cursor: 'pointer', borderRadius: '10px',
+    fontFamily: 'Inter, sans-serif', textAlign: 'left',
   },
   mobileLinkIcon: {
-    width: '32px',
-    height: '32px',
-    borderRadius: '8px',
+    width: '32px', height: '32px', borderRadius: '8px',
     background: 'rgba(255,255,255,0.1)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
     fontSize: '14px',
   },
   mobileLangWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    marginTop: '12px',
-    padding: '12px 14px',
-    background: 'rgba(255,255,255,0.08)',
-    borderRadius: '10px',
+    display: 'flex', alignItems: 'center', gap: '10px',
+    marginTop: '12px', padding: '12px 14px',
+    background: 'rgba(255,255,255,0.08)', borderRadius: '10px',
     border: '1px solid rgba(255,255,255,0.12)',
   },
   mobileLangSelect: {
-    flex: 1,
-    background: 'transparent',
-    border: 'none',
-    color: 'white',
-    fontSize: '14px',
-    fontWeight: 500,
-    cursor: 'pointer',
-    outline: 'none',
-    fontFamily: 'Inter, sans-serif',
+    flex: 1, background: 'transparent', border: 'none',
+    color: 'white', fontSize: '14px', fontWeight: 500,
+    cursor: 'pointer', outline: 'none', fontFamily: 'Inter, sans-serif',
   },
 };
 
