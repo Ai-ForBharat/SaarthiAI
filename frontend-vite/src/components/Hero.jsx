@@ -382,6 +382,7 @@ const styles = {
     height: 'clamp(350px, 50vw, 500px)',
     position: 'relative',
     background: '#020617',
+    paddingTop: '72px',
   },
   imageSlide: {
     width: '100%',

@@ -36,3 +36,19 @@
 .fade-in {
   animation: fadeIn 0.4s ease forwards;
 }
+
+/* Navbar Responsive */
+@media (max-width: 768px) {
+  nav > div > form {
+    display: none !important;
+  }
+  nav > div > div:nth-child(3) {
+    display: none !important;
+  }
+  nav > div > div:nth-child(4) {
+    display: none !important;
+  }
+  nav > div > button:last-child {
+    display: flex !important;
+  }
+}
