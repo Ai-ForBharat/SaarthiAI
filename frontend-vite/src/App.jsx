@@ -3,9 +3,7 @@ import { useApp } from './context/AppContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import HowItWorks from './components/HowItWorks';
-import Categories from './components/Categories';
-import CentralSchemes from './components/CentralSchemes';
-import StateSchemes from './components/StateSchemes';
+import SchemeExplorer from './components/SchemeExplorer';    // ← NEW
 import UserForm from './components/UserForm';
 import Loading from './components/Loading';
 import Results from './components/Results';
@@ -34,9 +32,7 @@ function App() {
             <Hero />
             <HowItWorks />
             <UserForm />
-            <Categories />
-            <CentralSchemes />
-            <StateSchemes />
+            <SchemeExplorer />
             <FAQ />
             <About />
           </>
