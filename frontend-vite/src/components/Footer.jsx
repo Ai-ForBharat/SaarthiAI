@@ -18,10 +18,9 @@ const Footer = () => {
     { label: 'FAQs', action: () => navigateTo('faq') },
     { label: 'Find Schemes', action: () => navigateTo('form') },
     { label: 'Home', action: () => navigateTo('home') },
-    { label: 'Disclaimer', action: () => {} },
-    { label: 'Terms & Conditions', action: () => {} },
-    { label: 'Privacy Policy', action: () => {} },
-    { label: 'Accessibility Statement', action: () => {} },
+    { label: 'Disclaimer', action: () => navigateTo('disclaimer') },
+    { label: 'Terms & Conditions', action: () => navigateTo('terms') },
+    { label: 'Privacy Policy', action: () => navigateTo('privacy') },
   ];
 
   const govLinks = [

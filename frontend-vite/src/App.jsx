@@ -14,6 +14,9 @@ import About from './components/About';
 import AboutPage from './components/AboutPage';
 import FAQPage from './components/FAQPage';
 import SearchResults from './components/SearchResults';
+import Disclaimer from './components/Disclaimer';
+import Terms from './components/Terms';
+import Privacy from './components/Privacy';
 import Footer from './components/Footer';
 import { FaCommentDots, FaTimes } from 'react-icons/fa';
 import { ToastContainer } from 'react-toastify';
@@ -45,6 +48,9 @@ function App() {
         {currentView === 'about' && <AboutPage />}
         {currentView === 'faq' && <FAQPage />}
         {currentView === 'search' && <SearchResults />}
+        {currentView === 'disclaimer' && <Disclaimer />}
+        {currentView === 'terms' && <Terms />}
+        {currentView === 'privacy' && <Privacy />}
       </div>
 
       {/* Floating Chatbot */}
