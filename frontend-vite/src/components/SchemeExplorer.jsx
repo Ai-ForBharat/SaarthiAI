@@ -4,7 +4,13 @@ import { useApp } from '../context/AppContext';
 import {
   FaThList, FaMapMarkedAlt, FaLandmark,
   FaChevronDown, FaChevronUp, FaMapMarkerAlt,
-  FaSearch, FaTimes, FaCheckCircle
+  FaSearch, FaTimes, FaSeedling, FaUniversity,
+  FaBriefcase, FaGraduationCap, FaHeartbeat,
+  FaHome, FaBalanceScale, FaLaptopCode,
+  FaTools, FaHandsHelping, FaMedal,
+  FaCar, FaPlane, FaTint, FaFemale,
+  FaMap, FaCity, FaFlag, FaMountain,
+  FaWater, FaTree, FaSun, FaGlobeAsia
 } from 'react-icons/fa';
 
 const SchemeExplorer = () => {
@@ -19,10 +25,75 @@ const SchemeExplorer = () => {
   const [showAll, setShowAll] = useState(false);
   const [searchFilter, setSearchFilter] = useState('');
 
+  const categoryIcons = {
+    'Agriculture, Rural & Environment': <FaSeedling />,
+    'Banking, Financial Services & Insurance': <FaUniversity />,
+    'Business & Entrepreneurship': <FaBriefcase />,
+    'Education & Learning': <FaGraduationCap />,
+    'Health & Wellness': <FaHeartbeat />,
+    'Housing & Shelter': <FaHome />,
+    'Public Safety, Law & Justice': <FaBalanceScale />,
+    'Science, IT & Communications': <FaLaptopCode />,
+    'Skills & Employment': <FaTools />,
+    'Social Welfare & Empowerment': <FaHandsHelping />,
+    'Sports & Culture': <FaMedal />,
+    'Transport & Infrastructure': <FaCar />,
+    'Travel & Tourism': <FaPlane />,
+    'Utility & Sanitation': <FaTint />,
+    'Women and Child': <FaFemale />,
+  };
+
+  const stateIcons = {
+    'Andaman and Nicobar Islands': <FaWater />,
+    'Andhra Pradesh': <FaSun />,
+    'Arunachal Pradesh': <FaMountain />,
+    'Assam': <FaTree />,
+    'Bihar': <FaMap />,
+    'Chandigarh': <FaCity />,
+    'Chhattisgarh': <FaTree />,
+    'Dadra & Nagar Haveli and Daman & Diu': <FaWater />,
+    'Delhi': <FaCity />,
+    'Goa': <FaWater />,
+    'Gujarat': <FaSun />,
+    'Haryana': <FaSeedling />,
+    'Himachal Pradesh': <FaMountain />,
+    'Jammu and Kashmir': <FaMountain />,
+    'Jharkhand': <FaTree />,
+    'Karnataka': <FaMap />,
+    'Kerala': <FaWater />,
+    'Ladakh': <FaMountain />,
+    'Lakshadweep': <FaWater />,
+    'Madhya Pradesh': <FaMap />,
+    'Maharashtra': <FaCity />,
+    'Manipur': <FaMountain />,
+    'Meghalaya': <FaMountain />,
+    'Mizoram': <FaMountain />,
+    'Nagaland': <FaMountain />,
+    'Odisha': <FaWater />,
+    'Puducherry': <FaWater />,
+    'Punjab': <FaSeedling />,
+    'Rajasthan': <FaSun />,
+    'Sikkim': <FaMountain />,
+    'Tamil Nadu': <FaMap />,
+    'Telangana': <FaSun />,
+    'Tripura': <FaTree />,
+    'Uttar Pradesh': <FaMap />,
+    'Uttarakhand': <FaMountain />,
+    'West Bengal': <FaMap />,
+  };
+
+  const getCategoryIcon = (name) => {
+    return categoryIcons[name] || <FaThList />;
+  };
+
+  const getStateIcon = (name) => {
+    return stateIcons[name] || <FaGlobeAsia />;
+  };
+
   const tabs = [
-    { key: 'categories', label: 'Categories', icon: <FaThList />, color: '#22c55e' },
-    { key: 'states', label: 'States/UTs', icon: <FaMapMarkedAlt />, color: '#3b82f6' },
-    { key: 'central', label: 'Central Ministries', icon: <FaLandmark />, color: '#8b5cf6' },
+    { key: 'categories', label: 'Categories', icon: <FaThList /> },
+    { key: 'states', label: 'States/UTs', icon: <FaMapMarkedAlt /> },
+    { key: 'central', label: 'Central Ministries', icon: <FaLandmark /> },
   ];
 
   const getFilteredData = () => {
@@ -56,8 +127,14 @@ const SchemeExplorer = () => {
     return 10;
   };
 
+  const getTabCount = (key) => {
+    if (key === 'categories') return CATEGORIES.length;
+    if (key === 'states') return STATE_DATA.length;
+    if (key === 'central') return MINISTRIES.length;
+    return 0;
+  };
+
   const filteredData = getFilteredData();
-  const activeTabData = tabs.find(t => t.key === activeTab);
 
   return (
     <section id="scheme-explorer" style={styles.section}>
@@ -74,62 +151,24 @@ const SchemeExplorer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span style={styles.label}>🔍 Explore Schemes</span>
           <h2 style={styles.heading}>
             Discover Government Schemes{' '}
-            <span style={{ color: activeTabData.color }}>Your Way</span>
+            <span style={{ color: '#f97316' }}>Your Way</span>
           </h2>
           <p style={styles.headerDesc}>
             Browse schemes by categories, states, or central ministries
           </p>
         </motion.div>
 
-        {/* TABS + SEARCH */}
+        {/* SEARCH + TABS */}
         <motion.div
-          style={styles.tabsWrapper}
+          style={styles.controlsWrapper}
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <div style={styles.tabsContainer}>
-            {tabs.map((tab) => (
-              <motion.button
-                key={tab.key}
-                style={{
-                  ...styles.tab,
-                  ...(activeTab === tab.key ? {
-                    background: `linear-gradient(135deg, ${tab.color}, ${tab.color}cc)`,
-                    color: '#ffffff',
-                    borderColor: tab.color,
-                    boxShadow: `0 4px 20px ${tab.color}30`,
-                  } : {}),
-                }}
-                onClick={() => {
-                  setActiveTab(tab.key);
-                  setShowAll(false);
-                  setSearchFilter('');
-                }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                {tab.icon}
-                <span>{tab.label}</span>
-                <span style={{
-                  ...styles.tabCount,
-                  background: activeTab === tab.key
-                    ? 'rgba(255,255,255,0.2)'
-                    : `${tab.color}15`,
-                  color: activeTab === tab.key ? '#ffffff' : tab.color,
-                }}>
-                  {tab.key === 'categories' ? CATEGORIES.length :
-                    tab.key === 'states' ? STATE_DATA.length : MINISTRIES.length}
-                </span>
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Search */}
+          {/* Search Bar */}
           <div style={styles.searchBar}>
             <FaSearch style={styles.searchIcon} />
             <input
@@ -161,9 +200,51 @@ const SchemeExplorer = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              Found <strong style={{ color: activeTabData.color }}>{filteredData.length}</strong> results
+              Found <strong style={{ color: '#f97316' }}>{filteredData.length}</strong> results
             </motion.span>
           )}
+
+          {/* Round Tab Buttons */}
+          <div style={styles.tabsRow}>
+            {tabs.map((tab, i) => (
+              <motion.button
+                key={tab.key}
+                style={{
+                  ...styles.roundTab,
+                  ...(activeTab === tab.key ? styles.roundTabActive : {}),
+                }}
+                onClick={() => {
+                  setActiveTab(tab.key);
+                  setShowAll(false);
+                  setSearchFilter('');
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.08 }}
+              >
+                <span style={{
+                  ...styles.roundTabIcon,
+                  ...(activeTab === tab.key ? styles.roundTabIconActive : {}),
+                }}>
+                  {tab.icon}
+                </span>
+                <span style={{
+                  ...styles.roundTabLabel,
+                  ...(activeTab === tab.key ? styles.roundTabLabelActive : {}),
+                }}>
+                  {tab.label}
+                </span>
+                <span style={{
+                  ...styles.roundTabCount,
+                  ...(activeTab === tab.key ? styles.roundTabCountActive : {}),
+                }}>
+                  {getTabCount(tab.key)}
+                </span>
+              </motion.button>
+            ))}
+          </div>
         </motion.div>
 
         {/* CONTENT */}
@@ -188,32 +269,19 @@ const SchemeExplorer = () => {
                     transition={{ delay: i * 0.03 }}
                     whileHover={{
                       y: -6,
-                      boxShadow: `0 15px 40px ${cat.color}15`,
-                      borderColor: `${cat.color}40`,
+                      boxShadow: '0 15px 40px rgba(0,0,0,0.06)',
+                      borderColor: '#d1d5db',
                     }}
                   >
-                    <div style={{
-                      ...styles.catIcon,
-                      background: `${cat.color}10`,
-                      border: `1px solid ${cat.color}20`,
-                    }}>
-                      <span style={{ fontSize: '28px' }}>{cat.icon}</span>
+                    <div style={styles.catIcon}>
+                      <span style={styles.catIconInner}>
+                        {getCategoryIcon(cat.name)}
+                      </span>
                     </div>
                     <h3 style={styles.catName}>{cat.name}</h3>
-                    <div style={{
-                      ...styles.catBadge,
-                      background: `${cat.color}10`,
-                      color: cat.color,
-                      borderColor: `${cat.color}25`,
-                    }}>
+                    <div style={styles.catBadge}>
                       {cat.count} Schemes
                     </div>
-
-                    {/* Bottom accent */}
-                    <div style={{
-                      ...styles.catAccent,
-                      background: `linear-gradient(90deg, ${cat.color}, transparent)`,
-                    }} />
                   </motion.div>
                 ))}
               </div>
@@ -231,47 +299,34 @@ const SchemeExplorer = () => {
                     transition={{ delay: i * 0.03 }}
                     whileHover={{
                       y: -5,
-                      boxShadow: '0 12px 35px rgba(59,130,246,0.12)',
-                      borderColor: 'rgba(59,130,246,0.4)',
+                      boxShadow: '0 12px 35px rgba(59,130,246,0.08)',
+                      borderColor: 'rgba(59,130,246,0.3)',
                     }}
                   >
                     <div style={styles.stateTop}>
                       <div style={styles.stateIconBox}>
-                        <FaMapMarkerAlt style={{ color: '#3b82f6', fontSize: '16px' }} />
+                        <span style={styles.stateIconInner}>
+                          {getStateIcon(state.name)}
+                        </span>
                       </div>
                       <div style={{ flex: 1 }}>
                         <h3 style={styles.stateName}>{state.name}</h3>
                         <span style={styles.stateType}>
-                          {state.type === 'UT' ? '🏛️ Union Territory' : '📍 State'}
+                          {state.type === 'UT' ? 'Union Territory' : 'State'}
                         </span>
                       </div>
                     </div>
                     <div style={styles.stateStats}>
                       {state.type === 'UT' ? (
-                        <span style={{
-                          ...styles.statBadge,
-                          background: 'rgba(245,158,11,0.1)',
-                          color: '#f59e0b',
-                          borderColor: 'rgba(245,158,11,0.25)',
-                        }}>
+                        <span style={styles.statBadgeBlue}>
                           {state.ut} UT Schemes
                         </span>
                       ) : (
-                        <span style={{
-                          ...styles.statBadge,
-                          background: 'rgba(59,130,246,0.1)',
-                          color: '#3b82f6',
-                          borderColor: 'rgba(59,130,246,0.25)',
-                        }}>
+                        <span style={styles.statBadgeBlue}>
                           {state.state} State Schemes
                         </span>
                       )}
-                      <span style={{
-                        ...styles.statBadge,
-                        background: 'rgba(34,197,94,0.1)',
-                        color: '#22c55e',
-                        borderColor: 'rgba(34,197,94,0.25)',
-                      }}>
+                      <span style={styles.statBadgeBlue}>
                         {state.central} Central
                       </span>
                     </div>
@@ -292,8 +347,8 @@ const SchemeExplorer = () => {
                     transition={{ delay: i * 0.03 }}
                     whileHover={{
                       y: -5,
-                      boxShadow: '0 12px 35px rgba(139,92,246,0.12)',
-                      borderColor: 'rgba(139,92,246,0.4)',
+                      boxShadow: '0 12px 35px rgba(139,92,246,0.08)',
+                      borderColor: 'rgba(139,92,246,0.3)',
                     }}
                   >
                     <div style={styles.ministryIcon}>
@@ -315,7 +370,6 @@ const SchemeExplorer = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
               >
-                <div style={styles.noResultsIcon}>🔍</div>
                 <h3 style={styles.noResultsTitle}>No results found</h3>
                 <p style={styles.noResultsText}>
                   No matches for "<strong>{searchFilter}</strong>". Try different keywords.
@@ -338,13 +392,9 @@ const SchemeExplorer = () => {
         {!searchFilter && getTotalCount() > getDefaultVisible() && (
           <div style={{ textAlign: 'center', marginTop: '32px' }}>
             <motion.button
-              style={{
-                ...styles.viewAllBtn,
-                background: `linear-gradient(135deg, ${activeTabData.color}, ${activeTabData.color}cc)`,
-                boxShadow: `0 6px 20px ${activeTabData.color}30`,
-              }}
+              style={styles.viewAllBtn}
               onClick={() => setShowAll(!showAll)}
-              whileHover={{ scale: 1.05, boxShadow: `0 10px 30px ${activeTabData.color}40` }}
+              whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(249,115,22,0.3)' }}
               whileTap={{ scale: 0.95 }}
             >
               {showAll ? (
@@ -365,7 +415,7 @@ const SchemeExplorer = () => {
           transition={{ delay: 0.3 }}
         >
           {[
-            { num: '7,500+', label: 'Total Schemes', color: '#22c55e' },
+            { num: '7,500+', label: 'Total Schemes', color: '#f97316' },
             { num: '36', label: 'States & UTs', color: '#3b82f6' },
             { num: '22+', label: 'Ministries', color: '#8b5cf6' },
             { num: '15', label: 'Categories', color: '#f59e0b' },
@@ -394,7 +444,7 @@ const SchemeExplorer = () => {
 const styles = {
   section: {
     padding: 'clamp(60px, 10vw, 100px) 24px',
-    background: '#0f172a',
+    background: '#ffffff',
     position: 'relative',
     overflow: 'hidden',
   },
@@ -406,7 +456,7 @@ const styles = {
     width: '400px',
     height: '400px',
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 70%)',
+    background: 'radial-gradient(circle, rgba(249,115,22,0.05) 0%, transparent 70%)',
     pointerEvents: 'none',
   },
   bgDecor2: {
@@ -432,69 +482,26 @@ const styles = {
     textAlign: 'center',
     marginBottom: 'clamp(32px, 5vw, 44px)',
   },
-  label: {
-    display: 'inline-block',
-    background: 'rgba(34,197,94,0.1)',
-    border: '1px solid rgba(34,197,94,0.3)',
-    color: '#22c55e',
-    padding: '6px 20px',
-    borderRadius: '50px',
-    fontSize: '13px',
-    fontWeight: 600,
-    marginBottom: '16px',
-  },
   heading: {
     fontSize: 'clamp(26px, 4vw, 40px)',
     fontWeight: 800,
-    color: '#ffffff',
+    color: '#1a1a1a',
     lineHeight: 1.2,
     marginBottom: '12px',
   },
   headerDesc: {
     fontSize: 'clamp(13px, 2.5vw, 15px)',
-    color: '#64748b',
+    color: '#6b7280',
     fontWeight: 500,
   },
 
-  /* Tabs */
-  tabsWrapper: {
+  /* Controls Wrapper */
+  controlsWrapper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '14px',
-    marginBottom: '32px',
-  },
-  tabsContainer: {
-    display: 'flex',
-    gap: '8px',
-    background: '#020617',
-    padding: '6px',
-    borderRadius: '16px',
-    border: '1px solid #1e293b',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
-  tab: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    padding: '10px 20px',
-    borderRadius: '12px',
-    border: '2px solid transparent',
-    background: 'transparent',
-    fontSize: '13px',
-    fontWeight: 600,
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    fontFamily: 'Inter, sans-serif',
-    color: '#94a3b8',
-    whiteSpace: 'nowrap',
-  },
-  tabCount: {
-    padding: '2px 10px',
-    borderRadius: '50px',
-    fontSize: '11px',
-    fontWeight: 700,
+    gap: '18px',
+    marginBottom: '36px',
   },
 
   /* Search */
@@ -502,38 +509,38 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
-    background: '#020617',
+    background: '#f9fafb',
     padding: '0 16px',
-    borderRadius: '12px',
-    border: '1px solid #1e293b',
+    borderRadius: '50px',
+    border: '2px solid #e5e7eb',
     width: '100%',
-    maxWidth: '400px',
+    maxWidth: '460px',
     transition: 'border-color 0.3s',
   },
   searchIcon: {
-    color: '#475569',
-    fontSize: '13px',
+    color: '#9ca3af',
+    fontSize: '14px',
     flexShrink: 0,
   },
   searchInput: {
     border: 'none',
     outline: 'none',
-    fontSize: '13px',
+    fontSize: '14px',
     width: '100%',
     fontFamily: 'Inter, sans-serif',
-    color: '#ffffff',
+    color: '#1a1a1a',
     background: 'transparent',
-    padding: '12px 0',
+    padding: '14px 0',
   },
   clearSearch: {
-    background: '#1e293b',
+    background: '#e5e7eb',
     border: 'none',
-    color: '#94a3b8',
+    color: '#6b7280',
     cursor: 'pointer',
     fontSize: '10px',
-    width: '22px',
-    height: '22px',
-    borderRadius: '6px',
+    width: '24px',
+    height: '24px',
+    borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -541,9 +548,70 @@ const styles = {
     fontFamily: 'Inter, sans-serif',
   },
   resultsCount: {
-    fontSize: '12px',
-    color: '#64748b',
+    fontSize: '13px',
+    color: '#9ca3af',
     fontWeight: 500,
+  },
+
+  /* Round Tab Buttons */
+  tabsRow: {
+    display: 'flex',
+    gap: '12px',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
+  roundTab: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    padding: '12px 24px',
+    borderRadius: '50px',
+    border: '2px solid #e5e7eb',
+    background: '#ffffff',
+    fontSize: '13px',
+    fontWeight: 600,
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    fontFamily: 'Inter, sans-serif',
+    color: '#6b7280',
+    whiteSpace: 'nowrap',
+  },
+  roundTabActive: {
+    background: 'linear-gradient(135deg, #f97316, #ea580c)',
+    borderColor: '#f97316',
+    color: '#ffffff',
+    boxShadow: '0 6px 24px rgba(249,115,22,0.25)',
+  },
+  roundTabIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '14px',
+    color: '#9ca3af',
+  },
+  roundTabIconActive: {
+    color: '#ffffff',
+  },
+  roundTabLabel: {
+    fontSize: '13px',
+    fontWeight: 600,
+    color: '#4b5563',
+  },
+  roundTabLabelActive: {
+    color: '#ffffff',
+  },
+  roundTabCount: {
+    padding: '2px 10px',
+    borderRadius: '50px',
+    fontSize: '11px',
+    fontWeight: 700,
+    background: '#f3f4f6',
+    color: '#6b7280',
+    border: '1px solid #e5e7eb',
+  },
+  roundTabCountActive: {
+    background: 'rgba(255,255,255,0.2)',
+    color: '#ffffff',
+    border: '1px solid rgba(255,255,255,0.3)',
   },
 
   /* Categories Grid */
@@ -553,29 +621,38 @@ const styles = {
     gap: '14px',
   },
   categoryCard: {
-    background: '#020617',
+    background: '#ffffff',
     borderRadius: '16px',
     padding: '24px 18px',
     textAlign: 'center',
-    border: '1px solid #1e293b',
+    border: '1px solid #e5e7eb',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    position: 'relative',
     overflow: 'hidden',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
   },
   catIcon: {
     width: '56px',
     height: '56px',
-    borderRadius: '16px',
+    borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     margin: '0 auto 12px',
+    background: '#f3f4f6',
+    border: '1px solid #e5e7eb',
+  },
+  catIconInner: {
+    fontSize: '22px',
+    color: '#1a1a1a',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   catName: {
     fontSize: '13px',
     fontWeight: 700,
-    color: '#e2e8f0',
+    color: '#1a1a1a',
     marginBottom: '10px',
     lineHeight: 1.3,
     minHeight: '34px',
@@ -589,14 +666,9 @@ const styles = {
     borderRadius: '50px',
     fontSize: '11px',
     fontWeight: 700,
-    border: '1px solid',
-  },
-  catAccent: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    height: '2px',
+    background: 'rgba(249,115,22,0.06)',
+    color: '#f97316',
+    border: '1px solid rgba(249,115,22,0.2)',
   },
 
   /* States Grid */
@@ -606,12 +678,13 @@ const styles = {
     gap: '12px',
   },
   stateCard: {
-    background: '#020617',
+    background: '#ffffff',
     borderRadius: '14px',
     padding: '16px',
-    border: '1px solid #1e293b',
+    border: '1px solid #e5e7eb',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
   },
   stateTop: {
     display: 'flex',
@@ -622,23 +695,30 @@ const styles = {
   stateIconBox: {
     width: '40px',
     height: '40px',
-    borderRadius: '10px',
-    background: 'rgba(59,130,246,0.1)',
-    border: '1px solid rgba(59,130,246,0.2)',
+    borderRadius: '50%',
+    background: '#f3f4f6',
+    border: '1px solid #e5e7eb',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
   },
+  stateIconInner: {
+    fontSize: '16px',
+    color: '#1a1a1a',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   stateName: {
     fontSize: '14px',
     fontWeight: 700,
-    color: '#e2e8f0',
+    color: '#1a1a1a',
     lineHeight: 1.2,
   },
   stateType: {
     fontSize: '11px',
-    color: '#64748b',
+    color: '#9ca3af',
     fontWeight: 500,
     marginTop: '2px',
     display: 'block',
@@ -648,12 +728,14 @@ const styles = {
     gap: '8px',
     flexWrap: 'wrap',
   },
-  statBadge: {
+  statBadgeBlue: {
     padding: '4px 12px',
     borderRadius: '50px',
     fontSize: '11px',
     fontWeight: 700,
-    border: '1px solid',
+    border: '1px solid rgba(59,130,246,0.2)',
+    background: 'rgba(59,130,246,0.06)',
+    color: '#3b82f6',
   },
 
   /* Central Grid */
@@ -663,22 +745,23 @@ const styles = {
     gap: '12px',
   },
   ministryCard: {
-    background: '#020617',
+    background: '#ffffff',
     borderRadius: '14px',
     padding: '16px',
     display: 'flex',
     alignItems: 'center',
     gap: '14px',
-    border: '1px solid #1e293b',
+    border: '1px solid #e5e7eb',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
   },
   ministryIcon: {
     width: '44px',
     height: '44px',
     borderRadius: '12px',
-    background: 'rgba(139,92,246,0.1)',
-    border: '1px solid rgba(139,92,246,0.2)',
+    background: 'rgba(139,92,246,0.06)',
+    border: '1px solid rgba(139,92,246,0.15)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -687,7 +770,7 @@ const styles = {
   ministryName: {
     fontSize: '13px',
     fontWeight: 600,
-    color: '#e2e8f0',
+    color: '#1a1a1a',
     lineHeight: 1.3,
     margin: 0,
   },
@@ -695,8 +778,8 @@ const styles = {
     fontSize: '11px',
     fontWeight: 700,
     color: '#8b5cf6',
-    background: 'rgba(139,92,246,0.1)',
-    border: '1px solid rgba(139,92,246,0.25)',
+    background: 'rgba(139,92,246,0.06)',
+    border: '1px solid rgba(139,92,246,0.2)',
     padding: '4px 12px',
     borderRadius: '50px',
     whiteSpace: 'nowrap',
@@ -707,28 +790,24 @@ const styles = {
   noResults: {
     textAlign: 'center',
     padding: 'clamp(40px, 8vw, 60px) 20px',
-    background: '#020617',
-    border: '1px solid #1e293b',
+    background: '#f9fafb',
+    border: '1px solid #e5e7eb',
     borderRadius: '20px',
-  },
-  noResultsIcon: {
-    fontSize: '44px',
-    marginBottom: '12px',
   },
   noResultsTitle: {
     fontSize: '18px',
     fontWeight: 700,
-    color: '#e2e8f0',
+    color: '#1a1a1a',
     marginBottom: '6px',
   },
   noResultsText: {
     fontSize: '13px',
-    color: '#64748b',
+    color: '#9ca3af',
     marginBottom: '18px',
   },
   noResultsBtn: {
     padding: '10px 24px',
-    background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+    background: 'linear-gradient(135deg, #f97316, #ea580c)',
     color: '#ffffff',
     border: 'none',
     borderRadius: '50px',
@@ -743,7 +822,7 @@ const styles = {
     padding: '14px 32px',
     color: '#ffffff',
     border: 'none',
-    borderRadius: '14px',
+    borderRadius: '50px',
     fontSize: '14px',
     fontWeight: 700,
     cursor: 'pointer',
@@ -751,6 +830,8 @@ const styles = {
     alignItems: 'center',
     gap: '8px',
     fontFamily: 'Inter, sans-serif',
+    background: 'linear-gradient(135deg, #f97316, #ea580c)',
+    boxShadow: '0 6px 20px rgba(249,115,22,0.2)',
   },
 
   /* Summary Bar */
@@ -761,11 +842,11 @@ const styles = {
     gap: 'clamp(20px, 4vw, 40px)',
     marginTop: 'clamp(40px, 6vw, 60px)',
     padding: 'clamp(20px, 4vw, 28px) clamp(20px, 4vw, 36px)',
-    background: '#020617',
-    border: '1px solid #1e293b',
+    background: '#f9fafb',
+    border: '1px solid #e5e7eb',
     borderRadius: '20px',
     flexWrap: 'wrap',
-    boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
   },
   summaryItem: {
     display: 'flex',
@@ -779,7 +860,7 @@ const styles = {
   },
   summaryLabel: {
     fontSize: '11px',
-    color: '#64748b',
+    color: '#9ca3af',
     fontWeight: 600,
     textTransform: 'uppercase',
     letterSpacing: '0.5px',
@@ -787,7 +868,7 @@ const styles = {
   summaryDivider: {
     width: '1px',
     height: '36px',
-    background: '#1e293b',
+    background: '#e5e7eb',
   },
 };
 
