@@ -2,7 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   FaCheckCircle, FaChevronRight,
-  FaRupeeSign, FaFileAlt
+  FaRupeeSign, FaFileAlt,
+  FaFlag, FaBuilding
 } from 'react-icons/fa';
 
 const SchemeCard = ({ scheme, index, onViewDetails }) => {
@@ -37,7 +38,11 @@ const SchemeCard = ({ scheme, index, onViewDetails }) => {
             color: isCenter ? '#f97316' : '#1a1a1a',
             borderColor: isCenter ? 'rgba(249,115,22,0.2)' : '#e5e7eb',
           }}>
-            {isCenter ? '🇮🇳 Central' : '🏛️ State'}
+            {isCenter ? (
+              <><FaFlag style={{ fontSize: '11px' }} /> Central</>
+            ) : (
+              <><FaBuilding style={{ fontSize: '11px' }} /> State</>
+            )}
           </span>
 
           <span style={styles.categoryTag}>
