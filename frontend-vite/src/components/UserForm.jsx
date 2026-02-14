@@ -8,7 +8,7 @@ import {
   FaUsers, FaRupeeSign, FaBriefcase, FaGraduationCap,
   FaHeart, FaArrowRight, FaArrowLeft, FaSearch,
   FaTractor, FaUserGraduate, FaWheelchair, FaMosque,
-  FaHome
+  FaHome, FaClipboardList, FaMoneyBillWave, FaFileAlt
 } from 'react-icons/fa';
 
 const UserForm = () => {
@@ -93,7 +93,6 @@ const UserForm = () => {
 
   return (
     <section style={styles.fullPage}>
-      {/* Background decoration */}
       <div style={styles.bgDecor1} />
       <div style={styles.bgDecor2} />
 
@@ -107,7 +106,7 @@ const UserForm = () => {
         <motion.button
           onClick={goBackHome}
           style={styles.backHomeBtn}
-          whileHover={{ scale: 1.05, background: '#1e293b' }}
+          whileHover={{ scale: 1.05, background: '#f3f4f6' }}
           whileTap={{ scale: 0.95 }}
         >
           <FaHome /> Back to Home
@@ -121,7 +120,7 @@ const UserForm = () => {
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
           >
-            <FaSearch style={{ fontSize: '28px', color: '#22c55e' }} />
+            <FaSearch style={{ fontSize: '28px', color: '#f97316' }} />
           </motion.div>
 
           <h2 style={styles.title}>Find Your Schemes</h2>
@@ -139,8 +138,8 @@ const UserForm = () => {
                 <div style={{
                   ...styles.progressLine,
                   background: step > i
-                    ? 'linear-gradient(90deg, #22c55e, #16a34a)'
-                    : '#1e293b'
+                    ? 'linear-gradient(90deg, #f97316, #ea580c)'
+                    : '#e5e7eb'
                 }} />
               )}
               <div style={styles.progressStep}>
@@ -148,13 +147,14 @@ const UserForm = () => {
                   style={{
                     ...styles.progressDot,
                     background: step > i + 1
-                      ? '#22c55e'
+                      ? '#f97316'
                       : step === i + 1
-                        ? 'linear-gradient(135deg, #22c55e, #16a34a)'
-                        : '#1e293b',
-                    color: step >= i + 1 ? 'white' : '#64748b',
+                        ? 'linear-gradient(135deg, #f97316, #ea580c)'
+                        : '#f3f4f6',
+                    color: step >= i + 1 ? 'white' : '#9ca3af',
+                    border: step < i + 1 ? '2px solid #e5e7eb' : '2px solid transparent',
                     boxShadow: step === i + 1
-                      ? '0 0 20px rgba(34,197,94,0.4)'
+                      ? '0 0 20px rgba(249,115,22,0.3)'
                       : 'none',
                   }}
                   animate={step === i + 1 ? { scale: [1, 1.1, 1] } : {}}
@@ -165,7 +165,7 @@ const UserForm = () => {
                 <span style={{
                   fontSize: 'clamp(10px, 2.5vw, 12px)',
                   fontWeight: step === i + 1 ? 700 : 500,
-                  color: step === i + 1 ? '#22c55e' : '#64748b',
+                  color: step === i + 1 ? '#f97316' : '#9ca3af',
                   marginTop: '6px',
                 }}>{label}</span>
               </div>
@@ -190,7 +190,9 @@ const UserForm = () => {
                 exit={{ opacity: 0, x: -60 }}
                 transition={{ duration: 0.35 }}
               >
-                <h3 style={styles.stepTitle}>👤 Personal Information</h3>
+                <h3 style={styles.stepTitle}>
+                  <FaUser style={{ color: '#f97316', fontSize: '16px' }} /> Personal Information
+                </h3>
 
                 <div style={styles.group}>
                   <label style={styles.label}>
@@ -209,7 +211,7 @@ const UserForm = () => {
                 <div style={styles.row}>
                   <div style={styles.group}>
                     <label style={styles.label}>
-                      <FaBirthdayCake style={{ ...styles.labelIcon, color: '#16a34a' }} /> Age
+                      <FaBirthdayCake style={{ ...styles.labelIcon, color: '#ea580c' }} /> Age
                     </label>
                     <input
                       style={styles.input}
@@ -235,9 +237,9 @@ const UserForm = () => {
                       required
                     >
                       <option value="">Select Gender</option>
-                      <option value="male">👨 Male</option>
-                      <option value="female">👩 Female</option>
-                      <option value="other">🧑 Other</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
                     </select>
                   </div>
                 </div>
@@ -282,7 +284,7 @@ const UserForm = () => {
                   type="button"
                   onClick={nextStep}
                   style={styles.nextBtn}
-                  whileHover={{ scale: 1.02, boxShadow: '0 8px 25px rgba(59,130,246,0.4)' }}
+                  whileHover={{ scale: 1.02, boxShadow: '0 8px 25px rgba(249,115,22,0.3)' }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Continue to Economic Details <FaArrowRight />
@@ -299,11 +301,13 @@ const UserForm = () => {
                 exit={{ opacity: 0, x: -60 }}
                 transition={{ duration: 0.35 }}
               >
-                <h3 style={styles.stepTitle}>💰 Economic Information</h3>
+                <h3 style={styles.stepTitle}>
+                  <FaMoneyBillWave style={{ color: '#f97316', fontSize: '16px' }} /> Economic Information
+                </h3>
 
                 <div style={styles.group}>
                   <label style={styles.label}>
-                    <FaRupeeSign style={{ ...styles.labelIcon, color: '#22c55e' }} /> Annual Family Income (₹)
+                    <FaRupeeSign style={{ ...styles.labelIcon, color: '#f97316' }} /> Annual Family Income (₹)
                   </label>
                   <input
                     style={styles.input}
@@ -320,7 +324,7 @@ const UserForm = () => {
 
                 <div style={styles.group}>
                   <label style={styles.label}>
-                    <FaBriefcase style={{ ...styles.labelIcon, color: '#16a34a' }} /> Occupation
+                    <FaBriefcase style={{ ...styles.labelIcon, color: '#ea580c' }} /> Occupation
                   </label>
                   <select
                     style={styles.input}
@@ -330,14 +334,14 @@ const UserForm = () => {
                     required
                   >
                     <option value="">Select Occupation</option>
-                    <option value="farmer">🌾 Farmer</option>
-                    <option value="student">🎓 Student</option>
-                    <option value="employed">💼 Employed</option>
-                    <option value="self_employed">🏪 Self-Employed</option>
-                    <option value="unemployed">🔍 Unemployed</option>
-                    <option value="daily_wage">🔨 Daily Wage Worker</option>
-                    <option value="homemaker">🏠 Homemaker</option>
-                    <option value="retired">👴 Retired</option>
+                    <option value="farmer">Farmer</option>
+                    <option value="student">Student</option>
+                    <option value="employed">Employed</option>
+                    <option value="self_employed">Self-Employed</option>
+                    <option value="unemployed">Unemployed</option>
+                    <option value="daily_wage">Daily Wage Worker</option>
+                    <option value="homemaker">Homemaker</option>
+                    <option value="retired">Retired</option>
                   </select>
                 </div>
 
@@ -349,7 +353,8 @@ const UserForm = () => {
                     onChange={handleChange}
                     style={styles.checkboxInput}
                   />
-                  📋 BPL (Below Poverty Line) Card Holder
+                  <FaClipboardList style={{ color: '#f97316', fontSize: '14px', flexShrink: 0 }} />
+                  BPL (Below Poverty Line) Card Holder
                 </label>
 
                 <div style={styles.btnRow}>
@@ -366,7 +371,7 @@ const UserForm = () => {
                     type="button"
                     onClick={nextStep}
                     style={{ ...styles.nextBtn, flex: 1, marginTop: 0 }}
-                    whileHover={{ scale: 1.02, boxShadow: '0 8px 25px rgba(59,130,246,0.4)' }}
+                    whileHover={{ scale: 1.02, boxShadow: '0 8px 25px rgba(249,115,22,0.3)' }}
                     whileTap={{ scale: 0.98 }}
                   >
                     Continue <FaArrowRight />
@@ -384,7 +389,9 @@ const UserForm = () => {
                 exit={{ opacity: 0, x: -60 }}
                 transition={{ duration: 0.35 }}
               >
-                <h3 style={styles.stepTitle}>📋 Additional Information</h3>
+                <h3 style={styles.stepTitle}>
+                  <FaFileAlt style={{ color: '#f97316', fontSize: '16px' }} /> Additional Information
+                </h3>
 
                 <div style={styles.row}>
                   <div style={styles.group}>
@@ -439,7 +446,10 @@ const UserForm = () => {
                       onChange={handleChange}
                       style={styles.checkboxInput}
                     />
-                    {item.icon} {item.text}
+                    <span style={{ color: '#f97316', fontSize: '14px', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+                      {item.icon}
+                    </span>
+                    {item.text}
                   </label>
                 ))}
 
@@ -456,7 +466,7 @@ const UserForm = () => {
                   <motion.button
                     type="submit"
                     style={styles.submitBtn}
-                    whileHover={{ scale: 1.02, boxShadow: '0 8px 30px rgba(34,197,94,0.5)' }}
+                    whileHover={{ scale: 1.02, boxShadow: '0 8px 30px rgba(249,115,22,0.4)' }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <FaSearch /> Find My Schemes
@@ -473,10 +483,9 @@ const UserForm = () => {
 };
 
 const styles = {
-  /* 🔥 FULL PAGE DARK BACKGROUND */
   fullPage: {
     minHeight: '100vh',
-    background: 'linear-gradient(180deg, #020617 0%, #0f172a 40%, #020617 100%)',
+    background: '#ffffff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -485,7 +494,6 @@ const styles = {
     overflow: 'hidden',
   },
 
-  /* Background decorations */
   bgDecor1: {
     position: 'absolute',
     top: '-150px',
@@ -493,7 +501,7 @@ const styles = {
     width: '400px',
     height: '400px',
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%)',
+    background: 'radial-gradient(circle, rgba(249,115,22,0.06) 0%, transparent 70%)',
     pointerEvents: 'none',
   },
   bgDecor2: {
@@ -503,33 +511,31 @@ const styles = {
     width: '300px',
     height: '300px',
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)',
+    background: 'radial-gradient(circle, rgba(249,115,22,0.05) 0%, transparent 70%)',
     pointerEvents: 'none',
   },
 
-  /* 🔥 DARK CARD */
   container: {
     width: '100%',
     maxWidth: '720px',
-    background: '#0f172a',
+    background: '#ffffff',
     borderRadius: 'clamp(16px, 3vw, 24px)',
     padding: 'clamp(24px, 5vw, 48px)',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px #1e293b',
-    border: '1px solid #1e293b',
+    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.08), 0 0 0 1px #e5e7eb',
+    border: '1px solid #e5e7eb',
     position: 'relative',
     zIndex: 1,
   },
 
-  /* Back to Home button */
   backHomeBtn: {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '8px',
     padding: '8px 16px',
-    background: '#0f172a',
-    border: '1px solid #1e293b',
+    background: '#f9fafb',
+    border: '1px solid #e5e7eb',
     borderRadius: '50px',
-    color: '#94a3b8',
+    color: '#6b7280',
     fontSize: '13px',
     fontWeight: 600,
     cursor: 'pointer',
@@ -538,7 +544,6 @@ const styles = {
     transition: 'all 0.3s ease',
   },
 
-  /* Header */
   header: {
     textAlign: 'center',
     marginBottom: 'clamp(24px, 4vw, 36px)',
@@ -547,8 +552,8 @@ const styles = {
     width: '64px',
     height: '64px',
     borderRadius: '50%',
-    background: 'linear-gradient(135deg, rgba(34,197,94,0.15), rgba(34,197,94,0.05))',
-    border: '2px solid rgba(34,197,94,0.2)',
+    background: 'rgba(249,115,22,0.08)',
+    border: '2px solid rgba(249,115,22,0.2)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -558,19 +563,18 @@ const styles = {
   title: {
     fontSize: 'clamp(22px, 5vw, 30px)',
     fontWeight: 800,
-    color: '#ffffff',
+    color: '#1a1a1a',
     marginBottom: '8px',
   },
 
   subtitle: {
-    color: '#94a3b8',
+    color: '#6b7280',
     fontSize: 'clamp(13px, 2.5vw, 15px)',
     maxWidth: '480px',
     margin: '0 auto',
     lineHeight: 1.6,
   },
 
-  /* Progress */
   progress: {
     display: 'flex',
     alignItems: 'center',
@@ -610,7 +614,7 @@ const styles = {
   stepIndicator: {
     textAlign: 'center',
     fontSize: '12px',
-    color: '#64748b',
+    color: '#9ca3af',
     fontWeight: 600,
     marginBottom: 'clamp(20px, 4vw, 30px)',
     textTransform: 'uppercase',
@@ -621,9 +625,12 @@ const styles = {
     fontSize: 'clamp(16px, 3vw, 20px)',
     fontWeight: 700,
     marginBottom: 'clamp(16px, 3vw, 24px)',
-    color: '#ffffff',
+    color: '#1a1a1a',
     paddingBottom: '12px',
-    borderBottom: '1px solid #1e293b',
+    borderBottom: '1px solid #e5e7eb',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
   },
 
   group: {
@@ -637,31 +644,30 @@ const styles = {
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     fontWeight: 600,
     marginBottom: '8px',
-    color: '#e2e8f0',
+    color: '#1a1a1a',
   },
 
   labelIcon: {
-    color: '#22c55e',
+    color: '#f97316',
     fontSize: '14px',
   },
 
-  /* 🔥 DARK INPUTS */
   input: {
     width: '100%',
     padding: 'clamp(12px, 2.5vw, 16px) clamp(14px, 2.5vw, 18px)',
-    border: '2px solid #1e293b',
+    border: '2px solid #e5e7eb',
     borderRadius: 'clamp(10px, 2vw, 12px)',
     fontSize: 'clamp(13px, 2.5vw, 15px)',
     fontFamily: 'Inter, sans-serif',
-    background: '#020617',
-    color: '#ffffff',
+    background: '#f9fafb',
+    color: '#1a1a1a',
     transition: 'all 0.3s ease',
     outline: 'none',
     boxSizing: 'border-box',
   },
 
   hint: {
-    color: '#64748b',
+    color: '#9ca3af',
     fontSize: 'clamp(10px, 2vw, 12px)',
     marginTop: '6px',
     display: 'block',
@@ -673,27 +679,26 @@ const styles = {
     gap: 'clamp(12px, 2vw, 16px)',
   },
 
-  /* 🔥 DARK CHECKBOX CARDS */
   checkbox: {
     display: 'flex',
     alignItems: 'center',
     gap: 'clamp(10px, 2vw, 14px)',
     padding: 'clamp(12px, 2.5vw, 16px) clamp(14px, 2.5vw, 20px)',
-    border: '2px solid #1e293b',
+    border: '2px solid #e5e7eb',
     borderRadius: 'clamp(10px, 2vw, 12px)',
     marginBottom: 'clamp(10px, 1.5vw, 12px)',
     cursor: 'pointer',
     fontSize: 'clamp(12px, 2.5vw, 14px)',
     fontWeight: 500,
     transition: 'all 0.3s ease',
-    background: '#020617',
-    color: '#e2e8f0',
+    background: '#f9fafb',
+    color: '#1a1a1a',
   },
 
   checkboxInput: {
     width: '20px',
     height: '20px',
-    accentColor: '#22c55e',
+    accentColor: '#f97316',
     flexShrink: 0,
   },
 
@@ -707,7 +712,7 @@ const styles = {
   nextBtn: {
     width: '100%',
     padding: 'clamp(14px, 3vw, 18px) 24px',
-    background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+    background: 'linear-gradient(135deg, #f97316, #ea580c)',
     color: 'white',
     border: 'none',
     borderRadius: 'clamp(10px, 2vw, 12px)',
@@ -724,9 +729,9 @@ const styles = {
 
   backBtn: {
     padding: 'clamp(14px, 3vw, 18px) clamp(18px, 3vw, 28px)',
-    background: '#1e293b',
-    color: '#e2e8f0',
-    border: '1px solid #334155',
+    background: '#f9fafb',
+    color: '#4b5563',
+    border: '1px solid #e5e7eb',
     borderRadius: 'clamp(10px, 2vw, 12px)',
     fontSize: 'clamp(13px, 2.5vw, 15px)',
     fontWeight: 600,
@@ -740,7 +745,7 @@ const styles = {
   submitBtn: {
     flex: 1,
     padding: 'clamp(14px, 3vw, 18px) 24px',
-    background: 'linear-gradient(135deg, #22c55e, #16a34a)',
+    background: 'linear-gradient(135deg, #f97316, #ea580c)',
     color: 'white',
     border: 'none',
     borderRadius: 'clamp(10px, 2vw, 12px)',
