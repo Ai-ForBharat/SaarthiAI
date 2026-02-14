@@ -5,8 +5,7 @@ import { getAllSchemes } from '../api/api';
 import { toast } from 'react-toastify';
 import {
   FaGlobe, FaSearch, FaBars, FaTimes,
-  FaHome, FaThList, FaInfoCircle,
-  FaShieldAlt
+  FaHome, FaThList, FaInfoCircle
 } from 'react-icons/fa';
 
 const Navbar = () => {
@@ -101,23 +100,20 @@ const Navbar = () => {
     >
       <div style={styles.container}>
 
+        {/* ─── Brand ─── */}
         <motion.div
           style={styles.brand}
           onClick={() => { resetApp(); setMobileMenu(false); }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <div style={styles.logoIcon}>
-            <FaShieldAlt style={{ fontSize: '16px', color: '#22c55e' }} />
-          </div>
-          <div style={styles.logoText}>
-            <h1 style={styles.title}>
-              <span style={styles.titleGreen}>Gov</span>Scheme
-            </h1>
-            <span style={styles.titleSub}>AI</span>
-          </div>
+          <h1 style={styles.title}>
+            <span style={styles.titleOrange}>Saarthi</span>{' '}
+            <span style={styles.titleDark}>AI</span>
+          </h1>
         </motion.div>
 
+        {/* ─── Desktop Search ─── */}
         <form onSubmit={handleSearch} style={styles.searchForm}>
           <FaSearch style={styles.searchIcon} />
           <input
@@ -140,13 +136,14 @@ const Navbar = () => {
           )}
         </form>
 
+        {/* ─── Desktop Nav Links ─── */}
         <div style={styles.navLinks}>
           {navLinks.map(link => (
             <motion.button
               key={link.label}
               onClick={link.action}
               style={styles.navLink}
-              whileHover={{ color: '#22c55e' }}
+              whileHover={{ color: '#f97316' }}
               whileTap={{ scale: 0.95 }}
             >
               {link.icon}
@@ -155,6 +152,7 @@ const Navbar = () => {
           ))}
         </div>
 
+        {/* ─── Language Selector ─── */}
         <div style={styles.langWrapper}>
           <FaGlobe style={styles.langIcon} />
           <select
@@ -170,6 +168,7 @@ const Navbar = () => {
           </select>
         </div>
 
+        {/* ─── Mobile Menu Button ─── */}
         <motion.button
           style={styles.menuBtn}
           onClick={() => setMobileMenu(!mobileMenu)}
@@ -180,6 +179,7 @@ const Navbar = () => {
 
       </div>
 
+      {/* ─── Mobile Menu ─── */}
       <AnimatePresence>
         {mobileMenu && (
           <motion.div
@@ -190,7 +190,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
           >
             <form onSubmit={handleSearch} style={styles.mobileSearchForm}>
-              <FaSearch style={styles.searchIcon} />
+              <FaSearch style={styles.mobileSearchIcon} />
               <input
                 style={styles.mobileSearchInput}
                 value={searchInput}
@@ -215,7 +215,7 @@ const Navbar = () => {
             ))}
 
             <div style={styles.mobileLangRow}>
-              <FaGlobe style={{ color: '#64748b', fontSize: '14px' }} />
+              <FaGlobe style={{ color: '#6b7280', fontSize: '14px' }} />
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
@@ -241,18 +241,18 @@ const styles = {
     top: 0,
     left: 0,
     width: '100%',
-    background: '#020617',
+    background: '#ffffff',
     borderBottom: '1px solid transparent',
     zIndex: 1000,
     transition: 'all 0.3s ease',
     fontFamily: 'Inter, sans-serif',
   },
   navbarScrolled: {
-    background: 'rgba(2, 6, 23, 0.95)',
+    background: 'rgba(255, 255, 255, 0.97)',
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
-    borderBottom: '1px solid #1e293b',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
+    borderBottom: '1px solid #e5e7eb',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
   },
 
   container: {
@@ -267,45 +267,23 @@ const styles = {
   brand: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px',
     cursor: 'pointer',
-    color: 'white',
+    color: '#1a1a1a',
     textDecoration: 'none',
     flexShrink: 0,
   },
-  logoIcon: {
-    width: '34px',
-    height: '34px',
-    borderRadius: '10px',
-    background: 'rgba(34,197,94,0.1)',
-    border: '1px solid rgba(34,197,94,0.25)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoText: {
-    display: 'flex',
-    alignItems: 'baseline',
-    gap: '4px',
-  },
   title: {
-    fontSize: '18px',
+    fontSize: '20px',
     fontWeight: 800,
-    color: '#ffffff',
     margin: 0,
     letterSpacing: '-0.3px',
+    lineHeight: 1,
   },
-  titleGreen: {
-    color: '#22c55e',
+  titleOrange: {
+    color: '#f97316',
   },
-  titleSub: {
-    fontSize: '12px',
-    fontWeight: 700,
-    color: '#22c55e',
-    background: 'rgba(34,197,94,0.1)',
-    padding: '1px 6px',
-    borderRadius: '4px',
-    border: '1px solid rgba(34,197,94,0.2)',
+  titleDark: {
+    color: '#1a1a1a',
   },
 
   searchForm: {
@@ -313,14 +291,14 @@ const styles = {
     maxWidth: '400px',
     display: 'flex',
     alignItems: 'center',
-    background: '#0f172a',
+    background: '#f9fafb',
     borderRadius: '12px',
     padding: '0 14px',
-    border: '1px solid #1e293b',
+    border: '1px solid #e5e7eb',
     transition: 'all 0.3s ease',
   },
   searchIcon: {
-    color: '#475569',
+    color: '#9ca3af',
     fontSize: '13px',
     flexShrink: 0,
   },
@@ -329,15 +307,15 @@ const styles = {
     background: 'transparent',
     border: 'none',
     outline: 'none',
-    color: '#ffffff',
+    color: '#1a1a1a',
     padding: '10px 10px',
     fontSize: '13px',
     fontFamily: 'Inter, sans-serif',
   },
   clearBtn: {
-    background: '#1e293b',
+    background: '#e5e7eb',
     border: 'none',
-    color: '#94a3b8',
+    color: '#6b7280',
     cursor: 'pointer',
     width: '22px',
     height: '22px',
@@ -357,7 +335,7 @@ const styles = {
   navLink: {
     background: 'transparent',
     border: 'none',
-    color: '#94a3b8',
+    color: '#4b5563',
     fontSize: '13px',
     fontWeight: 600,
     cursor: 'pointer',
@@ -375,21 +353,21 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '6px',
-    color: '#94a3b8',
+    color: '#4b5563',
     padding: '6px 12px',
-    background: '#0f172a',
-    border: '1px solid #1e293b',
+    background: '#f9fafb',
+    border: '1px solid #e5e7eb',
     borderRadius: '10px',
     flexShrink: 0,
   },
   langIcon: {
     fontSize: '13px',
-    color: '#64748b',
+    color: '#6b7280',
   },
   langSelect: {
     background: 'transparent',
     border: 'none',
-    color: '#e2e8f0',
+    color: '#1a1a1a',
     outline: 'none',
     cursor: 'pointer',
     fontSize: '12px',
@@ -398,15 +376,15 @@ const styles = {
     maxWidth: '100px',
   },
   langOption: {
-    background: '#0f172a',
-    color: '#e2e8f0',
+    background: '#ffffff',
+    color: '#1a1a1a',
   },
 
   menuBtn: {
     display: 'none',
-    background: '#0f172a',
-    border: '1px solid #1e293b',
-    color: '#94a3b8',
+    background: '#f9fafb',
+    border: '1px solid #e5e7eb',
+    color: '#4b5563',
     fontSize: '18px',
     cursor: 'pointer',
     width: '40px',
@@ -419,25 +397,30 @@ const styles = {
 
   mobileMenu: {
     padding: '12px 20px 20px',
-    background: '#020617',
-    borderTop: '1px solid #1e293b',
+    background: '#ffffff',
+    borderTop: '1px solid #e5e7eb',
     overflow: 'hidden',
   },
   mobileSearchForm: {
     display: 'flex',
     alignItems: 'center',
-    background: '#0f172a',
+    background: '#f9fafb',
     borderRadius: '12px',
     padding: '0 14px',
-    border: '1px solid #1e293b',
+    border: '1px solid #e5e7eb',
     marginBottom: '12px',
+  },
+  mobileSearchIcon: {
+    color: '#9ca3af',
+    fontSize: '13px',
+    flexShrink: 0,
   },
   mobileSearchInput: {
     flex: 1,
     background: 'transparent',
     border: 'none',
     outline: 'none',
-    color: '#ffffff',
+    color: '#1a1a1a',
     padding: '12px 10px',
     fontSize: '14px',
     fontFamily: 'Inter, sans-serif',
@@ -447,10 +430,10 @@ const styles = {
     alignItems: 'center',
     gap: '12px',
     width: '100%',
-    background: '#0f172a',
-    border: '1px solid #1e293b',
+    background: '#f9fafb',
+    border: '1px solid #e5e7eb',
     borderRadius: '12px',
-    color: '#e2e8f0',
+    color: '#1a1a1a',
     padding: '14px 16px',
     textAlign: 'left',
     fontSize: '14px',
@@ -461,7 +444,7 @@ const styles = {
     transition: 'all 0.2s ease',
   },
   mobileLinkIcon: {
-    color: '#22c55e',
+    color: '#f97316',
     fontSize: '16px',
     width: '20px',
     display: 'flex',
@@ -473,8 +456,8 @@ const styles = {
     alignItems: 'center',
     gap: '10px',
     padding: '12px 16px',
-    background: '#0f172a',
-    border: '1px solid #1e293b',
+    background: '#f9fafb',
+    border: '1px solid #e5e7eb',
     borderRadius: '12px',
     marginTop: '4px',
   },
@@ -482,7 +465,7 @@ const styles = {
     flex: 1,
     background: 'transparent',
     border: 'none',
-    color: '#e2e8f0',
+    color: '#1a1a1a',
     outline: 'none',
     cursor: 'pointer',
     fontSize: '14px',
