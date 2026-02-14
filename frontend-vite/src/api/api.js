@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://saarthiai-3fam.onrender.com',
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
