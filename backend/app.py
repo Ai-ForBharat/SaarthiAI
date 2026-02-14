@@ -1,5 +1,5 @@
 """
-GovScheme AI - Main Flask Application (Enhanced v3.0)
+Saarthi AI - Main Flask Application (Enhanced v3.0)
 =====================================================
 Features:
   - Request logging & analytics tracking
@@ -312,7 +312,7 @@ class InputSanitizer:
 # ──────────────────────────────────────────────
 
 print("=" * 55)
-print("🚀 Starting GovScheme AI v3.0...")
+print("🚀 Starting Saarthi AI v3.0...")
 print("=" * 55)
 
 data_loader = DataLoader()
@@ -440,7 +440,7 @@ def home():
     """Health check + API overview"""
     return jsonify({
         "status": "running",
-        "app": "GovScheme AI",
+        "app": "Saarthi AI",
         "version": "3.0",
         "uptime": analytics.get_uptime(),
         "total_schemes": len(all_schemes),
@@ -1313,7 +1313,7 @@ if __name__ == '__main__':
     debug = os.environ.get('FLASK_DEBUG', 'true').lower() == 'true'
 
     print(f"\n{'=' * 55}")
-    print(f"🌐 GovScheme AI Server v3.0")
+    print(f"🌐 Saarthi AI Server v3.0")
     print(f"📡 Running on http://0.0.0.0:{port}")
     print(f"🔧 Debug mode: {debug}")
     print(f"{'=' * 55}\n")

@@ -1,5 +1,5 @@
 """
-🤖 Enhanced GovScheme AI Chatbot
+🤖 Enhanced Saarthi AI Chatbot
 Features:
   - Trained ML model for intent classification
   - Scheme database search (finds real schemes from schemes.json)
@@ -450,7 +450,7 @@ class GovSchemeBot:
         if msg_lower in ['reset', 'start over', 'clear', 'new chat']:
             self.memory.clear_session(session_id)
             return ("🔄 Conversation reset! Let's start fresh.\n\n"
-                    "I'm GovScheme AI. I can help you:\n"
+                    "I'm Saarthi AI. I can help you:\n"
                     "• Find government schemes for you\n"
                     "• Explain scheme details and benefits\n"
                     "• Guide you on how to apply\n"
@@ -889,7 +889,7 @@ class GovSchemeBot:
         """Return comprehensive help message"""
         turn_count = self.memory.get_turn_count('default')
 
-        response = "🆘 **GovScheme AI - Help**\n"
+        response = "🆘 **Saarthi AI - Help**\n"
         response += "=" * 35 + "\n\n"
         response += "Here's everything I can do:\n\n"
 
@@ -995,8 +995,8 @@ class GovSchemeBot:
         # Greetings
         if any(w in msg_lower for w in ['hi', 'hello', 'hey', 'namaste', 'namaskar']):
             greetings = [
-                "Namaste! 🙏 I'm GovScheme AI. I can help you find government schemes!\n\nTry asking:\n• \"Schemes for farmers\"\n• \"Tell me about PM-KISAN\"\n• \"I am 25 years old from Bihar\"",
-                "Hello! 👋 Welcome to GovScheme AI!\n\nI can search 100+ government schemes for you. What would you like to know?",
+                "Namaste! 🙏 I'm Saarthi AI. I can help you find government schemes!\n\nTry asking:\n• \"Schemes for farmers\"\n• \"Tell me about PM-KISAN\"\n• \"I am 25 years old from Bihar\"",
+                "Hello! 👋 Welcome to Saarthi AI!\n\nI can search 100+ government schemes for you. What would you like to know?",
                 "Hey there! 🙏 I'm your government scheme assistant.\n\nAsk me about any scheme or tell me about yourself for personalized recommendations!"
             ]
             return random.choice(greetings)
@@ -1004,7 +1004,7 @@ class GovSchemeBot:
         # Farewells
         if any(w in msg_lower for w in ['bye', 'goodbye', 'thanks', 'thank you', 'dhanyavad']):
             farewells = [
-                "Thank you for using GovScheme AI! 🙏\nVisit official websites to apply for schemes.\nJai Hind! 🇮🇳",
+                "Thank you for using Saarthi AI! 🙏\nVisit official websites to apply for schemes.\nJai Hind! 🇮🇳",
                 "Glad I could help! 😊\nRemember to check eligibility on official portals.\nGoodbye! 🙏",
                 "Dhanyavad! 🙏 All the best with your applications!\nCome back anytime you need help. 🇮🇳"
             ]

@@ -20,8 +20,8 @@
         "hey i have a question", "hi i want to ask something"
       ],
       "responses": [
-        "Namaste! 🙏 I'm GovScheme AI. I can help you find government schemes. Ask me anything!",
-        "Hello! Welcome to GovScheme AI. How can I help you find the right government scheme?",
+        "Namaste! 🙏 I'm Saarthi AI. I can help you find government schemes. Ask me anything!",
+        "Hello! Welcome to Saarthi AI. How can I help you find the right government scheme?",
         "Hey there! I'm here to help you discover government schemes you're eligible for.",
         "Hi! 😊 Ask me about any government scheme or tell me about yourself and I'll find matching schemes!",
         "Namaste! 🙏 I can help with PM-KISAN, Ayushman Bharat, scholarships, and 100+ more schemes. What do you need?"
@@ -44,10 +44,10 @@
       ],
       "responses": [
         "Goodbye! 🙏 Hope I helped you find useful schemes. Visit official websites to apply!",
-        "Thank you for using GovScheme AI! Good luck with your applications! 🇮🇳",
+        "Thank you for using Saarthi AI! Good luck with your applications! 🇮🇳",
         "Bye! Remember to check official portals for the latest scheme updates. Jai Hind! 🙏",
         "Take care! Don't forget to apply before the deadlines. Feel free to come back anytime! 😊",
-        "Alvida! 🙏 Share GovScheme AI with friends and family who might benefit. Good luck!"
+        "Alvida! 🙏 Share Saarthi AI with friends and family who might benefit. Good luck!"
       ]
     },
     {
@@ -932,15 +932,15 @@
         "are you a bot", "are you human",
         "what is your name", "tum kaun ho",
         "your name", "tell me about yourself",
-        "what is govscheme ai", "about this bot",
+        "what is Saarthi AI", "about this bot",
         "who made you", "who created you",
         "kya tum robot ho", "aap kaun hain",
         "what can you do for me",
         "how does this work", "what is this app"
       ],
       "responses": [
-        "🤖 I'm GovScheme AI!\n\nI'm an intelligent assistant that helps Indian citizens find government schemes they're eligible for.\n\n📊 What I can do:\n• Match you with 100+ government schemes\n• Provide details about any specific scheme\n• Guide you on how to apply\n• Tell you about required documents\n• Answer questions in multiple languages\n\n💡 How to use:\n• Fill the form above for personalized recommendations\n• Or chat with me about any scheme!\n\n🏛️ I cover Central + State government schemes across:\n🌾 Agriculture, 🏥 Health, 🎓 Education, 🏠 Housing,\n💰 Finance, 👩 Women, 👴 Senior Citizens, ♿ Disability,\n💼 Employment, and more!\n\n🇮🇳 Jai Hind!",
-        "I'm GovScheme AI - your digital guide to Indian government schemes! 🤖\n\nI was created to make government schemes accessible to every citizen.\n\nAsk me anything about schemes or fill the form above! 😊"
+        "🤖 I'm Saarthi AI!\n\nI'm an intelligent assistant that helps Indian citizens find government schemes they're eligible for.\n\n📊 What I can do:\n• Match you with 100+ government schemes\n• Provide details about any specific scheme\n• Guide you on how to apply\n• Tell you about required documents\n• Answer questions in multiple languages\n\n💡 How to use:\n• Fill the form above for personalized recommendations\n• Or chat with me about any scheme!\n\n🏛️ I cover Central + State government schemes across:\n🌾 Agriculture, 🏥 Health, 🎓 Education, 🏠 Housing,\n💰 Finance, 👩 Women, 👴 Senior Citizens, ♿ Disability,\n💼 Employment, and more!\n\n🇮🇳 Jai Hind!",
+        "I'm Saarthi AI - your digital guide to Indian government schemes! 🤖\n\nI was created to make government schemes accessible to every citizen.\n\nAsk me anything about schemes or fill the form above! 😊"
       ]
     },
     {
@@ -970,7 +970,7 @@
         "bored", "bore ho raha hun"
       ],
       "responses": [
-        "😄 Here's a fun fact about Indian government schemes:\n\nDid you know? India has 750+ government schemes running simultaneously! That's why GovScheme AI exists - to help you find the right ones! 🎯\n\n🤓 Another fact: PM Jan Dhan Yojana holds the Guinness World Record for most bank accounts opened in one week (18 million)!\n\nNow, shall we find some schemes for you? 😊",
+        "😄 Here's a fun fact about Indian government schemes:\n\nDid you know? India has 750+ government schemes running simultaneously! That's why Saarthi AI exists - to help you find the right ones! 🎯\n\n🤓 Another fact: PM Jan Dhan Yojana holds the Guinness World Record for most bank accounts opened in one week (18 million)!\n\nNow, shall we find some schemes for you? 😊",
         "😄 Government scheme joke:\n\nFriend: I know all government schemes!\nMe: Really? Name them.\nFriend: PM... PM... okay there are too many! 😅\n\nThat's exactly why I'm here! Ask me about any scheme. 🤖\n\n💡 Fun fact: MGNREGA is the largest employment guarantee program in the WORLD!"
       ]
     }

@@ -1,8 +1,8 @@
-# 🏛️ GovScheme AI - Indian Government Scheme Recommender
+# 🏛️ Saarthi AI - Indian Government Scheme Recommender
 
 <div align="center">
 
-![GovScheme AI](https://img.shields.io/badge/GovScheme-AI-blue?style=for-the-badge&logo=government)
+![Saarthi AI](https://img.shields.io/badge/GovScheme-AI-blue?style=for-the-badge&logo=government)
 ![Python](https://img.shields.io/badge/Python-3.10+-green?style=for-the-badge&logo=python)
 ![React](https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react)
 ![Flask](https://img.shields.io/badge/Flask-3.0-black?style=for-the-badge&logo=flask)
@@ -30,7 +30,7 @@
 
 ## 💡 Our Solution
 
-**GovScheme AI** — A smart web application where citizens:
+**Saarthi AI** — A smart web application where citizens:
 
 1. Fill a simple form with personal details  
 2. AI analyzes their profile against 200+ schemes  

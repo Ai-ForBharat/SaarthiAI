@@ -1,5 +1,5 @@
 """
-🧠 GovScheme AI - Model Training Pipeline v3.0
+🧠 Saarthi AI - Model Training Pipeline v3.0
 ================================================
 Features:
   - Multiple model comparison (Logistic Regression, SVM, Random Forest, Naive Bayes)
@@ -722,7 +722,7 @@ def train_and_save(compare_models=False, use_augmentation=False,
     pipeline_start = time.time()
 
     print("\n" + "=" * 60)
-    print("🧠 GovScheme AI - Model Training Pipeline v3.0")
+    print("🧠 Saarthi AI - Model Training Pipeline v3.0")
     print("=" * 60)
 
     # ── STEP 1: Load Data ──
