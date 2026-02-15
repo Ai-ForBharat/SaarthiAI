@@ -203,6 +203,173 @@ class SchemeRecommendationEngine:
         """
         pass
 ```
+## 3. Eligibility Verification Engine
+```python
+class EligibilityChecker:
+    """Rule-based eligibility verification"""
+    
+    def check_eligibility(
+        self, 
+        user_profile: dict, 
+        scheme: Scheme
+    ) -> EligibilityResult:
+        """
+        Check if user is eligible for scheme
+        Returns: eligible (bool), confidence (float), reasons (list)
+        """
+        rules = scheme.eligibility_rules
+        results = []
+        
+        for rule in rules:
+            result = self._evaluate_rule(user_profile, rule)
+            results.append(result)
+        
+        eligible = all(r.passed for r in results)
+        confidence = self._calculate_confidence(results)
+        
+        return EligibilityResult(
+            eligible=eligible,
+            confidence=confidence,
+            passed_criteria=[r for r in results if r.passed],
+            failed_criteria=[r for r in results if not r.passed],
+            explanation=self._generate_explanation(results)
+        )
+    
+    def _evaluate_rule(self, profile: dict, rule: Rule) -> RuleResult:
+        """Evaluate single eligibility rule"""
+        if rule.type == 'age_range':
+            return self._check_age_range(profile['age'], rule.params)
+        elif rule.type == 'income_limit':
+            return self._check_income(profile['income'], rule.params)
+        elif rule.type == 'category':
+            return self._check_category(profile['category'], rule.params)
+        # ... more rule types
+```
+
+## 4. Conversational AI Service
+``` python
+class ConversationalAIService:
+    """Chatbot service with NLP capabilities"""
+    
+    def __init__(self):
+        self.intent_classifier = IntentClassifier()
+        self.entity_extractor = EntityExtractor()
+        self.llm_client = LLMClient()
+        self.context_manager = ConversationContextManager()
+    
+    async def process_message(
+        self, 
+        user_id: str, 
+        message: str, 
+        language: str = 'en'
+    ) -> ChatResponse:
+        """
+        Process user message and generate response
+        
+        Flow:
+        1. Translate to English if needed
+        2. Extract intent and entities
+        3. Retrieve relevant context
+        4. Generate response using LLM
+        5. Translate back to user language
+        """
+        # Get conversation context
+        context = self.context_manager.get_context(user_id)
+        
+        # Translate if needed
+        if language != 'en':
+            message_en = await self.translate(message, language, 'en')
+        else:
+            message_en = message
+        
+        # Extract intent and entities
+        intent = self.intent_classifier.classify(message_en)
+        entities = self.entity_extractor.extract(message_en)
+        
+        # Handle based on intent
+        if intent == 'scheme_search':
+            response = await self._handle_scheme_search(
+                entities, context
+            )
+        elif intent == 'eligibility_check':
+            response = await self._handle_eligibility_check(
+                entities, context
+            )
+        elif intent == 'general_query':
+            response = await self._handle_general_query(
+                message_en, context
+            )
+        
+        # Translate response back
+        if language != 'en':
+            response_text = await self.translate(
+                response.text, 'en', language
+            )
+        else:
+            response_text = response.text
+        
+        # Update context
+        self.context_manager.update_context(
+            user_id, message, response_text
+        )
+        
+        return ChatResponse(
+            text=response_text,
+            intent=intent,
+            suggestions=response.suggestions,
+            schemes=response.schemes
+        )
+```
+## 5. Multilingual Translation Service
+``` python
+class TranslationService:
+    """Handles multilingual translation"""
+    
+    SUPPORTED_LANGUAGES = [
+        'en', 'hi', 'bn', 'te', 'mr', 'ta', 'gu', 'kn', 'ml', 'pa'
+    ]
+    
+    def __init__(self):
+        self.bhashini_client = BhashiniAPIClient()
+        self.google_translate = GoogleTranslateClient()
+        self.cache = RedisCache()
+    
+    async def translate(
+        self, 
+        text: str, 
+        source_lang: str, 
+        target_lang: str
+    ) -> str:
+        """Translate text with caching"""
+        
+        # Check cache
+        cache_key = f"trans:{source_lang}:{target_lang}:{hash(text)}"
+        cached = await self.cache.get(cache_key)
+        if cached:
+            return cached
+        
+        # Try Bhashini first (for Indian languages)
+        if self._is_indian_language(source_lang, target_lang):
+            try:
+                result = await self.bhashini_client.translate(
+                    text, source_lang, target_lang
+                )
+                await self.cache.set(cache_key, result, ttl=86400)
+                return result
+            except Exception as e:
+                logger.warning(f"Bhashini failed: {e}")
+        
+        # Fallback to Google Translate
+        result = await self.google_translate.translate(
+            text, source_lang, target_lang
+        )
+        await self.cache.set(cache_key, result, ttl=86400)
+        return result
+```
+
+
+
+
 
 ---
 
@@ -223,6 +390,155 @@ Cache Tier:
   - Redis cluster
   - Distributed caching
   - Session management
+```
+## Database Schema
+``` sql
+-- Users and Profiles
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    phone_number VARCHAR(15) UNIQUE,
+    email VARCHAR(255) UNIQUE,
+    preferred_language VARCHAR(5) DEFAULT 'en',
+    created_at TIMESTAMP DEFAULT NOW(),
+    last_active TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE user_profiles (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    age INTEGER,
+    gender VARCHAR(20),
+    income_range VARCHAR(50),
+    occupation VARCHAR(100),
+    category VARCHAR(50), -- General, SC, ST, OBC, etc.
+    state VARCHAR(100),
+    district VARCHAR(100),
+    education_level VARCHAR(50),
+    marital_status VARCHAR(20),
+    disability_status BOOLEAN DEFAULT FALSE,
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Schemes
+CREATE TABLE schemes (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    scheme_code VARCHAR(100) UNIQUE NOT NULL,
+    name_en TEXT NOT NULL,
+    name_hi TEXT,
+    description_en TEXT,
+    description_hi TEXT,
+    ministry VARCHAR(255),
+    department VARCHAR(255),
+    scheme_type VARCHAR(50), -- Central, State, District
+    category VARCHAR(100), -- Education, Health, Agriculture, etc.
+    benefits JSONB,
+    eligibility_rules JSONB NOT NULL,
+    required_documents JSONB,
+    application_process JSONB,
+    official_url TEXT,
+    is_active BOOLEAN DEFAULT TRUE,
+    state VARCHAR(100), -- NULL for central schemes
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE scheme_translations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    scheme_id UUID REFERENCES schemes(id) ON DELETE CASCADE,
+    language_code VARCHAR(5) NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT,
+    benefits TEXT,
+    UNIQUE(scheme_id, language_code)
+);
+
+-- Eligibility Rules (structured)
+CREATE TABLE eligibility_criteria (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    scheme_id UUID REFERENCES schemes(id) ON DELETE CASCADE,
+    criterion_type VARCHAR(50) NOT NULL, -- age, income, category, etc.
+    operator VARCHAR(20), -- >=, <=, ==, IN, etc.
+    value JSONB NOT NULL,
+    is_mandatory BOOLEAN DEFAULT TRUE,
+    priority INTEGER DEFAULT 0
+);
+
+-- User Interactions
+CREATE TABLE user_scheme_interactions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    scheme_id UUID REFERENCES schemes(id),
+    interaction_type VARCHAR(50), -- viewed, bookmarked, applied
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE chat_conversations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    session_id VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    response TEXT NOT NULL,
+    intent VARCHAR(100),
+    language VARCHAR(5),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Recommendations
+CREATE TABLE scheme_recommendations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    scheme_id UUID REFERENCES schemes(id),
+    relevance_score FLOAT,
+    eligibility_confidence FLOAT,
+    reasoning TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Admin and Analytics
+CREATE TABLE admin_users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    role VARCHAR(50) DEFAULT 'admin',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE scheme_audit_log (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    scheme_id UUID REFERENCES schemes(id),
+    admin_id UUID REFERENCES admin_users(id),
+    action VARCHAR(50), -- created, updated, deleted
+    changes JSONB,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Indexes for performance
+CREATE INDEX idx_schemes_category ON schemes(category);
+CREATE INDEX idx_schemes_state ON schemes(state);
+CREATE INDEX idx_schemes_active ON schemes(is_active);
+CREATE INDEX idx_user_profiles_state ON user_profiles(state);
+CREATE INDEX idx_interactions_user ON user_scheme_interactions(user_id);
+CREATE INDEX idx_conversations_user ON chat_conversations(user_id);
+```
+## API Endpoints
+
+## Authentication
+``` yaml
+POST /api/v1/auth/register:
+  description: Register new user
+  request: { phone_number, preferred_language }
+  response: { user_id, access_token }
+
+POST /api/v1/auth/login:
+  description: User login
+  request: { phone_number, otp }
+  response: { access_token, refresh_token }
+
+POST /api/v1/auth/verify-otp:
+  description: Verify OTP
+  request: { phone_number, otp }
+  response: { verified, access_token }
 ```
 
 ---
