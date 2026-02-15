@@ -1,59 +1,26 @@
-# Saarthi AI – System Design Document
+# Saarthi AI - System Design Document
 
 ## Project Overview
 
 **Product Name:** Saarthi AI  
 **Category:** AI-powered citizen assistance platform  
 **Version:** 1.0  
-**Date:** February 15, 2026  
+**Date:** February 15, 2026
 
 ---
 
-# System Architecture
+## System Architecture
 
-## High-Level Architecture
+### High-Level Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                       PRESENTATION LAYER                        │
-├─────────────────────────────────────────────────────────────────┤
-│ Web App (PWA) │ Mobile App │ WhatsApp Bot │ Admin Panel       │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-┌─────────────────────────────────────────────────────────────────┐
-│                         API GATEWAY LAYER                       │
-├─────────────────────────────────────────────────────────────────┤
-│ Authentication │ Rate Limiting │ Request Routing │ Load Balance│
-└─────────────────────────────────────────────────────────────────┘
-                                │
-┌─────────────────────────────────────────────────────────────────┐
-│                       APPLICATION LAYER                         │
-├─────────────────────────────────────────────────────────────────┤
-│ User Service │ Scheme Service │ Chat Service │ Recommendation  │
-│ Profile Mgmt │ Search Engine  │ NLP Engine   │ Eligibility     │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-┌─────────────────────────────────────────────────────────────────┐
-│                         AI ENGINE LAYER                         │
-├─────────────────────────────────────────────────────────────────┤
-│ Recommendation │ NLP/NLU │ Translation │ Intent Detection      │
-│ Eligibility ML │ Chatbot LLM │ Ranking Algo │ Entity Extract   │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-┌─────────────────────────────────────────────────────────────────┐
-│                           DATA LAYER                           │
-├─────────────────────────────────────────────────────────────────┤
-│ PostgreSQL │ Elasticsearch │ Redis Cache │ Vector DB           │
-│ User/Schemes │ Search Index │ Sessions │ Embeddings            │
-└─────────────────────────────────────────────────────────────────┘
-```
+┌─────────────────────────────────────────────────────────────────┐ │ PRESENTATION LAYER │ ├─────────────────────────────────────────────────────────────────┤ │ Web App (PWA) │ Mobile App │ WhatsApp Bot │ Admin Panel │ └─────────────────────────────────────────────────────────────────┘ │ ┌─────────────────────────────────────────────────────────────────┐ │ API GATEWAY LAYER │ ├─────────────────────────────────────────────────────────────────┤ │ Authentication │ Rate Limiting │ Request Routing │ Load Balance│ └─────────────────────────────────────────────────────────────────┘ │ ┌─────────────────────────────────────────────────────────────────┐ │ APPLICATION LAYER │ ├─────────────────────────────────────────────────────────────────┤ │ User Service │ Scheme Service │ Chat Service │ Recommendation │ │ Profile Mgmt │ Search Engine │ NLP Engine │ Eligibility │ └─────────────────────────────────────────────────────────────────┘ │ ┌─────────────────────────────────────────────────────────────────┐ │ AI ENGINE LAYER │ ├─────────────────────────────────────────────────────────────────┤ │ Recommendation │ NLP/NLU │ Translation │ Intent Detection│ │ Eligibility ML │ Chatbot LLM │ Ranking Algo │ Entity Extract │ └─────────────────────────────────────────────────────────────────┘ │ ┌─────────────────────────────────────────────────────────────────┐ │ DATA LAYER │ ├─────────────────────────────────────────────────────────────────┤ │ PostgreSQL │ Elasticsearch │ Redis Cache │ Vector DB │ │ User/Schemes │ Search Index │ Sessions │ Embeddings │ └─────────────────────────────────────────────────────────────────┘
+
 
 ---
 
-# Technology Stack
+## Technology Stack
 
-## Frontend
-
+### Frontend
 ```yaml
 Web Application:
   Framework: React 18 with TypeScript
@@ -61,80 +28,57 @@ Web Application:
   State Management: Zustand / Redux Toolkit
   PWA: Workbox for offline support
   Build Tool: Vite
-
+  
 Mobile Application:
   Framework: React Native / Flutter
   State Management: Provider / Bloc
   Local Storage: SQLite
-
+  
 Admin Dashboard:
   Framework: React with TypeScript
   UI: Ant Design / Material-UI
   Charts: Recharts / Chart.js
-```
-
-## Backend
-
-```yaml
+Backend
 API Framework: FastAPI (Python 3.11+)
 Authentication: JWT + OAuth2
 API Documentation: OpenAPI/Swagger
 Background Jobs: Celery + Redis
 Task Queue: Redis Queue (RQ)
 WebSocket: FastAPI WebSocket support
-```
-
-## AI/ML Stack
-
-```yaml
+AI/ML Stack
 NLP/NLU:
   - spaCy for entity extraction
   - Hugging Face Transformers
   - Sentence Transformers for embeddings
-
+  
 LLM Integration:
   - OpenAI GPT-4 / GPT-3.5
   - Google Gemini API
   - Local LLM: Llama 2 (fallback)
-
+  
 Translation:
   - Google Cloud Translation API
   - IndicTrans for Indian languages
   - Bhashini API (Government of India)
-
+  
 Vector Search:
   - Pinecone / Weaviate
   - FAISS for local embeddings
-```
-
-## Database & Storage
-
-```yaml
+Database & Storage
 Primary Database: PostgreSQL 15+
 Search Engine: Elasticsearch 8.x
 Cache: Redis 7.x
 Vector Database: Pinecone / Weaviate
 Object Storage: AWS S3 / MinIO
-```
-
-## Infrastructure
-
-```yaml
+Infrastructure
 Cloud Provider: AWS / Google Cloud
 Container: Docker
 Orchestration: Kubernetes / AWS ECS
 CDN: CloudFront / Cloudflare
 Monitoring: Prometheus + Grafana
 Logging: ELK Stack
-```
-
----
-
-# Component Architecture
-
-## 1. User Profile Service
-
-```python
+Component Architecture
+1. User Profile Service
 class UserProfileService:
     """Manages user profile and preferences"""
     
@@ -156,11 +100,7 @@ class UserProfileService:
             'state': user.state,
             'district': user.district
         }
-```
-
-## 2. Scheme Recommendation Engine
-
-```python
+2. Scheme Recommendation Engine
 class SchemeRecommendationEngine:
     """AI-powered scheme recommendation system"""
     
@@ -183,17 +123,29 @@ class SchemeRecommendationEngine:
         3. Rank by composite score
         4. Return top K recommendations
         """
-        eligible_schemes = self.eligibility_checker.filter_eligible(user_profile)
+        # Filter eligible schemes
+        eligible_schemes = self.eligibility_checker.filter_eligible(
+            user_profile
+        )
         
+        # Calculate relevance scores
         scored_schemes = []
         for scheme in eligible_schemes:
-            score = self._calculate_relevance_score(user_profile, scheme)
+            score = self._calculate_relevance_score(
+                user_profile, 
+                scheme
+            )
             scored_schemes.append((scheme, score))
         
+        # Rank and return
         ranked = sorted(scored_schemes, key=lambda x: x[1], reverse=True)
         return ranked[:top_k]
     
-    def _calculate_relevance_score(self, user_profile: dict, scheme: Scheme) -> float:
+    def _calculate_relevance_score(
+        self, 
+        user_profile: dict, 
+        scheme: Scheme
+    ) -> float:
         """
         Composite scoring:
         - Eligibility confidence: 40%
@@ -202,9 +154,7 @@ class SchemeRecommendationEngine:
         - Popularity: 10%
         """
         pass
-```
-## 3. Eligibility Verification Engine
-```python
+3. Eligibility Verification Engine
 class EligibilityChecker:
     """Rule-based eligibility verification"""
     
@@ -244,10 +194,7 @@ class EligibilityChecker:
         elif rule.type == 'category':
             return self._check_category(profile['category'], rule.params)
         # ... more rule types
-```
-
-## 4. Conversational AI Service
-``` python
+4. Conversational AI Service
 class ConversationalAIService:
     """Chatbot service with NLP capabilities"""
     
@@ -319,9 +266,7 @@ class ConversationalAIService:
             suggestions=response.suggestions,
             schemes=response.schemes
         )
-```
-## 5. Multilingual Translation Service
-``` python
+5. Multilingual Translation Service
 class TranslationService:
     """Handles multilingual translation"""
     
@@ -365,31 +310,7 @@ class TranslationService:
         )
         await self.cache.set(cache_key, result, ttl=86400)
         return result
-```
-
----
-
-# Scalability Strategy
-
-```yaml
-Application Tier:
-  - Kubernetes pods with auto-scaling
-  - Stateless API design
-  - Load balancing with NGINX/ALB
-
-Database Tier:
-  - Read replicas for queries
-  - Connection pooling (PgBouncer)
-  - Partitioning by state/region
-
-Cache Tier:
-  - Redis cluster
-  - Distributed caching
-  - Session management
-```
----
-## Database Schema
-``` sql
+Database Schema
 -- Users and Profiles
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -517,12 +438,8 @@ CREATE INDEX idx_schemes_active ON schemes(is_active);
 CREATE INDEX idx_user_profiles_state ON user_profiles(state);
 CREATE INDEX idx_interactions_user ON user_scheme_interactions(user_id);
 CREATE INDEX idx_conversations_user ON chat_conversations(user_id);
-```
----
-
-## API Endpoints
-
-``` yaml
+API Endpoints
+Authentication
 POST /api/v1/auth/register:
   description: Register new user
   request: { phone_number, preferred_language }
@@ -537,10 +454,7 @@ POST /api/v1/auth/verify-otp:
   description: Verify OTP
   request: { phone_number, otp }
   response: { verified, access_token }
-```
----
-## User Profile
-``` yaml
+User Profile
 GET /api/v1/profile:
   description: Get user profile
   response: { profile_data }
@@ -553,10 +467,7 @@ POST /api/v1/profile:
 GET /api/v1/profile/eligibility-params:
   description: Get eligibility parameters
   response: { age, income, occupation, category, location }
-```
----
-## Scheme Discovery
-``` yaml
+Scheme Discovery
 GET /api/v1/schemes/recommendations:
   description: Get personalized recommendations
   parameters: { limit, offset }
@@ -592,10 +503,7 @@ POST /api/v1/schemes/{scheme_id}/check-eligibility:
     failed_criteria,
     explanation 
   }
-```
----
-## Chatbot
-``` yaml
+Chatbot
 POST /api/v1/chat/message:
   description: Send message to chatbot
   request: { message, language, session_id }
@@ -615,10 +523,7 @@ POST /api/v1/chat/translate:
   description: Translate text
   request: { text, source_lang, target_lang }
   response: { translated_text }
-```
----
-## Admin
-``` yaml
+Admin
 POST /api/v1/admin/schemes:
   description: Create new scheme
   request: { scheme_data }
@@ -641,31 +546,19 @@ GET /api/v1/admin/analytics:
     recommendations_generated,
     chat_interactions 
   }
-```
----
-# Data Flow Diagrams
-
-## Recommendation Flow
-``` text
+Data Flow Diagrams
+Recommendation Flow
 User Profile → Eligibility Filter → Relevance Scoring → 
 Ranking Algorithm → Top K Selection → Response
-```
-## Chat Flow
-``` text
+Chat Flow
 User Message → Language Detection → Translation (if needed) →
 Intent Classification → Entity Extraction → Context Retrieval →
 LLM Processing → Response Generation → Translation → User
-```
-## Eligibility Check Flow
-``` text
+Eligibility Check Flow
 User Profile + Scheme Rules → Rule Evaluation Engine →
 Confidence Calculation → Explanation Generation → Result
-```
----
-# Scalability Strategy
-
-## Horizontal Scaling
-``` yaml
+Scalability Strategy
+Horizontal Scaling
 Application Tier:
   - Kubernetes pods with auto-scaling
   - Stateless API design
@@ -680,10 +573,7 @@ Cache Tier:
   - Redis cluster
   - Distributed caching
   - Session management
-```
-
-## Performance Optimization
-``` yaml
+Performance Optimization
 Caching Strategy:
   - User profiles: 1 hour TTL
   - Scheme data: 24 hours TTL
@@ -699,12 +589,8 @@ API Optimization:
   - Response compression
   - Pagination for large results
   - Async processing for heavy tasks
-```
----
-# Security Considerations
-
-## Authentication & Authorization
-``` yaml
+Security Considerations
+Authentication & Authorization
 Authentication:
   - OTP-based phone authentication
   - JWT tokens with short expiration
@@ -714,9 +600,7 @@ Authorization:
   - Role-based access control
   - User data isolation
   - Admin privilege separation
-```
-## Data Security
-``` yaml
+Data Security
 Encryption:
   - TLS 1.3 for data in transit
   - AES-256 for sensitive data at rest
@@ -727,12 +611,8 @@ Privacy:
   - Data anonymization for analytics
   - GDPR-compliant data handling
   - User data deletion on request
-```
----
-# Deployment Plan
-
-## Environment Setup
-``` yaml
+Deployment Plan
+Environment Setup
 Development:
   - Local Docker Compose
   - Mock external APIs
@@ -747,10 +627,7 @@ Production:
   - Multi-region deployment
   - Blue-green deployment
   - Automated rollback
-```
-
-## CI/CD Pipeline
-``` yaml
+CI/CD Pipeline
 Pipeline Stages:
   1. Code Quality:
      - Linting (Ruff, ESLint)
@@ -770,10 +647,7 @@ Pipeline Stages:
      - Kubernetes deployment
      - Health checks
      - Smoke tests
-```
-
-## Monitoring
-``` yaml
+Monitoring
 Application Monitoring:
   - Prometheus metrics
   - Grafana dashboards
@@ -784,30 +658,21 @@ Business Monitoring:
   - Recommendation accuracy
   - Chat success rate
   - Scheme discovery rate
-```
----
-
-# Success Metrics & KPIs
-
-## Technical Metrics
-- API response time < 2 seconds (P95)
-- Recommendation accuracy > 85%
-- Chat intent classification > 90%
-- System uptime > 99.5%
-
-## Business Metrics
-- User retention rate
-- Schemes discovered per user
-- Eligibility check success rate
-- User satisfaction score (NPS)
-
-## AI Model Metrics
-- Recommendation relevance score
-- Translation accuracy (BLEU score)
-- Intent classification F1 score
-- Eligibility prediction accuracy
-
----
-
-**Document Version:** 1.0  
-**Last Updated:** February 15, 2026
+Success Metrics & KPIs
+Technical Metrics
+API response time < 2 seconds (P95)
+Recommendation accuracy > 85%
+Chat intent classification > 90%
+System uptime > 99.5%
+Business Metrics
+User retention rate
+Schemes discovered per user
+Eligibility check success rate
+User satisfaction score (NPS)
+AI Model Metrics
+Recommendation relevance score
+Translation accuracy (BLEU score)
+Intent classification F1 score
+Eligibility prediction accuracy
+Document Version: 1.0
+Last Updated: February 15, 2026
