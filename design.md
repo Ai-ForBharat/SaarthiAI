@@ -521,9 +521,9 @@ CREATE INDEX idx_user_profiles_state ON user_profiles(state);
 CREATE INDEX idx_interactions_user ON user_scheme_interactions(user_id);
 CREATE INDEX idx_conversations_user ON chat_conversations(user_id);
 ```
+
 ## API Endpoints
 
-## Authentication
 ``` yaml
 POST /api/v1/auth/register:
   description: Register new user
@@ -540,7 +540,124 @@ POST /api/v1/auth/verify-otp:
   request: { phone_number, otp }
   response: { verified, access_token }
 ```
+## User Profile
+``` yaml
+GET /api/v1/profile:
+  description: Get user profile
+  response: { profile_data }
 
+POST /api/v1/profile:
+  description: Create/update profile
+  request: { age, income_range, occupation, category, state, district }
+  response: { profile_id, updated_fields }
+
+GET /api/v1/profile/eligibility-params:
+  description: Get eligibility parameters
+  response: { age, income, occupation, category, location }
+```
+## Scheme Discovery
+``` yaml
+GET /api/v1/schemes/recommendations:
+  description: Get personalized recommendations
+  parameters: { limit, offset }
+  response: { 
+    schemes: [{ 
+      id, name, description, benefits, 
+      relevance_score, eligibility_status 
+    }],
+    total_count
+  }
+
+GET /api/v1/schemes/search:
+  description: Search schemes
+  parameters: { query, category, state, limit }
+  response: { schemes: [], total_count }
+
+GET /api/v1/schemes/{scheme_id}:
+  description: Get scheme details
+  response: { 
+    scheme_data, 
+    eligibility_criteria, 
+    required_documents,
+    application_steps 
+  }
+
+POST /api/v1/schemes/{scheme_id}/check-eligibility:
+  description: Check eligibility for specific scheme
+  request: { user_profile }
+  response: { 
+    eligible, 
+    confidence, 
+    passed_criteria, 
+    failed_criteria,
+    explanation 
+  }
+```
+## Chatbot
+``` yaml
+POST /api/v1/chat/message:
+  description: Send message to chatbot
+  request: { message, language, session_id }
+  response: { 
+    response_text, 
+    intent, 
+    suggested_schemes,
+    follow_up_questions 
+  }
+
+GET /api/v1/chat/history:
+  description: Get chat history
+  parameters: { session_id, limit }
+  response: { conversations: [] }
+
+POST /api/v1/chat/translate:
+  description: Translate text
+  request: { text, source_lang, target_lang }
+  response: { translated_text }
+```
+## Admin
+``` yaml
+POST /api/v1/admin/schemes:
+  description: Create new scheme
+  request: { scheme_data }
+  response: { scheme_id }
+
+PUT /api/v1/admin/schemes/{scheme_id}:
+  description: Update scheme
+  request: { updates }
+  response: { updated_scheme }
+
+DELETE /api/v1/admin/schemes/{scheme_id}:
+  description: Delete/deactivate scheme
+  response: { success }
+
+GET /api/v1/admin/analytics:
+  description: Get platform analytics
+  response: { 
+    total_users, 
+    active_schemes, 
+    recommendations_generated,
+    chat_interactions 
+  }
+```
+## Data Flow Diagrams
+
+## Recommendation Flow
+``` text
+User Profile → Eligibility Filter → Relevance Scoring → 
+Ranking Algorithm → Top K Selection → Response
+```
+## Chat Flow
+``` text
+User Message → Language Detection → Translation (if needed) →
+Intent Classification → Entity Extraction → Context Retrieval →
+LLM Processing → Response Generation → Translation → User
+```
+## Eligibility Check Flow
+``` text
+User Profile + Scheme Rules → Rule Evaluation Engine →
+Confidence Calculation → Explanation Generation → Result
+```
 ---
 
 # Success Metrics & KPIs
